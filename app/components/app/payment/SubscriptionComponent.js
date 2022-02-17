@@ -19,13 +19,13 @@ const PackageCard = ({ title, subTitle, price }) => {
                 // backgroundColor: "orange",
                 width: Dimensions.get('window').width * 0.45
             }}>
-                <Text style={{ fontSize: 22, fontWeight: "bold" }}>{title}</Text>
-                <Text style={{ fontSize: 18 }}>{subTitle}</Text>
+                <Text style={{ fontSize: 22, fontWeight: "bold", fontFamily:'Poppins-Regular' }}>{title}</Text>
+                <Text style={{ fontSize: 18, fontFamily:'Poppins-Regular' }}>{subTitle}</Text>
             </View>
             <View
             // style={{backgroundColor:"green"}}
             >
-                <Text style={{ fontSize: 30, fontWeight: "bold" }}>$2.99</Text>
+                <Text style={{ fontSize: 30, fontWeight: "bold",fontFamily:'Poppins-Regular' }}>$2.99</Text>
             </View>
         </View>
     );

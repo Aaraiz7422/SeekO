@@ -18,7 +18,7 @@ console.log("Result.............................",props.selected_topic_redux);
         <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
                 <AppHeader title={"Making Crafty Paintings"}></AppHeader>
-                <ProgressBar progress={0.5}
+                <ProgressBar progress={1}
                     style={{
                         height: 16,
                         borderRadius: 10,
@@ -31,8 +31,8 @@ console.log("Result.............................",props.selected_topic_redux);
                     }}
                     color={"#01CCAD"} />
                 <View style={{ marginTop: 50, alignItems: "center" }}>
-                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>You have scored:</Text>
-                    <Text style={{ textAlign: 'center', fontSize: 16, fontWeight: 'bold' }}>{quiz_result_data.user_marks}/{quiz_result_data.total_marks}</Text>
+                    <Text style={{ fontSize: 16, fontWeight: 'bold',fontFamily:'Poppins-Regular' }}>You have scored:</Text>
+                    <Text style={{ textAlign: 'center', fontSize: 16, fontWeight: 'bold',fontFamily:'Poppins-Regular' }}>{quiz_result_data.user_marks}/{quiz_result_data.total_marks}</Text>
                 </View>
                 <View style={{marginBottom:-40,marginTop:-20}}>
 

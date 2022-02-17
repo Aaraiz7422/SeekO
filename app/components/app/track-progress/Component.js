@@ -45,10 +45,10 @@ const TrackProgressComponent = (props) => {
             justifyContent: 'flex-start',
           }}>
           <View style={styles.child_account_count_circle}>
-            <Text style={{ textAlign: 'center' }} >{index + 1}</Text>
+            <Text style={{ textAlign: 'center',fontFamily:'Poppins-Regular', }} >{index + 1}</Text>
           </View>
           <View style={{ maxWidth: ((SCREEN_WIDTH * 0.9) - 24 - 120) }}>
-            <Text style={[global.text, { fontSize: 18 }]}>
+            <Text style={[global.text, { fontSize: 18,fontFamily:'Poppins-Regular', }]}>
               {selected_screen && selected_screen === 'quizzes_list'
                 ? item.quiz_name
                 : item.name}

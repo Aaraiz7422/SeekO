@@ -40,13 +40,13 @@ const LoginComponent = (props) => {
                         navigation.navigate('Signup');
                     }
                     }>
-                    <Text style={{ fontSize: 16 }}>Sign Up</Text>
+                    <Text style={{ fontSize: 16,fontFamily:'Poppins-Regular', }}>Sign Up</Text>
                 </Button>
             </View>
             <Image
                 source={require('../../../assets/Logo.png')}
             ></Image>
-            <Text style={{ margin: 30, fontSize: 26, fontWeight: '700' }}>Sign In</Text>
+            <Text style={{ margin: 30, fontSize: 26, fontWeight: '700',fontFamily:'Poppins-Regular', }}>Sign In</Text>
             <View>
                 <TextInput
                     style={global.auth_input}
@@ -94,7 +94,7 @@ const LoginComponent = (props) => {
 
             <View style={[global.row_flex_end_container, { width: Dimensions.get('window').width * 0.7 }]}>
                 <Text
-                    style={global.anchor_text}
+                    style={[global.anchor_text,{fontFamily:'Poppins-Regular',}]}
                     onPress={() => { navigation.navigate('ForgotPassword');}
                     }>
                     Forgot Password?

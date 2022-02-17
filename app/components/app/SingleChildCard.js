@@ -62,7 +62,7 @@ const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, a
                     margin: 10,
                     // borderRadius: 100 
                 }} />
-            <Title style={{ textAlign: 'center' }}>{account.name}</Title>
+            <Title style={{ textAlign: 'center',fontWeight:'bold',fontFamily:'Poppins-Regular' }}>{account.name}</Title>
         </Card>
     </TouchableOpacity>
 );
@@ -154,7 +154,7 @@ const SingleChildCard = (props) => {
                                     }}>
                                 </Icon.Button>
                             </View>
-                            <Text>There is no child account yet. Tap plus button to register your child account.</Text>
+                            <Text style={{fontFamily:'Poppins-Regular'}}>There is no child account yet. Tap plus button to register your child account.</Text>
                         </>
                     )
             }

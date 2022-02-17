@@ -27,8 +27,8 @@ function OnBoardingScreen2() {
                 </Text>
             </View>
             <View style={styles.bottomContainer}>
-                {/* <Text style={{ fontSize: 40, marginLeft: 30, marginRight: 30, fontWeight: '700', padding: 20, textAlign: 'center' }}>Learn While Playing</Text> */}
-                <Text style={{ fontSize: 16, marginTop: 50, marginLeft: 30, marginRight: 30, textAlign: 'justify', color: '#707A8D' }}>The average company forecasts a growth   178% in revenues for their first year, 100% for </Text>
+                {/* <Text style={{ fontSize: 40, marginLeft: 30, marginRight: 30,fontFamily:'Poppins-Regular', fontWeight: '700', padding: 20, textAlign: 'center' }}>Learn While Playing</Text> */}
+                <Text style={{ fontSize: 16, fontFamily:'Poppins-Regular', marginTop: 50, marginLeft: 30, marginRight: 30, textAlign: 'justify', color: '#707A8D' }}>The average company forecasts a growth   178% in revenues for their first year, 100% for </Text>
                 <View style={{
                     flex: 0.9,
                     justifyContent: 'space-around',

@@ -24,7 +24,7 @@ const global = StyleSheet.create({
     },
 
     anchor_text: {
-        textDecorationLine: 'underline',
+        textDecorationLine: 'underline',fontFamily:'Poppins-Regular',
     },
 
     page_container: {
@@ -72,7 +72,7 @@ const global = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
-        marginVertical: 4,
+        marginVertical: 4,fontFamily:'Poppins-Regular',
     },
     align_items_center: {
         alignItems: 'center',
@@ -116,7 +116,7 @@ const global = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
-        fontFamily: 'ProductSans-Regular',
+        fontFamily:'Poppins-Regular',
     },
     button: {
         width: SCREEN_WIDTH * 0.9,
@@ -132,7 +132,7 @@ const global = StyleSheet.create({
         borderWidth: 0.5,
     },
     text_input: {
-        fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
+        fontFamily: Platform.OS === 'ios' ? 'System' : 'Poppins-Regular',
         fontSize: 12,
         lineHeight: 14,
         color: COLORS.white,

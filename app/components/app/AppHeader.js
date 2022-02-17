@@ -24,7 +24,7 @@ const AppHeader = ({ title }) => {
             onPress={_goBack} 
             />
             <View style={{ height: Dimensions.get('window').height * 0.12,justifyContent:'flex-start',alignItems:'center',flexDirection: "row",  width: Dimensions.get('window').width * 0.78 }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 22, }} numberOfLines={3}>{title}</Text>
+                <Text style={{ fontSize: 22,fontWeight:'bold',fontFamily:'Poppins-Regular' }} numberOfLines={3}>{title}</Text>
             </View>
             <Appbar.Action icon="account"/>
         </Appbar.Header>

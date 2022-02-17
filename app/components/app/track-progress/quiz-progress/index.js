@@ -54,12 +54,12 @@ const QuizProgressComponent = (props) => {
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: SCREEN_HEIGHT * 0.1, }}>
           <View style={{ flexDirection: "column", justifyContent: "space-around", width: SCREEN_WIDTH * 0.5 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Total Marks:</Text>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>{quiz_progress_data.total_marks}</Text>
+              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>Total Marks:</Text>
+              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{quiz_progress_data.total_marks}</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Obtained Marks:</Text>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>{quiz_progress_data.user_marks}</Text>
+              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>Obtained Marks:</Text>
+              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{quiz_progress_data.user_marks}</Text>
             </View>
           </View>
           <View style={{ justifyContent: "center", alignItems: 'center' }}>
@@ -73,7 +73,7 @@ const QuizProgressComponent = (props) => {
                   justifyContent: "center",
                   alignItems: 'center'
                 }}>
-                  <Text style={{ color: "white", fontSize: 34, fontWeight: "bold" }}>{markInPercentage}%</Text>
+                  <Text style={{ color: "white", fontSize: 34, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{markInPercentage}%</Text>
                 </LinearGradient>
               </View>
             </BoxShadow>
@@ -98,11 +98,11 @@ const QuizProgressComponent = (props) => {
             return (
               <>
                 <View key={index} style={{ marginTop: 20, marginBottom: 40 }}>
-                  <Text style={[global.text, { textAlign: 'justify', marginTop: 4, fontSize: 14 }]}>
+                  <Text style={[global.text, { textAlign: 'justify', marginTop: 4, fontSize: 14,fontFamily:'Poppins-Regular', }]}>
                     Question # {index + 1}
                   </Text>
                   <Text
-                    style={[global.text, { textAlign: 'justify', marginTop: 4, width: SCREEN_WIDTH * 0.8, fontSize: 20, fontWeight: 'bold' }]}>
+                    style={[global.text, { textAlign: 'justify', marginTop: 4, width: SCREEN_WIDTH * 0.8, fontSize: 20, fontWeight: 'bold',fontFamily:'Poppins-Regular', }]}>
                     {key}
                   </Text>
                   {questions[key].map((answer, index) => {
@@ -119,7 +119,7 @@ const QuizProgressComponent = (props) => {
                         }}>
                           <Text
                             key={index}
-                            style={[{ color: "white", fontSize: 20 }]}>
+                            style={[{ color: "white", fontSize: 20,fontFamily:'Poppins-Regular', }]}>
                             {answer.option}
                           </Text>
                         </View>
@@ -138,7 +138,7 @@ const QuizProgressComponent = (props) => {
                         }}>
                           <Text
                             key={index}
-                            style={[{ color: "white", fontSize: 20 }]}>
+                            style={[{ color: "white", fontSize: 20 ,fontFamily:'Poppins-Regular',}]}>
                             {answer.option}
                           </Text>
                         </View>
@@ -157,7 +157,7 @@ const QuizProgressComponent = (props) => {
                         }}>
                           <Text
                             key={index}
-                            style={[{ color: "black", fontSize: 20 }]}>
+                            style={[{ color: "black", fontSize: 20,fontFamily:'Poppins-Regular', }]}>
                             {answer.option}
                           </Text>
                         </View>

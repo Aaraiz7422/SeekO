@@ -66,11 +66,11 @@ const QuizCard = (props) => {
             color={"#F8C04E"} />
 
           <Text
-            style={[global.text, { marginTop: 20, fontSize: 16 }]}
+            style={[global.text, { marginTop: 20, fontSize: 16,fontFamily:'Poppins-Regular', }]}
           >
             Question: {question_number_heading}
           </Text>
-          <Text style={[global.text, global.margin_top_10, global.alignTextJustify, {fontFamily:'Poppins-Bold', fontSize: 20 }]}>
+          <Text style={[global.text, global.margin_top_10, global.alignTextJustify, {fontFamily:'Poppins-Regular',fontWeight:'bold', fontSize: 20 }]}>
             {current_question.question}
           </Text>
         </View>
@@ -84,7 +84,7 @@ const QuizCard = (props) => {
             return (
               <View style={{margin:5}}>
                 <Pressable style={[{width:Dimensions.get('window').width * 0.8, borderRadius:30, borderWidth: 1, backgroundColor: is_selected ? "#01CCAD" : "#F5F8FF",}]}  onPress={() => onChangeOption(current_question, option)}>
-                  <Text style={{color:'black',textAlign:'center',margin:10,fontSize:20}}>{option.option}</Text>
+                  <Text style={{color:'black',textAlign:'center',fontFamily:'Poppins-Regular',margin:10,fontSize:20}}>{option.option}</Text>
                 </Pressable>
                 {/* <CustomButton
                   key={option.id}

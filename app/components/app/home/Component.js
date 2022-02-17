@@ -17,7 +17,7 @@ import close from '../../../assets/close.png';
 
 const HomeComponent = (props) => {
 
-    const {selectedTab} = props;
+    const { selectedTab } = props;
     const [currentTab, setCurrentTab] = useState("Home");
     // To get the curretn Status of menu ...
     const [showMenu, setShowMenu] = useState(false);
@@ -33,83 +33,83 @@ const HomeComponent = (props) => {
         getCurrentUserAction,
         navigation,
         onLogout
-      } = props;
+    } = props;
 
     const openCloseMenu = () => {
-                                // Do Actions Here....
-                        // Scaling the view...
-                        Animated.timing(scaleValue, {
-                            toValue: showMenu ? 1 : 1,
-                            duration: 300,
-                            useNativeDriver: true
-                        })
-                            .start()
+        // Do Actions Here....
+        // Scaling the view...
+        Animated.timing(scaleValue, {
+            toValue: showMenu ? 1 : 1,
+            duration: 300,
+            useNativeDriver: true
+        })
+            .start()
 
-                        Animated.timing(offsetValue, {
-                            // YOur Random Value...
-                            toValue: showMenu ? 0 : Dimensions.get('window').width * 0.7,
-                            duration: 300,
-                            useNativeDriver: true
-                        })
-                            .start()
+        Animated.timing(offsetValue, {
+            // YOur Random Value...
+            toValue: showMenu ? 0 : Dimensions.get('window').width * 0.7,
+            duration: 300,
+            useNativeDriver: true
+        })
+            .start()
 
-                        Animated.timing(closeButtonOffset, {
-                            // YOur Random Value...
-                            toValue: !showMenu ? 0 : 0,
-                            duration: 300,
-                            useNativeDriver: true
-                        })
-                            .start()
+        Animated.timing(closeButtonOffset, {
+            // YOur Random Value...
+            toValue: !showMenu ? 0 : 0,
+            duration: 300,
+            useNativeDriver: true
+        })
+            .start()
 
-                        setShowMenu(!showMenu);
+        setShowMenu(!showMenu);
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <LinearGradient colors={["#85DADA", "#2CB8B8"]} 
-                style={[styles.container,{width: Dimensions.get('window').width }]}
+            <LinearGradient colors={["#85DADA", "#2CB8B8"]}
+                style={[styles.container, { width: Dimensions.get('window').width }]}
 
-                // style={{ flex: 1 ,width: Dimensions.get('window').width}}
-                >
-            <View style={{ justifyContent: 'flex-start', padding: 15 }}>
-                <Image source={profile} style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 10,
-                    marginTop: 8
-                }}></Image>
+            // style={{ flex: 1 ,width: Dimensions.get('window').width}}
+            >
+                <View style={{ justifyContent: 'flex-start', padding: 15 }}>
+                    <Image source={profile} style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 10,
+                        marginTop: 8
+                    }}></Image>
 
-                <Text style={{
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    color: 'white',
-                    marginTop: 20
-                }}>Jenna Ezarik</Text>
-
-                <TouchableOpacity>
                     <Text style={{
-                        marginTop: 6,
-                        color: 'white'
-                    }}>View Profile</Text>
-                </TouchableOpacity>
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: 'white',
+                        marginTop: 20
+                    }}>Jenna Ezarik</Text>
 
-                <View style={{ flexGrow: 1, marginTop: 50 }}>
-                    {
-                        // Tab Bar Buttons....
-                    }
+                    <TouchableOpacity>
+                        <Text style={{
+                            marginTop: 6,
+                            color: 'white'
+                        }}>View Profile</Text>
+                    </TouchableOpacity>
 
-                    {TabButton(onLogout,openCloseMenu,currentTab, setCurrentTab, "Home", home)}
-                    {TabButton(onLogout,openCloseMenu,currentTab, setCurrentTab, "Subscription", search)}
-                    {TabButton(onLogout,openCloseMenu,currentTab, setCurrentTab, "Track Progress", notifications)}
-                    {TabButton(onLogout,openCloseMenu,currentTab, setCurrentTab, "User", settings)}
+                    <View style={{ flexGrow: 1, marginTop: 50 }}>
+                        {
+                            // Tab Bar Buttons....
+                        }
+
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Home", home)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", search)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Track Progress", notifications)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "User", settings)}
+
+                    </View>
+
+                    <View>
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "LogOut", logout)}
+                    </View>
 
                 </View>
-
-                <View>
-                    {TabButton(onLogout,openCloseMenu,currentTab, setCurrentTab, "LogOut", logout)}
-                </View>
-
-            </View>
             </LinearGradient>
 
             {
@@ -144,28 +144,27 @@ const HomeComponent = (props) => {
                     }]
                 }}>
                     <TouchableOpacity onPress={() => {
-openCloseMenu()
+                        openCloseMenu()
                     }}>
 
-                        <View style={{ flexDirection: "row", alignItems:'flex-end'}}>
-
-                        <Image source={showMenu ? close : menu} style={{
-                            width: 24,
-                            height: 20,
-                            tintColor: 'black',
-                            marginTop: 20
-
-                        }}></Image>
-                        <Text style={{
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                            color: 'black',
-                            marginLeft:20,
-                        }}>{currentTab}</Text>
+                        <View style={{ flexDirection: "row", alignItems: 'center',marginTop:20 }}>
+                                <Image source={showMenu ? close : menu} style={{
+                                    width: 24,
+                                    height: 20,
+                                    tintColor: 'black',
+                                }}></Image>
+                                <Text style={{
+                                    lineHeight: 25,
+                                    fontSize: 20,
+                                    fontWeight:'bold',
+                                    fontFamily: 'Poppins-Regular',
+                                    color: 'black',
+                                    marginLeft: 20,
+                                }}>{currentTab}</Text>
                         </View>
 
                     </TouchableOpacity>
-                    {selectedTab(currentTab,props)}
+                    {selectedTab(currentTab, props)}
                 </Animated.View>
 
             </Animated.View>
@@ -175,7 +174,7 @@ openCloseMenu()
 }
 
 // For multiple Buttons...
-const TabButton = (onLogout,openCloseMenu,currentTab, setCurrentTab, title, image) => {
+const TabButton = (onLogout, openCloseMenu, currentTab, setCurrentTab, title, image) => {
     return (
 
         <TouchableOpacity onPress={() => {
@@ -205,8 +204,9 @@ const TabButton = (onLogout,openCloseMenu,currentTab, setCurrentTab, title, imag
                 }}></Image>
 
                 <Text style={{
-                    fontSize: 15,
+                    fontSize: 18,
                     fontWeight: 'bold',
+                    fontFamily:'Poppins-Regular',
                     paddingLeft: 15,
                     color: currentTab == title ? "#5359D1" : "white"
                 }}>{title}</Text>

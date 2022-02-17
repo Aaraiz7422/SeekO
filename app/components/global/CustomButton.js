@@ -54,7 +54,7 @@ const CustomButton = ({
     const textStyle = {
         fontSize: 20,
         color: textColor,
-        textAlign:"center",
+        textAlign:"center",fontFamily:'Poppins-Regular',
         paddingLeft:10,paddingRight:10
     };
 

@@ -50,7 +50,7 @@ const SplashScreen = (props) => {
           }}
           localImage={true}
           source={require('../../assets/Logo.png')} />
-        <Text style={{color: '#000'}}>
+        <Text style={{color: '#000',fontFamily:'Poppins-Regular',}}>
           {APP_NAME}
         </Text>
       </View>

@@ -53,9 +53,9 @@ const CategoryItem = ({navigation, categoryName,topicId,index}) => {
         <>
             <View style={{ marginLeft: 20, marginBottom: -20, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
 
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{categoryName}</Text>
+                <Text style={{ fontSize: 20,fontWeight:'bold', fontFamily:'Poppins-Regular' }}>{categoryName}</Text>
                 <TouchableOpacity onPress={onClickViewAll} style={{marginVertical:16,marginHorizontal:20}}>
-                    <Text style={{fontSize:16,fontWeight:'bold'}}>View All</Text>
+                    <Text style={{fontSize:16, fontFamily:'Poppins-Medium'}}>View All</Text>
                 </TouchableOpacity>
             </View>
 

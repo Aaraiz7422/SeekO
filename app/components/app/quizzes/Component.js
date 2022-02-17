@@ -168,7 +168,7 @@ const QuizzesComponent = (props) => {
                         style={{ alignItems: 'center', }}
                     >
 
-                        <Text style={{ fontSize: 22, fontWeight: 'bold', textAlign: 'center', marginBottom: 30 }}>Are you sure you want to submit your quiz?</Text>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold',fontFamily:'Poppins-Regular', textAlign: 'center', marginBottom: 30 }}>Are you sure you want to submit your quiz?</Text>
                         <CustomButton backgroundColor={"#FFFFFF"} title={"Cancel"} height={60} width={0.64} borderColor={"red"} borderWidth={1} borderRadius={30}></CustomButton>
                         <CustomButton backgroundColor={"#01CCAD"} title={"OK"} height={60} width={0.64} borderRadius={30}></CustomButton>
                     </View>

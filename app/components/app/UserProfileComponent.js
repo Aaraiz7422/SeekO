@@ -31,7 +31,7 @@ const UserProfileComponent = ({ navigation }) => {
                 </View>
                 <View style={{ alignItems: 'center', zIndex: 3, position: 'relative', top: -60 }}>
                     <Image source={require("../../assets/profileAvatar.png")}></Image>
-                    <Text style={{ margin: 10, fontSize: 24, fontWeight: 'bold' }}>Usama Ejaz</Text>
+                    <Text style={{ margin: 10, fontSize: 24,fontWeight:'bold', fontFamily:'Poppins-Regular' }}>Usama Ejaz</Text>
 
                 </View>
                 <View style={{ zIndex: 3, position: 'relative', top: -50 }}>
@@ -41,7 +41,7 @@ const UserProfileComponent = ({ navigation }) => {
                     }} />
                     <View style={{ marginLeft: 20, marginBottom: -20, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
 
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Completed Courses</Text>
+                        <Text style={{ fontSize: 20,fontWeight:'bold', fontFamily:'Poppins-Regular' }}>Completed Courses</Text>
                         <CustomButton
                             title={"View All"}
                             height={40}

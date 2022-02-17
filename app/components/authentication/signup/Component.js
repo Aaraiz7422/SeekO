@@ -39,13 +39,13 @@ const SignupComponent = (props) => {
                         navigation.navigate('Login');
                     }
                     }>
-                    <Text style={{ fontSize: 16 }}>Sign In</Text>
+                    <Text style={{ fontSize: 16,fontFamily:'Poppins-Regular', }}>Sign In</Text>
                 </Button>
             </View>
             <Image
                 source={require('../../../assets/Logo.png')}
             ></Image>
-            <Text style={{ margin: 30, fontSize: 26, fontWeight: '700' }}>Sign Up</Text>
+            <Text style={{ margin: 30, fontSize: 26, fontWeight: '700',fontFamily:'Poppins-Regular', }}>Sign Up</Text>
             <View>
                 <TextInput
                     style={global.auth_input}
@@ -119,11 +119,11 @@ const SignupComponent = (props) => {
                 alignItems: 'center',
                 marginTop: 16,
             }}>
-                <Text>
+                <Text style={{fontFamily:'Poppins-Regular',}}>
                     Already have an account?&nbsp;
                     <Text
                         style={{
-                            textDecorationLine: 'underline',
+                            textDecorationLine: 'underline',fontFamily:'Poppins-Regular',
                         }}
                         onPress={() => navigation.navigate('Login')}>
                         Login

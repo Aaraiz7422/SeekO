@@ -59,7 +59,7 @@ const TopicsListComponent = (props) => {
                     <ActivityIndicator size="large" />
                 ) : (
                     fetching_topics_error && <View>
-                        <Text>Tap to reload</Text>
+                        <Text style={{fontFamily:'Poppins-Regular'}}>Tap to reload</Text>
                         <Button title='click me' onPress={() => fetchTopics()}></Button>
                     </View>
                 )
