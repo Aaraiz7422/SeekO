@@ -40,7 +40,7 @@ const QuizzesComponent = (props) => {
     // const headerTitle = selected_topic_redux ? tab_data ? `${selected_topic_redux.name} - ${tab_data.name}` : `${selected_topic_redux.name}` : 'Quiz';
     const headerTitle = selected_topic_redux ? tab_data ? `${selected_topic_redux.name}` : `${selected_topic_redux.name}` : 'Quiz';
     const showModal = () => setVisible(true);
-    const hideModal = () => setVisible(false);
+    const closeModal = () => setVisible(false);
     const containerStyle = { backgroundColor: 'white', padding: 30, margin: 30, borderRadius: 20 };
 
     const shadowOpt = {
@@ -76,8 +76,7 @@ const QuizzesComponent = (props) => {
     };
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-            <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
+        <ScrollView stickyHeaderIndices={[0]} style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
                 <View style={{ paddingTop: 10, backgroundColor: "#F5F8FF" }}>
                     <AppHeader title={headerTitle}></AppHeader>
                 </View>
@@ -158,23 +157,22 @@ const QuizzesComponent = (props) => {
                             shadowOpacity={0.15}
                             linearStartColor={"#F8C04E"}
                             linearEndColor={"#FFBF3C"}
-                            onPress={submitQuiz}
+                            onPress={showModal}
                         ></CustomButton>
                     }
 
                 </View>
-                <FullScreenModal visible={visible} onDismiss={hideModal}>
+                <FullScreenModal visible={visible} onDismiss={closeModal}>
                     <View
                         style={{ alignItems: 'center', }}
                     >
 
                         <Text style={{ fontSize: 22, fontWeight: 'bold',fontFamily:'Poppins-Regular', textAlign: 'center', marginBottom: 30 }}>Are you sure you want to submit your quiz?</Text>
-                        <CustomButton backgroundColor={"#FFFFFF"} title={"Cancel"} height={60} width={0.64} borderColor={"red"} borderWidth={1} borderRadius={30}></CustomButton>
-                        <CustomButton backgroundColor={"#01CCAD"} title={"OK"} height={60} width={0.64} borderRadius={30}></CustomButton>
+                        <CustomButton backgroundColor={"#FFFFFF"} title={"Cancel"} height={60} width={0.64} borderColor={"red"} borderWidth={1} borderRadius={30} onPress={closeModal}></CustomButton>
+                        <CustomButton backgroundColor={"#01CCAD"} title={"OK"} height={60} width={0.64} borderRadius={30} onPress={submitQuiz}></CustomButton>
                     </View>
                 </FullScreenModal>
 
-            </View>
 
         </ScrollView>
     );

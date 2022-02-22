@@ -9,7 +9,7 @@ const FullScreenModal = (props) => {
 
     const {visible, closeModal,children} = props;
 
-    const containerStyle = { backgroundColor: 'white', padding: 20, margin: 20,borderRadius:20};
+    const containerStyle = {zIndex:2, backgroundColor: 'white', padding: 20, margin: 20,borderRadius:20};
 
     return(
         <Provider>

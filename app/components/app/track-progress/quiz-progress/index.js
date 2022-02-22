@@ -3,7 +3,6 @@ import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { BoxShadow } from 'react-native-shadow';
 import { Divider } from 'react-native-paper';
 import LinearGradient from "react-native-linear-gradient";
-
 //Import Plugins and Libraries
 
 //Import Constants and variables
@@ -110,7 +109,7 @@ const QuizProgressComponent = (props) => {
                       return (
                         <View style={{
                           marginTop: 4,
-                          height: SCREEN_HEIGHT * 0.06,
+                          // height: SCREEN_HEIGHT * 0.06,
                           width: SCREEN_WIDTH * 0.8,
                           backgroundColor: "#027E6A",
                           justifyContent: "center",
@@ -210,4 +209,3 @@ const styles = StyleSheet.create({
 export default QuizProgressComponent;
 
 import global from '../../../../../global-styles'; import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-

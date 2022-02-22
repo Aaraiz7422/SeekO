@@ -50,6 +50,7 @@ const TopicsListComponent = (props) => {
             {!fetching_topics && !fetching_topics_error && topicListData ?
                 <View style={[{ flex: 1, backgroundColor: "#F5F8FF", alignItems: 'center' }]}>
                     <FlatList
+                        stickyHeaderIndices={[0]}
                         ListHeaderComponent={<AppHeader title={topicListData.name}></AppHeader>}
                         data={topicListData.topics}
                         renderItem={renderItem}
@@ -59,7 +60,7 @@ const TopicsListComponent = (props) => {
                     <ActivityIndicator size="large" />
                 ) : (
                     fetching_topics_error && <View>
-                        <Text style={{fontFamily:'Poppins-Regular'}}>Tap to reload</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular' }}>Tap to reload</Text>
                         <Button title='click me' onPress={() => fetchTopics()}></Button>
                     </View>
                 )

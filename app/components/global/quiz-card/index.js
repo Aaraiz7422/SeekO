@@ -44,10 +44,10 @@ const QuizCard = (props) => {
           style={[
             {
               flexDirection: 'column',
-              alignItems: 'flex-start',
+              alignItems: 'center',
               justifyContent: 'flex-start',
               marginBottom: 16,
-              width: '100%',
+              width: Dimensions.get('window').width * 0.8,
             },
           ]}>
 
@@ -59,18 +59,28 @@ const QuizCard = (props) => {
               borderColor: 'rgba(0, 0, 0, 0.19)',
               borderWidth: 2,
               backgroundColor: "#F5F8FF",
-              // marginHorizontal: 30,
               marginTop: 20,
-              // marginBottom: -20,
             }}
             color={"#F8C04E"} />
 
+        </View>
+        <View
+          style={[
+            {
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              marginBottom: 16,
+              width: Dimensions.get('window').width * 0.8,
+            },
+          ]}>
+
           <Text
-            style={[global.text, { marginTop: 20, fontSize: 16,fontFamily:'Poppins-Regular', }]}
+            style={[global.text, { marginTop: 20, fontSize: 16, fontFamily: 'Poppins-Regular', }]}
           >
             Question: {question_number_heading}
           </Text>
-          <Text style={[global.text, global.margin_top_10, global.alignTextJustify, {fontFamily:'Poppins-Regular',fontWeight:'bold', fontSize: 20 }]}>
+          <Text style={[global.text, global.margin_top_10, global.alignTextJustify, { fontFamily: 'Poppins-Regular', fontWeight: 'bold', fontSize: 20 }]}>
             {current_question.question}
           </Text>
         </View>
@@ -82,23 +92,10 @@ const QuizCard = (props) => {
               quiz_answers_indexes_list[current_question.id] &&
               quiz_answers_indexes_list[current_question.id] === option.id;
             return (
-              <View style={{margin:5}}>
-                <Pressable style={[{width:Dimensions.get('window').width * 0.8, borderRadius:30, borderWidth: 1, backgroundColor: is_selected ? "#01CCAD" : "#F5F8FF",}]}  onPress={() => onChangeOption(current_question, option)}>
-                  <Text style={{color:'black',textAlign:'center',fontFamily:'Poppins-Regular',margin:10,fontSize:20}}>{option.option}</Text>
+              <View style={{ margin: 5 }}>
+                <Pressable style={[{ width: Dimensions.get('window').width * 0.8, borderRadius: 30, borderWidth: 1, backgroundColor: is_selected ? "#01CCAD" : "#F5F8FF", }]} onPress={() => onChangeOption(current_question, option)}>
+                  <Text style={{ color: 'black', textAlign: 'center', fontFamily: 'Poppins-Regular', margin: 10, fontSize: 20 }}>{option.option}</Text>
                 </Pressable>
-                {/* <CustomButton
-                  key={option.id}
-                  backgroundColor={
-                    is_selected ? "#01CCAD" : "#F5F8FF"}
-                  title={option.option}
-                  height={"auto"}
-                  width={0.70}
-                  borderRadius={30}
-                  shadowVerticalMargin={0}
-                  shadowRadius={20}
-                  borderWidth={1.5}
-                  onPress={() => onChangeOption(current_question, option)}
-                ></CustomButton> */}
               </View>
             );
           })}

@@ -10,15 +10,15 @@ import { fetchTopics } from '../../../../global-functions';
 import { ActivityIndicator } from 'react-native-paper';
 
 
-const CategoryItem = ({navigation, categoryName,topicId,index}) => {
-    
+const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
+
     const [topicListData, setTopicListData] = useState({});
 
     useEffect(() => {
-        fetchTopics(topicId,setTopicListData);
+        fetchTopics(topicId, setTopicListData);
     }, [])
 
-    
+
     const TopicItem = ({ item, index }) => (
         <CustomCard
             height={0.38}
@@ -40,7 +40,7 @@ const CategoryItem = ({navigation, categoryName,topicId,index}) => {
     );
 
     const onClickViewAll = () => {
-        navigation.navigate('Topics',{topicListData:topicListData})
+        navigation.navigate('Topics', { topicListData: topicListData })
     }
 
     const goToTopicDetail = (item, index) => {
@@ -53,14 +53,14 @@ const CategoryItem = ({navigation, categoryName,topicId,index}) => {
         <>
             <View style={{ marginLeft: 20, marginBottom: -20, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
 
-                <Text style={{ fontSize: 20,fontWeight:'bold', fontFamily:'Poppins-Regular' }}>{categoryName}</Text>
-                <TouchableOpacity onPress={onClickViewAll} style={{marginVertical:16,marginHorizontal:20}}>
-                    <Text style={{fontSize:16, fontFamily:'Poppins-Medium'}}>View All</Text>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', fontFamily: 'Poppins-Regular' }}>{categoryName}</Text>
+                <TouchableOpacity onPress={onClickViewAll} style={{ marginVertical: 16, marginHorizontal: 20 }}>
+                    <Text style={{ fontSize: 16, fontFamily: 'Poppins-Medium' }}>View All</Text>
                 </TouchableOpacity>
             </View>
 
-            <FlatList 
-            data={topicListData.topics}
+            <FlatList
+                data={topicListData.topics}
                 renderItem={renderTopicItem}
                 horizontal={true}
             ></FlatList>
@@ -68,7 +68,7 @@ const CategoryItem = ({navigation, categoryName,topicId,index}) => {
     );
 }
 
-const CategoriesComponent = ({ navigation,childName, categories}) => {
+const CategoriesComponent = ({ navigation, childName, categories }) => {
 
     const renderCategoryItem = ({ item, index }) => (
         <CategoryItem navigation={navigation} categoryName={item.name} index={index} topicId={item.id} />
@@ -76,19 +76,20 @@ const CategoriesComponent = ({ navigation,childName, categories}) => {
 
     return (
 
-            <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-                {
-                    categories && categories.length > 1 ?                 <View>
+        <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
+            {
+                categories && categories.length > 1 ? <View>
                     <FlatList
-                    ListHeaderComponent={<AppHeader title={"Hi, "+childName}></AppHeader>}
+                        stickyHeaderIndices={[0]}
+                        ListHeaderComponent={<AppHeader title={"Hi, " + childName}></AppHeader>}
                         data={categories}
                         renderItem={renderCategoryItem}
                         keyExtractor={item => item.id}
                     />
-                </View>:<View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator size={"small"}></ActivityIndicator></View>
-                }
+                </View> : <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size={"small"}></ActivityIndicator></View>
+            }
 
-            </View>
+        </View>
     );
 }
 
