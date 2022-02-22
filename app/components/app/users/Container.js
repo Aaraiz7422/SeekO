@@ -87,6 +87,7 @@ const UserContainer = (props) => {
             setLoading(false);
             return;
         } else {
+            props.setCurrentUserFetchLoadingAction(true);
             addUser(child_information);
         } 
     }
@@ -105,19 +106,26 @@ const UserContainer = (props) => {
             "name": child_information.name,
             "gender": gen,
             "dob": dob,
-            "avatar": profileImage.id,
+        }
+
+        if(profileImage.id !== null){
+            payload.avatar = profileImage.id;
         }
 
         services
             .base_service(urls.user_register, payload)
             .then((response) => {
                 console.log('Create User response: ', response);
+                props.setCurrentUserFetchLoadingAction(false);
+
             })
             .catch((error) => {
                 console.log('fetch categories error: ', error);
-            });
+                props.setCurrentUserFetchLoadingAction(false);
 
+            });
         navigation.pop();
+        // navigation.replace("Home");
     }
 
     const deleteChildAccount = user_id => {

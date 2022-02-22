@@ -16,7 +16,7 @@ import TrackProgressContainer from '../track-progress/Container';
 const HomeContainer = (props) => {
     const { navigation, current_user} = props;
     const [show_add_child_account_modal, setShowAddChildAccountModal] = useState(false);
-
+    // const { current_user_fetching,current_user_error,getCurrentUserAction } = props;
     useEffect(() => {
         props.getCurrentUserAction(userId => (setUserIdIAP(userId)));
         if(current_user !== null){
@@ -63,16 +63,16 @@ const HomeContainer = (props) => {
 
     const selectedTab = (currentTab,prop) => {
         if (currentTab === 'Home') {
-            return current_user == null ? <ActivityIndicator></ActivityIndicator> : <SingleChildCard {...prop} trackProgress={false} navigation={navigation} current_user={current_user} showAddChildAccountModal={showAddChildAccountModal} id={1}></SingleChildCard>;
+            return current_user == null ? <ActivityIndicator></ActivityIndicator> : <SingleChildCard {...prop} trackProgress={false} navigation={navigation} current_user={current_user} showAddChildAccountModal={showAddChildAccountModal} registerNewChild={registerNewChild} id={1}></SingleChildCard>;
         }
         else if (currentTab === 'Track Progress') {
-            return current_user == null ? <ActivityIndicator></ActivityIndicator> : <SingleChildCard {...prop} trackProgress={true} navigation={navigation} current_user={current_user} showAddChildAccountModal={showAddChildAccountModal} id={2}></SingleChildCard>; 
+            return current_user == null ? <ActivityIndicator></ActivityIndicator> : <SingleChildCard {...prop} trackProgress={true} navigation={navigation} current_user={current_user} showAddChildAccountModal={showAddChildAccountModal} registerNewChild={registerNewChild} id={2}></SingleChildCard>; 
         }
         else if (currentTab === 'Subscription') {
             return <SubscriptionComponent navigation={navigation}></SubscriptionComponent>;
         }
         else if (currentTab === 'User') {
-            return current_user == null ? <ActivityIndicator></ActivityIndicator> : <SingleChildCard {...prop} navigation={navigation} current_user={current_user} showAddChildAccountModal={showAddChildAccountModal} id={1}></SingleChildCard>;
+            return current_user == null ? <ActivityIndicator></ActivityIndicator> : <SingleChildCard {...prop} navigation={navigation} current_user={current_user} showAddChildAccountModal={showAddChildAccountModal} registerNewChild={registerNewChild} id={3}></SingleChildCard>;
 
             // return <UserComponent navigation={navigation}></UserComponent>;
         }

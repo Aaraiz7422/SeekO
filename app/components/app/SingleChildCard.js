@@ -4,12 +4,12 @@ import {
     StyleSheet,
     TouchableOpacity,
     Dimensions,
-    Text
+    Text,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Card, Title, TextInput, Button, ActivityIndicator, Colors, HelperText } from 'react-native-paper';
-import { COLORS, SCREEN_WIDTH,MAX_CHILD_ACCOUNTS, input_theme } from '../../../constants';
+import { COLORS, SCREEN_WIDTH, MAX_CHILD_ACCOUNTS, input_theme } from '../../../constants';
 import global from '../../../global-styles';
 import services from '../../api/services';
 import { urls } from '../../api/urls';
@@ -25,14 +25,14 @@ const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, a
             navigation.navigate('Categories', { accountName: account.name });
         }
         if (trackProgress === true) {
-            navigation.navigate('TrackProgress', { 
+            navigation.navigate('TrackProgress', {
                 selected_child_account: account,
                 selected_screen: 'quizzes_list',
                 // selected_child_account: {}, selected_screen: null 
             })
         }
         if (trackProgress === undefined) {
-            navigation.navigate('CreateUser',{child_account_info:account,edit_user_profile:true});
+            navigation.navigate('CreateUser', { child_account_info: account, edit_user_profile: true });
         }
     }}>
 
@@ -54,7 +54,11 @@ const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, a
             <Card.Content>
             </Card.Content>
             <Card.Cover
-                source={require('../../assets/childAvatar.png')}
+                source={
+                    // account.avatar.length < 1 ? 
+                    require('../../assets/childAvatar.png')
+                    // : {uri:account.avatar}
+                }
                 style={{
                     opacity: 1,
                     backgroundColor: 'transparent',
@@ -62,7 +66,7 @@ const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, a
                     margin: 10,
                     // borderRadius: 100 
                 }} />
-            <Title style={{ textAlign: 'center',fontWeight:'bold',fontFamily:'Poppins-Regular' }}>{account.name}</Title>
+            <Title style={{ textAlign: 'center', fontWeight: 'bold', fontFamily: 'Poppins-Regular' }}>{account.name}</Title>
         </Card>
     </TouchableOpacity>
 );
@@ -78,7 +82,11 @@ const SingleChildCard = (props) => {
         trackProgress,
         showAddChildAccountModal,
         navigation,
-        setChildUserAccountAction
+        setChildUserAccountAction,
+        current_user_fetching,
+        current_user_error,
+        getCurrentUserAction,
+        registerNewChild
     } = props;
 
     let passAccountToUserComponent;
@@ -95,14 +103,89 @@ const SingleChildCard = (props) => {
                 marginTop: 40,
             }}
         >
-            {
+            {!current_user_fetching && !current_user_error && current_user ? (
+                <>
+                    {
+                        child_accounts.length > 0 ?
+                            <>
+                                {child_accounts.map((account, index) => {
+                                    passAccountToUserComponent = account;
+                                    console.log(passAccountToUserComponent);
+                                    return <CardComponent key={index} trackProgress={trackProgress} setChildUserAccountAction={setChildUserAccountAction} account={account} index={index} navigation={navigation} ></CardComponent>
+                                }
+                                )}
+                                {trackProgress === false ? child_accounts && child_accounts.length < MAX_CHILD_ACCOUNTS && (<View
+                                    style={{
+                                        justifyContent: 'center', alignItems: 'center',
+                                        width: Dimensions.get('window').width * 0.4,
+                                        height: Dimensions.get('window').height * 0.27,
+                                        // backgroundColor:"purple",
+                                    }}
+                                >
+
+                                    <Icon.Button
+                                        name='pluscircle'
+                                        size={110}
+                                        iconStyle={{ marginRight: 0 }}
+                                        padding={0}
+                                        borderRadius={110}
+                                        backgroundColor={"#DFDDDD"}
+                                        onPress={() => {
+                                            navigation.navigate('CreateUser', { child_account_info: passAccountToUserComponent, edit_user_profile: false });
+                                        }}>
+                                    </Icon.Button>
+                                </View>
+                                )
+                                    : <></>}
+
+                            </>
+                            :
+                            (
+                                <>
+                                    <View
+                                        style={{
+                                            justifyContent: 'center', alignItems: 'center',
+                                            width: Dimensions.get('window').width * 0.4,
+                                            height: Dimensions.get('window').height * 0.27,
+                                            // backgroundColor:"purple",
+                                        }}
+                                    >
+
+                                        <Icon.Button
+                                            name='pluscircle'
+                                            size={110}
+                                            iconStyle={{ marginRight: 0 }}
+                                            padding={0}
+                                            borderRadius={110}
+                                            backgroundColor={"#DFDDDD"}
+                                            onPress={() => {
+                                                navigation.navigate('CreateUser', { child_account_info: passAccountToUserComponent, edit_user_profile: false });
+                                            }}>
+                                        </Icon.Button>
+                                    </View>
+                                    <Text style={{ fontFamily: 'Poppins-Regular' }}>There is no child account yet. Tap plus button to register your child account.</Text>
+                                </>
+                            )
+                    }
+                </>
+            ) : current_user_fetching ? (
+                <ActivityIndicator size="large" />
+            ) : (
+                current_user_error && (
+                    <>
+                        <Button title='Tap to reload' onPress={() => getCurrentUserAction()}></Button>
+                    </>
+                )
+            )
+
+            }
+            {/* {
                 child_accounts.length > 0 ?
                     <>
-                        {child_accounts.map((account, index) => 
-                        {
+                        {child_accounts.map((account, index) => {
                             passAccountToUserComponent = account;
                             console.log(passAccountToUserComponent);
-                         return <CardComponent key={index} trackProgress={trackProgress} setChildUserAccountAction={setChildUserAccountAction} account={account} index={index} navigation={navigation} ></CardComponent>
+                            return <CardComponent key={index} trackProgress={trackProgress} setChildUserAccountAction={setChildUserAccountAction} account={account} index={index} navigation={navigation} ></CardComponent>
                         }
                         )}
                         {trackProgress === false ? child_accounts && child_accounts.length < MAX_CHILD_ACCOUNTS && (<View
@@ -122,12 +205,12 @@ const SingleChildCard = (props) => {
                                 borderRadius={110}
                                 backgroundColor={"#DFDDDD"}
                                 onPress={() => {
-                                    navigation.navigate('CreateUser',{child_account_info:passAccountToUserComponent,edit_user_profile:false});
+                                    navigation.navigate('CreateUser', { child_account_info: passAccountToUserComponent, edit_user_profile: false });
                                 }}>
                             </Icon.Button>
-        </View>
-        )
-                         : <></>}
+                        </View>
+                        )
+                            : <></>}
 
                     </>
                     :
@@ -150,14 +233,14 @@ const SingleChildCard = (props) => {
                                     borderRadius={110}
                                     backgroundColor={"#DFDDDD"}
                                     onPress={() => {
-                                        navigation.navigate('CreateUser',{child_account_info:passAccountToUserComponent,edit_user_profile:false});
+                                        navigation.navigate('CreateUser', { child_account_info: passAccountToUserComponent, edit_user_profile: false });
                                     }}>
                                 </Icon.Button>
                             </View>
-                            <Text style={{fontFamily:'Poppins-Regular'}}>There is no child account yet. Tap plus button to register your child account.</Text>
+                            <Text style={{ fontFamily: 'Poppins-Regular' }}>There is no child account yet. Tap plus button to register your child account.</Text>
                         </>
                     )
-            }
+            } */}
             {/* <FullScreenModal visible={showAddChildAccountModal} closeModal={showAddChildAccountModal(true)}>
                 <View>
                     <Text>
