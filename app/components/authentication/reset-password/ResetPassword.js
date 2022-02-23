@@ -23,7 +23,7 @@ const ResetPassword = () => {
                     // style={styles.tinyLogo}
                     source={require('../../../assets/Logo.png')}
                 ></Image>
-                <Text style={{ margin: 30, fontSize: 26, fontWeight: '700',fontFamily:'Poppins-Regular', }}>Reset Password</Text>
+                <Text style={{ margin: 30,color:'black', fontSize: 26, fontWeight: '700',fontFamily:'Poppins-Regular', }}>Reset Password</Text>
 
                 <TextInput
                     style={global.auth_input}

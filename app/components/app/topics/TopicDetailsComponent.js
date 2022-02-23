@@ -113,7 +113,7 @@ const TopicDetailsComponent = (props) => {
         ) : (
           fetching_topics_error && (
             <View>
-              <Text style={{fontFamily:'Poppins-Regular'}}>Tap to reload</Text>
+              <Text style={{color:'black',fontFamily:'Poppins-Regular'}}>Tap to reload</Text>
               <Button title='click me' onPress={() => setTopicDataType()}></Button>
             </View>
           )

@@ -8,6 +8,7 @@ import { urls } from '../../../api/urls';
 import CustomButton from '../../global/CustomButton';
 import { fetchTopics } from '../../../../global-functions';
 import { ActivityIndicator } from 'react-native-paper';
+import { setCurrentUserFetchLoading } from '../../../redux/actions/userActions';
 
 
 const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
@@ -53,9 +54,21 @@ const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
         <>
             <View style={{ marginLeft: 20, marginBottom: -20, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
 
-                <Text style={{ fontSize: 20, fontWeight: 'bold', fontFamily: 'Poppins-Regular' }}>{categoryName}</Text>
-                <TouchableOpacity onPress={onClickViewAll} style={{ marginVertical: 16, marginHorizontal: 20 }}>
-                    <Text style={{ fontSize: 16, fontFamily: 'Poppins-Medium' }}>View All</Text>
+                <Text style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: 'black',
+                    fontFamily: 'Poppins-Regular'
+                }}>{categoryName}</Text>
+                <TouchableOpacity onPress={onClickViewAll} style={{
+                    marginVertical: 16,
+                    marginHorizontal: 20
+                }}>
+                    <Text style={{
+                        fontSize: 16,
+                        fontFamily: 'Poppins-Medium',
+                        color: 'black',
+                    }}>View All</Text>
                 </TouchableOpacity>
             </View>
 
@@ -70,6 +83,12 @@ const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
 
 const CategoriesComponent = ({ navigation, childName, categories }) => {
 
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 10000);
+    }, [])
+
     const renderCategoryItem = ({ item, index }) => (
         <CategoryItem navigation={navigation} categoryName={item.name} index={index} topicId={item.id} />
     );
@@ -78,15 +97,17 @@ const CategoriesComponent = ({ navigation, childName, categories }) => {
 
         <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             {
-                categories && categories.length > 1 ? <View>
-                    <FlatList
-                        stickyHeaderIndices={[0]}
-                        ListHeaderComponent={<AppHeader title={"Hi, " + childName}></AppHeader>}
-                        data={categories}
-                        renderItem={renderCategoryItem}
-                        keyExtractor={item => item.id}
-                    />
-                </View> : <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size={"small"}></ActivityIndicator></View>
+                categories && categories.length > 1 ?
+                    <View>
+                        <FlatList
+                            stickyHeaderIndices={[0]}
+                            ListHeaderComponent={<AppHeader title={"Hi, " + childName}></AppHeader>}
+                            data={categories}
+                            renderItem={renderCategoryItem}
+                            keyExtractor={item => item.id}
+                        />
+                    </View> :
+                    loading && <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size={"small"}></ActivityIndicator></View>
             }
 
         </View>

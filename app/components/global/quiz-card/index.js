@@ -76,11 +76,11 @@ const QuizCard = (props) => {
           ]}>
 
           <Text
-            style={[global.text, { marginTop: 20, fontSize: 16, fontFamily: 'Poppins-Regular', }]}
+            style={[global.text, { color:'black',marginTop: 20, fontSize: 16, fontFamily: 'Poppins-Regular', }]}
           >
             Question: {question_number_heading}
           </Text>
-          <Text style={[global.text, global.margin_top_10, global.alignTextJustify, { fontFamily: 'Poppins-Regular', fontWeight: 'bold', fontSize: 20 }]}>
+          <Text style={[global.text, global.margin_top_10, global.alignTextJustify, {color:'black', fontFamily: 'Poppins-Regular', fontWeight: 'bold', fontSize: 20 }]}>
             {current_question.question}
           </Text>
         </View>

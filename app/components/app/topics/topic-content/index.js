@@ -31,6 +31,7 @@ const TopicContentContainer = (props) => {
       case HEADING_1: {
         return (
           <Text style={{
+            color:'black',
             fontSize: 30,
             fontWeight: 'bold',
             fontFamily:'Poppins-Regular',
@@ -43,6 +44,7 @@ const TopicContentContainer = (props) => {
       case HEADING_2: {
         return (
           <Text  style={{
+            color:'black',
             fontSize: 28,
             fontWeight: 'bold',
             fontFamily:'Poppins-Regular',
@@ -55,6 +57,7 @@ const TopicContentContainer = (props) => {
       case HEADING_3: {
         return (
           <Text style={{
+            color:'black',
             fontSize: 26,
             fontWeight: 'bold',
             fontFamily:'Poppins-Regular',
@@ -65,14 +68,14 @@ const TopicContentContainer = (props) => {
       }
       case SUBTITLE: {
         return (
-          <Text style={{ fontSize: 16, paddingTop: 10,fontFamily:'Poppins-Regular', }} >
+          <Text style={{color:'black', fontSize: 16, paddingTop: 10,fontFamily:'Poppins-Regular', }} >
             {content.content}
           </Text>
         );
       }
       case PARAGRAPH: {
         return (
-          <Text style={{ fontSize: 16, paddingTop: 10,paddingBottom:16,fontFamily:'Poppins-Regular', }} >
+          <Text style={{color:'black', fontSize: 16, paddingTop: 10,paddingBottom:16,fontFamily:'Poppins-Regular', }} >
             {content.content}
           </Text>
         );
@@ -118,7 +121,7 @@ const TopicContentContainer = (props) => {
                 />
                 {
                   !isReady &&
-                  <Text style={{fontFamily:'Poppins-Regular',}}>Loading</Text>
+                  <Text style={{color:'black',fontFamily:'Poppins-Regular',}}>Loading</Text>
                 }
               </>
             )}
@@ -158,7 +161,7 @@ const TopicContentContainer = (props) => {
               {renderContentComponent(content)}
               {topic_associated_data.length - 1 === index && (
                 <Text
-                  style={{ textAlign: 'center',fontFamily:'Poppins-Regular', marginTop: 16 }}>
+                  style={{ color:'black',textAlign: 'center',fontFamily:'Poppins-Regular', marginTop: 16 }}>
                   End of content
                 </Text>
               )}

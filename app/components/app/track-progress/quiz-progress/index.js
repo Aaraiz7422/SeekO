@@ -32,6 +32,8 @@ const QuizProgressComponent = (props) => {
   }
   console.log("Quiz Progress.......................................................................................................");
 
+  const quizName = quiz_progress_data.quiz_name.split('-')[0];
+
   return (
     <View style={
       {
@@ -42,10 +44,10 @@ const QuizProgressComponent = (props) => {
         backgroundColor: "#F5F8FF"
       }
     }>
-      <AppHeader title={quiz_progress_data.quiz_name}></AppHeader>
+      <AppHeader title={quizName}></AppHeader>
       {/* <AppHeader title={selected_child_account.name}></AppHeader> */}
       <View style={{
-        margin: 40, marginBottom: 25,
+        marginHorizontal: 40, marginVertical:24,
         // backgroundColor:"green" 
       }}>
 
@@ -53,12 +55,12 @@ const QuizProgressComponent = (props) => {
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: SCREEN_HEIGHT * 0.1, }}>
           <View style={{ flexDirection: "column", justifyContent: "space-around", width: SCREEN_WIDTH * 0.5 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>Total Marks:</Text>
-              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{quiz_progress_data.total_marks}</Text>
+              <Text style={{ color:'black',fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>Total Marks:</Text>
+              <Text style={{color:'black', fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{quiz_progress_data.total_marks}</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>Obtained Marks:</Text>
-              <Text style={{ fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{quiz_progress_data.user_marks}</Text>
+              <Text style={{ color:'black',fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>Obtained Marks:</Text>
+              <Text style={{ color:'black',fontSize: 20, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{quiz_progress_data.user_marks}</Text>
             </View>
           </View>
           <View style={{ justifyContent: "center", alignItems: 'center' }}>
@@ -66,7 +68,7 @@ const QuizProgressComponent = (props) => {
               <View style={{ justifyContent: "center", alignItems: 'center' }}>
 
                 <LinearGradient colors={["#FFAC71", "#FF8450"]} style={{
-                  height: SCREEN_HEIGHT * 0.095,
+                  height: SCREEN_HEIGHT * 0.096,
                   width: SCREEN_WIDTH * 0.22,
                   borderRadius: 12,
                   justifyContent: "center",
@@ -97,11 +99,11 @@ const QuizProgressComponent = (props) => {
             return (
               <>
                 <View key={index} style={{ marginTop: 20, marginBottom: 40 }}>
-                  <Text style={[global.text, { textAlign: 'justify', marginTop: 4, fontSize: 14,fontFamily:'Poppins-Regular', }]}>
+                  <Text style={[global.text, { color:'black',textAlign: 'justify', marginTop: 4, fontSize: 14,fontFamily:'Poppins-Regular', }]}>
                     Question # {index + 1}
                   </Text>
                   <Text
-                    style={[global.text, { textAlign: 'justify', marginTop: 4, width: SCREEN_WIDTH * 0.8, fontSize: 20, fontWeight: 'bold',fontFamily:'Poppins-Regular', }]}>
+                    style={[global.text, { color:'black',textAlign: 'justify', marginTop: 4, width: SCREEN_WIDTH * 0.8, fontSize: 20, fontWeight: 'bold',fontFamily:'Poppins-Regular', }]}>
                     {key}
                   </Text>
                   {questions[key].map((answer, index) => {
@@ -128,7 +130,7 @@ const QuizProgressComponent = (props) => {
                       return (
                         <View style={{
                           marginTop: 4,
-                          height: SCREEN_HEIGHT * 0.06,
+                          // height: SCREEN_HEIGHT * 0.06,
                           width: SCREEN_WIDTH * 0.8,
                           backgroundColor: "red",
                           justifyContent: "center",
@@ -147,7 +149,7 @@ const QuizProgressComponent = (props) => {
                       return (
                         <View style={{
                           marginTop: 4,
-                          height: SCREEN_HEIGHT * 0.06,
+                          // height: SCREEN_HEIGHT * 0.06,
                           width: SCREEN_WIDTH * 0.8,
                           backgroundColor: "#DEE8FB",
                           justifyContent: "center",
