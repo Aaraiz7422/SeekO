@@ -48,7 +48,7 @@ const TrackProgressComponent = (props) => {
             <Text style={{ textAlign: 'center',fontFamily:'Poppins-Regular', }} >{index + 1}</Text>
           </View>
           <View style={{ maxWidth: ((SCREEN_WIDTH * 0.9) - 24 - 120) }}>
-            <Text style={[global.text, { fontSize: 18,fontFamily:'Poppins-Regular', }]}>
+            <Text style={[global.text, {textAlign:'left', fontSize: 18,fontFamily:'Poppins-Regular', }]}>
               {selected_screen && selected_screen === 'quizzes_list'
                 ? item.quiz_name.split('-')[0]
                 : item.name}

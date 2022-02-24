@@ -44,7 +44,7 @@ const TopicDetailsComponent = (props) => {
             {...props}
             navigation={navigation}
             topic_associated_data={topic_associated_data}
-
+            selected_topic_title={selected_topic_title}
             parent_data={
               selection_type === 'by_topic' ? selected_topic : selected_button
             }

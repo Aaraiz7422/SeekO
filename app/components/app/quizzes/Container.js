@@ -31,6 +31,7 @@ const QuizzesContainer = (props) => {
     const [show_quiz_submit_button, set_Show_Quiz_Submit_Button] = useState(false);
     const [tab_data, set_Tab_Data] = useState(null);
 
+
     useEffect(() => {
         console.log('Tab Data in Quizz: ', props.route.params.tab_data);
         if (props.route.params.tab_data) {
@@ -46,20 +47,19 @@ const QuizzesContainer = (props) => {
         }
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (selected_quiz !== null) {
             fetchQuizData();
         }
-    },[selected_quiz]);
+    }, [selected_quiz]);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("Error Updateddddddddddddddddddddddd");
-    },[
+    }, [
         submitting_quiz,
         fetching_quiz_data,
-        fetching_quiz_data_error
+        fetching_quiz_data_error,
     ])
-
 
     const fetchQuizData = () => {
         setLoadingAndErrorState(true, false, false);
@@ -122,9 +122,30 @@ const QuizzesContainer = (props) => {
         }, 300);
     }
 
-    const submitQuiz = () => {
-        setLoadingAndErrorState(false, false, true);
+    const fetchChildQuizProgress = (submitResponse) => {
         const { navigation, child_user_account } = props;
+        console.log('CURRENT CHILD ACCOUNT: ', child_user_account.id);
+        console.log("SSSSSSSSS ........... ::: ", submitResponse);
+        let data1 = { user_id: child_user_account.id };
+        services
+            .base_service(urls.track_progress, data1)
+            .then((response) => {
+                console.log('quiz progress response: ', JSON.stringify(response));
+                // setLoadingAndErrorState(false, false);
+                quiz_result = response;
+                console.log("Quiz Result ............", response);
+
+                navigation.navigate('QuizResult', { quiz_progress_data: response, quiz_result_data: submitResponse, selected_quiz, tab_data, child_user_account: child_user_account, selected_topic_title: props.route.params.selected_topic_title });
+            })
+            .catch((error) => {
+                // setLoadingAndErrorState(false, true);
+                console.log('fetch quiz progress error: ', error);
+            });
+    };
+
+    const submitQuiz = () => {
+        const { navigation, child_user_account } = props;
+        setLoadingAndErrorState(false, false, true);
         console.log('CHILD USER ACCOUNT: ', child_user_account);
         console.log('SUBMIT ANSWERS: ', attempted_quiz_data);
         let data = { quiz_id: selected_quiz.id };
@@ -132,12 +153,13 @@ const QuizzesContainer = (props) => {
             answers: attempted_quiz_data,
             user_id: child_user_account.id,
         };
+
         services
             .base_service(urls.attempt_quiz, data, payload)
             .then((response) => {
                 console.log('attempt quiz data response: ', response);
-                console.log("Selected Topic",props.selected_topic_redux);
-                navigation.navigate('QuizResult', { quiz_result_data: response,selected_quiz,tab_data });
+                console.log("Selected Topic", props.selected_topic_redux);
+                fetchChildQuizProgress(response);
                 setLoadingAndErrorState(false, false, false);
             })
             .catch((error) => {
@@ -163,6 +185,7 @@ const QuizzesContainer = (props) => {
             onNextQuestion={onNextQuestion}
             onPreviousQuestion={onPreviousQuestion}
             submitQuiz={submitQuiz}
+            selected_topic_title={props.route.params.selected_topic_title}
         />
     );
 }

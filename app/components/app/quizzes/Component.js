@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Dimensions, Button } from 'react-native';
+import { View, Image, Dimensions, Button, Pressable } from 'react-native';
 import AppHeader from '../AppHeader';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ProgressBar, Colors, Text, ActivityIndicator } from 'react-native-paper';
@@ -32,10 +32,11 @@ const QuizzesComponent = (props) => {
         onSelectionOfQuizOption,
         onNextQuestion,
         onPreviousQuestion,
-        submitQuiz
+        submitQuiz,
+        selected_topic_title,
     } = props;
 
-    console.log("Questionssssssssssssssssssss", quiz_data);
+    console.log("Questionssssssssssssssssssss", selected_topic_title, quiz_data);
     // *** uncomment below line if you Quiz AppBar/AppHeader title with tab number
     // const headerTitle = selected_topic_redux ? tab_data ? `${selected_topic_redux.name} - ${tab_data.name}` : `${selected_topic_redux.name}` : 'Quiz';
     const headerTitle = selected_topic_redux ? tab_data ? `${selected_topic_redux.name}` : `${selected_topic_redux.name}` : 'Quiz';
@@ -77,101 +78,100 @@ const QuizzesComponent = (props) => {
 
     return (
         <ScrollView stickyHeaderIndices={[0]} style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-                <View style={{ paddingTop: 10, backgroundColor: "#F5F8FF" }}>
-                    <AppHeader title={headerTitle}></AppHeader>
-                </View>
+            <View style={{ paddingTop: 10, backgroundColor: "#F5F8FF" }}>
+                <AppHeader title={headerTitle}></AppHeader>
+            </View>
 
-                {!fetching_quiz_data && !fetching_quiz_data_error && quiz_data ? (
-                    renderQuizQuestions()
-                ) : fetching_quiz_data ? (
-                    <ActivityIndicator size="large" />
-                ) : (
-                    fetching_quiz_data_error && (
-                        <Button title='Tap to reload' onPress={() => fetchQuizData()}></Button>
-                    )
-                )}
+            {!fetching_quiz_data && !fetching_quiz_data_error && quiz_data ? (
+                renderQuizQuestions()
+            ) : fetching_quiz_data ? (
+                <ActivityIndicator size="large" />
+            ) : (
+                fetching_quiz_data_error && (
+                    <Button title='Tap to reload' onPress={() => fetchQuizData()}></Button>
+                )
+            )}
 
+            <View style={{
+                alignItems: 'center',
+                // backgroundColor:"red"
+            }}>
                 <View style={{
-                    alignItems: 'center',
-                    // backgroundColor:"red"
+                    flexDirection: 'row', width: Dimensions.get('window').width * 0.9,
+                    // backgroundColor:"purple",
+                    justifyContent: 'space-between',
                 }}>
-                    <View style={{
-                        flexDirection: 'row', width: Dimensions.get('window').width * 0.9,
-                        // backgroundColor:"purple",
-                        justifyContent: 'space-between',
-                    }}>
 
-                        <BoxShadow setting={shadowOpt}>
-                            <LinearGradient
-                                colors={["#F8C04E", "#FFBF3C"]}
-                                style={{
-                                    width: Dimensions.get('window').width * 0.16,
-                                    height: Dimensions.get('window').height * 0.1,
-                                    alignItems: 'center',
-                                    borderRadius: 60,
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <Icon.Button
-                                    name='arrowleft'
-                                    size={40}
-                                    backgroundColor={"transparent"}
-                                    onPress={() => { onPreviousQuestion() }}>
-                                </Icon.Button>
-                            </LinearGradient>
-                        </BoxShadow>
-                        <BoxShadow setting={shadowOpt}>
-                            <LinearGradient
-                                colors={["#F8C04E", "#FFBF3C"]}
-                                style={{
-                                    width: Dimensions.get('window').width * 0.16,
-                                    height: Dimensions.get('window').height * 0.1,
-                                    alignItems: 'center',
-                                    borderRadius: 60,
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <Icon.Button
-                                    name='arrowright'
-                                    size={40}
-                                    backgroundColor={"transparent"}
-                                    onPress={() => { onNextQuestion() }}>
-                                </Icon.Button>
-                            </LinearGradient>
-                        </BoxShadow>
-                    </View>
-                    {!show_quiz_submit_button || submitting_quiz ? <></> :
-                        <CustomButton
-                            backgroundColor={"#F5F8FF"}
-                            title={"Submit"}
-                            textColor={"white"}
-                            height={50}
-                            width={0.70}
-                            borderRadius={30}
-                            shadowColor={'#f9c04d'}
-                            shadowVerticalMargin={0}
-                            shadowRadius={20}
-                            shadowBorder={10}
-                            shadowHorizontalMargin={10}
-                            shadowVerticalMargin={10}
-                            shadowOpacity={0.15}
-                            linearStartColor={"#F8C04E"}
-                            linearEndColor={"#FFBF3C"}
-                            onPress={showModal}
-                        ></CustomButton>
-                    }
-
+                    <BoxShadow setting={shadowOpt}>
+                        <LinearGradient
+                            colors={["#F8C04E", "#FFBF3C"]}
+                            style={{
+                                width: Dimensions.get('window').width * 0.16,
+                                height: Dimensions.get('window').height * 0.1,
+                                alignItems: 'center',
+                                borderRadius: 60,
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <Icon.Button
+                                name='arrowleft'
+                                size={40}
+                                backgroundColor={"transparent"}
+                                onPress={() => { onPreviousQuestion() }}>
+                            </Icon.Button>
+                        </LinearGradient>
+                    </BoxShadow>
+                    <BoxShadow setting={shadowOpt}>
+                        <LinearGradient
+                            colors={["#F8C04E", "#FFBF3C"]}
+                            style={{
+                                width: Dimensions.get('window').width * 0.16,
+                                height: Dimensions.get('window').height * 0.1,
+                                alignItems: 'center',
+                                borderRadius: 60,
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <Icon.Button
+                                name='arrowright'
+                                size={40}
+                                backgroundColor={"transparent"}
+                                onPress={() => { onNextQuestion() }}>
+                            </Icon.Button>
+                        </LinearGradient>
+                    </BoxShadow>
                 </View>
-                <FullScreenModal visible={visible} onDismiss={closeModal}>
-                    <View
-                        style={{ alignItems: 'center', }}
-                    >
+                {!show_quiz_submit_button || submitting_quiz ? <></> :
+                    <CustomButton
+                        backgroundColor={"#F5F8FF"}
+                        title={"Submit"}
+                        textColor={"white"}
+                        height={50}
+                        width={0.70}
+                        borderRadius={30}
+                        shadowColor={'#f9c04d'}
+                        shadowVerticalMargin={0}
+                        shadowRadius={20}
+                        shadowBorder={10}
+                        shadowHorizontalMargin={10}
+                        shadowVerticalMargin={10}
+                        shadowOpacity={0.15}
+                        linearStartColor={"#F8C04E"}
+                        linearEndColor={"#FFBF3C"}
+                        onPress={showModal}
+                    ></CustomButton>
+                }
 
-                        <Text style={{ color:'black',fontSize: 22, fontWeight: 'bold',fontFamily:'Poppins-Regular', textAlign: 'center', marginBottom: 30 }}>Are you sure you want to submit your quiz?</Text>
-                        <CustomButton backgroundColor={"#FFFFFF"} title={"Cancel"} height={60} width={0.64} borderColor={"red"} borderWidth={1} borderRadius={30} onPress={closeModal}></CustomButton>
-                        <CustomButton backgroundColor={"#01CCAD"} title={"OK"} height={60} width={0.64} borderRadius={30} onPress={submitQuiz}></CustomButton>
-                    </View>
-                </FullScreenModal>
+            </View>
+            <FullScreenModal visible={visible} onDismiss={closeModal}>
+                <View
+                    style={{ alignItems: 'center', }}
+                >
+                    <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', fontFamily: 'Poppins-Regular', textAlign: 'center', marginBottom: 30 }}>Are you sure you want to submit your quiz?</Text>
+                    <CustomButton backgroundColor={"#FFFFFF"} title={"Cancel"} height={60} width={0.64} borderColor={"red"} borderWidth={1} borderRadius={30} onPress={closeModal}></CustomButton>
+                    <CustomButton backgroundColor={"#01CCAD"} title={"OK"} height={60} width={0.64} borderRadius={30} onPress={submitQuiz}></CustomButton>
+                </View>
+            </FullScreenModal>
 
 
         </ScrollView>

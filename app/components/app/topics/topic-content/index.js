@@ -185,6 +185,7 @@ const TopicContentContainer = (props) => {
                 console.log('Parent Data: ', parent_data);
                 console.log('Tab Data: ', tab_data);
                 navigation.navigate('Quizzes', {
+                  selected_topic_title:props.selected_topic_title,
                   selected_quiz: { id: topic_associated_data.quiz_id },
                   tab_data,
                 });
