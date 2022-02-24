@@ -10,6 +10,7 @@ import { SCREEN_WIDTH } from '../../../../constants'
 const TopicDetailsComponent = (props) => {
 
   const {
+    account,
     fetching_topics,
     fetching_topics_error,
     selected_topic,
@@ -90,6 +91,7 @@ const TopicDetailsComponent = (props) => {
       <View style={{ paddingTop: 10, backgroundColor: "#F5F8FF" }}>
         <AppHeader
           {...props}
+          image={account.avatar[0].avatar}
           title={
             selected_topic
               ? selected_topic.name :

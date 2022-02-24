@@ -17,6 +17,7 @@ import { ActivityIndicator } from 'react-native-paper';
 const TrackProgressComponent = (props) => {
 
   const {
+    account,
     fetching_quiz_progress_data,
     fetching_quiz_data_progress_error,
     current_user,
@@ -63,11 +64,13 @@ const TrackProgressComponent = (props) => {
             if (selected_screen && selected_screen === 'quizzes_list') {
               console.log("Selected Screen...................................", selected_screen);
               navigation.push('QuizProgress', {
+                account:account,
                 quiz_progress_data: item,
                 selected_child_account: selected_child_account,
               });
             } else {
               navigation.push('TrackProgress', {
+                account:account,
                 selected_child_account: item,
                 selected_screen: 'quizzes_list',
               });
@@ -92,7 +95,9 @@ const TrackProgressComponent = (props) => {
         selected_screen && selected_screen === 'quizzes_list'
           ? selected_child_account.name
           : 'Track Progress'
-      }></AppHeader>
+      }
+      image={account.avatar[0].avatar}
+      ></AppHeader>
 
       {!fetching_quiz_progress_data && !fetching_quiz_data_progress_error && current_user ? (
         <FlatList

@@ -17,6 +17,7 @@ const QuizzesComponent = (props) => {
     const [visible, setVisible] = useState(false);
 
     const {
+        account,
         current_question_index,
         quiz_data,
         selected_quiz,
@@ -79,7 +80,7 @@ const QuizzesComponent = (props) => {
     return (
         <ScrollView stickyHeaderIndices={[0]} style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             <View style={{ paddingTop: 10, backgroundColor: "#F5F8FF" }}>
-                <AppHeader title={headerTitle}></AppHeader>
+                <AppHeader title={headerTitle} image={account.avatar[0].avatar}></AppHeader>
             </View>
 
             {!fetching_quiz_data && !fetching_quiz_data_error && quiz_data ? (

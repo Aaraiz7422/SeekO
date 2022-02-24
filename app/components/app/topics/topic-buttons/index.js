@@ -4,7 +4,7 @@ import CustomCard from '../../../global/CustomCard';
 import CustomButton from '../../../global/CustomButton';
 
 const TopicButtonsContainer = (props) => {
-    const { topic_associated_data, selected_topic, navigation } = props;
+    const {account, topic_associated_data, selected_topic, navigation } = props;
 
     return (
         <View>
@@ -33,6 +33,7 @@ const TopicButtonsContainer = (props) => {
                                 onPress={() => {
                                     console.log('OnPress: ', content);
                                     navigation.push('Topics', {
+                                        account:account,
                                         selected_button: content,
                                         content_type: content.has_content ? 'content' : 'tabs',
                                         selected_topic_title: selected_topic.name,

@@ -8,6 +8,7 @@ import { ActivityIndicator } from 'react-native-paper';
 const TopicsListComponent = (props) => {
 
     const {
+        account,
         navigation,
         fetching_topics,
         fetching_topics_error,
@@ -41,7 +42,7 @@ const TopicsListComponent = (props) => {
     );
 
     const goToTopicDetail = (item, index) => {
-        navigation.push('Topics', { selected_topic: item, index: index });
+        navigation.push('Topics', { account:account, selected_topic: item, index: index });
         console.log(`Go to Detail Component : ${item.name} ${item.thumbnail} ${item} ${index}`);
     }
 
@@ -51,7 +52,7 @@ const TopicsListComponent = (props) => {
                 <View style={[{ flex: 1, backgroundColor: "#F5F8FF", alignItems: 'center' }]}>
                     <FlatList
                         stickyHeaderIndices={[0]}
-                        ListHeaderComponent={<AppHeader title={topicListData.name}></AppHeader>}
+                        ListHeaderComponent={<AppHeader title={topicListData.name} image={account.avatar[0].avatar}></AppHeader>}
                         data={topicListData.topics}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}

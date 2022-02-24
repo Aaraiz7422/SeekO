@@ -15,24 +15,31 @@ import services from '../../api/services';
 import { urls } from '../../api/urls';
 import FullScreenModal from './FullScreenModal';
 import CustomButton from '../global/CustomButton';
+import { cos } from 'react-native-reanimated';
 
 
 
-const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, account, index }) => (
+const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, account, index }) => {
+
+    // console.log(
+    //  "image iiiiiiii ::: ", account.avatar[0].avatar 
+    // )
+    return (
     <TouchableOpacity onPress={() => {
         if (trackProgress === false) {
             setChildUserAccountAction(account);
-            navigation.navigate('Categories', { accountName: account.name });
+            navigation.navigate('Categories', { account: account });
         }
         if (trackProgress === true) {
             navigation.navigate('TrackProgress', {
+                account:account,
                 selected_child_account: account,
                 selected_screen: 'quizzes_list',
                 // selected_child_account: {}, selected_screen: null 
             })
         }
         if (trackProgress === undefined) {
-            navigation.navigate('CreateUser', { child_account_info: account, edit_user_profile: true });
+            navigation.navigate('CreateUser', { account:account, child_account_info: account, edit_user_profile: true });
         }
     }}>
 
@@ -55,21 +62,23 @@ const CardComponent = ({ trackProgress, setChildUserAccountAction, navigation, a
             </Card.Content>
             <Card.Cover
                 source={
-                    // account.avatar.length < 1 ? 
+                    // {uri:`${account.avatar[0].avatar}`}
+                    account.avatar.length < 1 ? 
                     require('../../assets/childAvatar.png')
-                    // : {uri:account.avatar}
+                    : {uri:`${account.avatar[0].avatar}`}
                 }
                 style={{
                     opacity: 1,
                     backgroundColor: 'transparent',
                     height: 116, width: 116,
+                    borderRadius:58,
                     margin: 10,
                     // borderRadius: 100 
                 }} />
             <Title style={{ textAlign: 'center', fontWeight: 'bold', fontFamily: 'Poppins-Regular' }}>{account.name}</Title>
         </Card>
     </TouchableOpacity>
-);
+)};
 
 // export default MyComponent;
 
@@ -110,7 +119,7 @@ const SingleChildCard = (props) => {
                             <>
                                 {child_accounts.map((account, index) => {
                                     passAccountToUserComponent = account;
-                                    console.log(passAccountToUserComponent);
+                                    console.log(`CHILD ACCOUNT ////////////-----------/////// ${passAccountToUserComponent}`);
                                     return <CardComponent key={index} trackProgress={trackProgress} setChildUserAccountAction={setChildUserAccountAction} account={account} index={index} navigation={navigation} ></CardComponent>
                                 }
                                 )}

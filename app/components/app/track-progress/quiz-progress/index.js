@@ -13,6 +13,7 @@ import AppHeader from '../../AppHeader';
 
 const QuizProgressComponent = (props) => {
   const {
+    account,
     quiz_progress_data,
     selected_child_account,
   } = props.route.params;
@@ -44,7 +45,7 @@ const QuizProgressComponent = (props) => {
         backgroundColor: "#F5F8FF"
       }
     }>
-      <AppHeader title={quizName}></AppHeader>
+      <AppHeader title={quizName} image={account.avatar[0].avatar}></AppHeader>
       {/* <AppHeader title={selected_child_account.name}></AppHeader> */}
       <View style={{
         marginHorizontal: 40, marginVertical:24,

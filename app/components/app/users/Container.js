@@ -37,7 +37,7 @@ const UserContainer = (props) => {
     const [avatarList, setAvatarList] = useState([]);
     const [profileImage, setProfileImage] = useState(null);
 
-    const { child_account_info, edit_user_profile } = props.route.params;
+    const {account, child_account_info, edit_user_profile } = props.route.params;
     const {navigation} = props;
 
     // Child Name Error Handling and State
@@ -108,7 +108,7 @@ const UserContainer = (props) => {
             "dob": dob,
         }
 
-        if(profileImage.id !== null){
+        if(profileImage !== null){
             payload.avatar = profileImage.id;
         }
 
@@ -151,6 +151,7 @@ const UserContainer = (props) => {
     return (
         <UserComponent
             {...props}
+            account={account}
             name={name} setName={setName}
             dob={dob} setDOB={setDOB}
             gender={gender} setGender={setGender}

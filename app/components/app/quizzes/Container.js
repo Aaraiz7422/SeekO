@@ -31,6 +31,8 @@ const QuizzesContainer = (props) => {
     const [show_quiz_submit_button, set_Show_Quiz_Submit_Button] = useState(false);
     const [tab_data, set_Tab_Data] = useState(null);
 
+    const {account} = props.route.params;
+
 
     useEffect(() => {
         console.log('Tab Data in Quizz: ', props.route.params.tab_data);
@@ -135,7 +137,7 @@ const QuizzesContainer = (props) => {
                 quiz_result = response;
                 console.log("Quiz Result ............", response);
 
-                navigation.navigate('QuizResult', { quiz_progress_data: response, quiz_result_data: submitResponse, selected_quiz, tab_data, child_user_account: child_user_account, selected_topic_title: props.route.params.selected_topic_title });
+                navigation.navigate('QuizResult', {account:account, quiz_progress_data: response, quiz_result_data: submitResponse, selected_quiz, tab_data, child_user_account: child_user_account, selected_topic_title: props.route.params.selected_topic_title });
             })
             .catch((error) => {
                 // setLoadingAndErrorState(false, true);
@@ -170,6 +172,7 @@ const QuizzesContainer = (props) => {
     return (
         <QuizzesComponent
             {...props}
+            account={account}
             quiz_data={quiz_data}
             current_question_index={current_question_index}
             selected_quiz={selected_quiz}

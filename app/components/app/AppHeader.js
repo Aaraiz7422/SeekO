@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, StyleSheet, Dimensions, View } from 'react-native';
+import { Text, StyleSheet, Dimensions, View,Image } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { SCREEN_WIDTH } from '../../../constants';
 
 
 
-const AppHeader = ({ title }) => {
+const AppHeader = ({ title, image}) => {
     const navigation = useNavigation();
     
     // useNavigation is a hook which gives access to navigation object. 
@@ -26,7 +26,9 @@ const AppHeader = ({ title }) => {
             <View style={{ height: Dimensions.get('window').height * 0.12,justifyContent:'flex-start',alignItems:'center',flexDirection: "row",  width: Dimensions.get('window').width * 0.78 }}>
                 <Text style={{ fontSize: 22,color:'black', fontWeight:'bold',fontFamily:'Poppins-Regular' }} numberOfLines={3}>{title}</Text>
             </View>
-            <Appbar.Action icon="account"/>
+            {
+                image ? <Image source={{uri:image}} style={{height:30,width:30,borderRadius:16,marginTop:4}}></Image> : <Appbar.Action icon="account"/>
+            }
         </Appbar.Header>
     );
 }

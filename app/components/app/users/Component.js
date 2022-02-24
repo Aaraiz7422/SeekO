@@ -17,6 +17,7 @@ const UserComponent = (props) => {
     const loadingIndicator = <ActivityIndicator animating={true} color={Colors.red800} />;
 
     const {
+        account,
         navigation,
         child_account_info,
         edit_user_profile,
@@ -66,7 +67,7 @@ const UserComponent = (props) => {
         <ScrollView style={{ height: SCREEN_HEIGHT * 1, marginTop: 0, backgroundColor: "#F5F8FF" }}>
             <View style={{ height: SCREEN_HEIGHT * 1.2, marginTop: 0, backgroundColor: "#F5F8FF" }}>
                 <View>
-                    <AppHeader title={edit_user_profile ? "Edit User" : "Create User"}></AppHeader>
+                    <AppHeader title={edit_user_profile ? "Edit User" : "Create User"}  image={edit_user_profile && account.avatar[0].avatar}> </AppHeader>
                 </View>
                 <View style={{ marginTop: 40, alignItems: "center", justifyContent: 'center' }}>
                     <TouchableOpacity onPress={() => { showModal() }}>

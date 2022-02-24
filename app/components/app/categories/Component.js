@@ -8,10 +8,10 @@ import { urls } from '../../../api/urls';
 import CustomButton from '../../global/CustomButton';
 import { fetchTopics } from '../../../../global-functions';
 import { ActivityIndicator } from 'react-native-paper';
-import { setCurrentUserFetchLoading } from '../../../redux/actions/userActions';
+import { setChildUserAccount, setCurrentUserFetchLoading } from '../../../redux/actions/userActions';
 
 
-const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
+const CategoryItem = ({ navigation, account, categoryName, topicId, index }) => {
 
     const [topicListData, setTopicListData] = useState({});
 
@@ -41,11 +41,11 @@ const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
     );
 
     const onClickViewAll = () => {
-        navigation.navigate('Topics', { topicListData: topicListData })
+        navigation.navigate('Topics', { account:account, topicListData: topicListData })
     }
 
     const goToTopicDetail = (item, index) => {
-        navigation.push('Topics', { selected_topic: item, index: index });
+        navigation.push('Topics', { account:account, selected_topic: item, index: index });
         console.log(`Go to Detail Component : ${item.name} ${item.thumbnail} ${item} ${index}`);
     }
 
@@ -81,7 +81,7 @@ const CategoryItem = ({ navigation, categoryName, topicId, index }) => {
     );
 }
 
-const CategoriesComponent = ({ navigation, childName, categories }) => {
+const CategoriesComponent = ({ navigation, account, categories }) => {
 
     const [loading, setLoading] = useState(true);
 
@@ -90,7 +90,7 @@ const CategoriesComponent = ({ navigation, childName, categories }) => {
     }, [])
 
     const renderCategoryItem = ({ item, index }) => (
-        <CategoryItem navigation={navigation} categoryName={item.name} index={index} topicId={item.id} />
+        <CategoryItem navigation={navigation} account={account} categoryName={item.name} index={index} topicId={item.id} />
     );
 
     return (
@@ -101,7 +101,7 @@ const CategoriesComponent = ({ navigation, childName, categories }) => {
                     <View>
                         <FlatList
                             stickyHeaderIndices={[0]}
-                            ListHeaderComponent={<AppHeader title={"Hi, " + childName}></AppHeader>}
+                            ListHeaderComponent={<AppHeader image={account.avatar[0].avatar} title={"Hi, " + account.name}></AppHeader>}
                             data={categories}
                             renderItem={renderCategoryItem}
                             keyExtractor={item => item.id}

@@ -11,7 +11,7 @@ import { urls } from '../../../api/urls';
 
 const TopicsContainer = (props) => {
   const { navigation, route } = props;
-  const { topicListData } = route.params;
+  const { topicListData,account } = route.params;
 
   const [selection_type, setSelectionType] = useState("by_category");
   const [selected_topic_title, setSelectedTopicTitle] = useState(null);
@@ -190,6 +190,7 @@ const TopicsContainer = (props) => {
     selection_type === 'by_topic') ||
     selection_type === 'by_button' ? (
     <TopicDetailsComponent
+      account={account}
       fetching_topics={fetching_topics}
       fetching_topics_error={fetching_topics_error}
       selected_topic={selected_topic}
@@ -202,7 +203,10 @@ const TopicsContainer = (props) => {
       topic_associated_data={topic_associated_data}
     />
   ) : (
-    <TopicsListComponent {...props} navigation={navigation}
+    <TopicsListComponent 
+      {...props}
+      account={account} 
+      navigation={navigation}
       fetchTopics={fetchTopics}
       fetching_topics={fetching_topics}
       fetching_topics_error={fetching_topics_error}

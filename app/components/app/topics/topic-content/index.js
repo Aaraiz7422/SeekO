@@ -24,7 +24,7 @@ const TopicContentContainer = (props) => {
   const [isReady, setIsReady] = useState(false);
   const [playerWidth, setPlayerWidth] = useState(Dimensions.get('window').width);
   const _youTubeRef = React.createRef();
-  const { topic_associated_data, navigation, parent_data, tab_data } = props;
+  const { account, topic_associated_data, navigation, parent_data, tab_data } = props;
 
   const renderContentComponent = (content) => {
     switch (content.type) {
@@ -185,6 +185,7 @@ const TopicContentContainer = (props) => {
                 console.log('Parent Data: ', parent_data);
                 console.log('Tab Data: ', tab_data);
                 navigation.navigate('Quizzes', {
+                  account:account,
                   selected_topic_title:props.selected_topic_title,
                   selected_quiz: { id: topic_associated_data.quiz_id },
                   tab_data,

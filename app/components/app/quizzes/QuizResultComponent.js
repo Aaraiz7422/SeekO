@@ -10,7 +10,7 @@ import { StackActions } from '@react-navigation/native';
 
 const QuizResultComponent = (props) => {
     const { navigation, route } = props;
-    const { quiz_progress_data, child_user_account, selected_topic_title, quiz_result_data, selected_quiz, tab_data } = route.params;
+    const { account, quiz_progress_data, child_user_account, selected_topic_title, quiz_result_data, selected_quiz, tab_data } = route.params;
 
     console.log("Result.............................", props.selected_topic_redux);
 
@@ -25,6 +25,7 @@ const QuizResultComponent = (props) => {
 
             if (selected_topic_title.trim() === quiz_name.trim()) {
                 navigation.navigate('QuizProgress', {
+                    account:account,
                     quiz_progress_data: item,
                     selected_child_account: child_user_account.id,
                 });
@@ -35,7 +36,7 @@ const QuizResultComponent = (props) => {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-                <AppHeader title={selected_topic_title}></AppHeader>
+                <AppHeader title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
                 <ProgressBar progress={1}
                     style={{
                         height: 16,
@@ -92,6 +93,7 @@ const QuizResultComponent = (props) => {
                             // navigation.dispatch(StackActions.popToTop());
                             navigation.pop();
                             navigation.replace('Quizzes', {
+                                account:account,
                                 selected_topic_title: selected_topic_title,
                                 selected_quiz: { id: selected_quiz.id },
                                 tab_data,

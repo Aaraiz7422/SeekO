@@ -20,6 +20,8 @@ const TrackProgressContainer = (props) => {
     const [selected_screen, set_Selected_Screen] = useState(null);
     const [selected_child_account, set_Selected_Child_Account] = useState(null);
 
+    const {account} = props.route.params;
+
     useEffect(() => {
         if (props.route.params.selected_child_account !== undefined) {
             console.log('props.route.params.selected_child_account: ', props.route.params.selected_child_account,);
@@ -66,7 +68,7 @@ const TrackProgressContainer = (props) => {
     };
 
 
-    return <TrackProgressComponent {...props} quiz_progress_data={quiz_progress_data} fetchChildQuizProgress={fetchChildQuizProgress} fetching_quiz_progress_data={fetching_quiz_progress_data} fetching_quiz_data_progress_error={fetching_quiz_data_progress_error} selected_screen={selected_screen} selected_child_account={selected_child_account} />;
+    return <TrackProgressComponent {...props} account={account} quiz_progress_data={quiz_progress_data} fetchChildQuizProgress={fetchChildQuizProgress} fetching_quiz_progress_data={fetching_quiz_progress_data} fetching_quiz_data_progress_error={fetching_quiz_data_progress_error} selected_screen={selected_screen} selected_child_account={selected_child_account} />;
 }
 
 // Map State To Props (Redux Store Passes State To Component)

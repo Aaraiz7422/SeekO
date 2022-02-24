@@ -10,14 +10,14 @@ import {getCurrentUser} from '../../../redux/actions/userActions';
 const CategoriesContainer = (props) => {
     const { navigation,route } = props;
     const [categories, setCategories] = useState([]);
-    const {accountName} = route.params;
+    const {account} = route.params;
 
     useEffect(() => {
         fetchCategories(setCategories);
     }, []);
 
     return (
-        <CategoriesComponent {...props} navigation={navigation} childName={accountName} categories={categories}></CategoriesComponent>
+        <CategoriesComponent {...props} navigation={navigation} account={account} categories={categories}></CategoriesComponent>
     );
 }
 
