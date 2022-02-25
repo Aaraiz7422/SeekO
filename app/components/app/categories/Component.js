@@ -41,11 +41,11 @@ const CategoryItem = ({ navigation, account, categoryName, topicId, index }) => 
     );
 
     const onClickViewAll = () => {
-        navigation.navigate('Topics', { account:account, topicListData: topicListData })
+        navigation.navigate('Topics', { account: account, topicListData: topicListData })
     }
 
     const goToTopicDetail = (item, index) => {
-        navigation.push('Topics', { account:account, selected_topic: item, index: index });
+        navigation.push('Topics', { account: account, selected_topic: item, index: index });
         console.log(`Go to Detail Component : ${item.name} ${item.thumbnail} ${item} ${index}`);
     }
 
@@ -85,9 +85,25 @@ const CategoriesComponent = ({ navigation, account, categories }) => {
 
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setTimeout(() => setLoading(false), 10000);
-    }, [])
+
+    const loadingFullScreenAtOnce = () => {
+
+        const item = <View>
+            <ActivityIndicator style={loading ? { display: 'flex' } : { display: 'none' }} size={"small"}></ActivityIndicator>
+            <View style={loading ? { display: 'none' } : { display: 'flex' }}>
+                <FlatList
+                    stickyHeaderIndices={[0]}
+                    ListHeaderComponent={<AppHeader image={account.avatar[0].avatar} title={"Hi, " + account.name}></AppHeader>}
+                    data={categories}
+                    renderItem={renderCategoryItem}
+                    keyExtractor={item => item.id}
+                />
+            </View>
+        </View>;
+        setTimeout(() => setLoading(false), 2500);
+
+        return item;
+    }
 
     const renderCategoryItem = ({ item, index }) => (
         <CategoryItem navigation={navigation} account={account} categoryName={item.name} index={index} topicId={item.id} />
@@ -96,20 +112,7 @@ const CategoriesComponent = ({ navigation, account, categories }) => {
     return (
 
         <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-            {
-                categories && categories.length > 1 ?
-                    <View>
-                        <FlatList
-                            stickyHeaderIndices={[0]}
-                            ListHeaderComponent={<AppHeader image={account.avatar[0].avatar} title={"Hi, " + account.name}></AppHeader>}
-                            data={categories}
-                            renderItem={renderCategoryItem}
-                            keyExtractor={item => item.id}
-                        />
-                    </View> :
-                    loading && <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size={"small"}></ActivityIndicator></View>
-            }
-
+            {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
         </View>
     );
 }

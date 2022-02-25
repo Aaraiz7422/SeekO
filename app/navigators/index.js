@@ -9,22 +9,22 @@ const SplashAuth = createStackNavigator();
 function SplashScreenStack() {
   return (
     <SplashAuth.Navigator headerMode="none">
-      <SplashAuth.Screen name="AuthLoading" component={SplashScreen} />
+      <SplashAuth.Screen name="AuthLoad" component={SplashScreen} />
     </SplashAuth.Navigator>
   );
 }
 const AppStack = createStackNavigator();
 
 function AppContainer() {
-    return (
-        <NavigationContainer>
-            <AppStack.Navigator initialRouteName="AuthLoading" headerMode="none" >
-            <AppStack.Screen name="AuthLoading" component={SplashScreenStack} />
-                <AppStack.Screen name="Authentication" component={AuthenticationStack} />
-                <AppStack.Screen name="App" component={AppNavigationStack} />
-            </AppStack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <AppStack.Navigator initialRouteName="AuthLoading" headerMode="none" >
+        <AppStack.Screen name="AuthLoading" component={SplashScreenStack} />
+        <AppStack.Screen name="Authentication" component={AuthenticationStack} />
+        <AppStack.Screen name="App" component={AppNavigationStack} />
+      </AppStack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 export default AppContainer;
