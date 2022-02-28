@@ -45,6 +45,12 @@ export const urls = {
     method: 'GET',
     type: URL_PARAMETERS,
   },
+  edit_user_by_id: {
+    url: '/user/user_id/',
+    parameters: ['user_id'],
+    method: 'PATCH',
+    type: URL_PARAMETERS_AND_PAYLOAD,
+  },
   delete_user_by_id: {
     url: '/user/user_id/',
     method: 'DELETE',

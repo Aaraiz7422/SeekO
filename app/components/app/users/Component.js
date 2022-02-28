@@ -40,7 +40,6 @@ const UserComponent = (props) => {
         validateChildInformation,
     } = props;
 
-
     const AvatarCard = () => {
         console.log("ALlllllllllllllllllllllllllll", avatarList);
         return (
@@ -67,13 +66,20 @@ const UserComponent = (props) => {
         <ScrollView style={{ height: SCREEN_HEIGHT * 1, marginTop: 0, backgroundColor: "#F5F8FF" }}>
             <View style={{ height: SCREEN_HEIGHT * 1.2, marginTop: 0, backgroundColor: "#F5F8FF" }}>
                 <View>
-                    <AppHeader title={edit_user_profile ? "Edit User" : "Create User"}  image={edit_user_profile && account.avatar[0].avatar}> </AppHeader>
+                    <AppHeader title={edit_user_profile ? "Edit User" : "Create User"} image={edit_user_profile && account.avatar[0].avatar}> </AppHeader>
                 </View>
                 <View style={{ marginTop: 40, alignItems: "center", justifyContent: 'center' }}>
                     <TouchableOpacity onPress={() => { showModal() }}>
                         <View style={{ margin: 5 }}>
                             <Avatar.Image
-                                size={130} source={profileImage === null ? require('../../../assets/profile.png') : { uri: profileImage.avatar }} />
+                                size={130}
+                                source={
+                                    profileImage === null ?
+                                    edit_user_profile ? {uri:account.avatar[0].avatar}:
+                                         require('../../../assets/profile.png') :
+                                        { uri: profileImage.avatar }
+                                }
+                            />
                             <Avatar.Icon size={24} icon="plus" style={{
                                 top: -30, left: 100, backgroundColor: "#C4C4C4",
                             }} />
@@ -113,7 +119,7 @@ const UserComponent = (props) => {
                                 theme={input_theme}
                                 left={<TextInput.Icon name="calendar" style={{ marginTop: 12 }} />}
                             />
-                            <DropDownListComponent value={value} isFocus={isFocus} setValue={setValue} setIsFocus={setIsFocus}></DropDownListComponent>
+                            <DropDownListComponent value={ value} isFocus={isFocus} setValue={setValue} setIsFocus={setIsFocus}></DropDownListComponent>
                         </View>
                         <View style={{ margin: 20 }}>
                             {
@@ -130,6 +136,16 @@ const UserComponent = (props) => {
                                             linearEndColor={'#FFBF3C'}
                                             shadowColor={'#FFBF3C'}
                                             shadowRadius={20}
+                                            onPress={name === null ? () => { } : () => {
+                                                setLoading(true);
+                                                loading ? loadingIndicator : loading;
+                                                let child_information = {
+                                                    name: name,
+                                                    user_id:account.id,
+                                                };
+                                                console.log(`Edited child Name .............................. : ${name}`);
+                                                validateChildInformation(child_information);
+                                            }}
                                         ></CustomButton>
                                         <CustomButton
                                             backgroundColor={"#FFFFFF"}
@@ -153,7 +169,7 @@ const UserComponent = (props) => {
                                         linearEndColor={'#FFBF3C'}
                                         shadowColor={'#FFBF3C'}
                                         shadowRadius={20}
-                                        onPress={name === null ?()=>{}:() => {
+                                        onPress={name === null ? () => { } : () => {
                                             setLoading(true);
                                             loading ? loadingIndicator : loading;
                                             let child_information = {
@@ -162,7 +178,7 @@ const UserComponent = (props) => {
                                             console.log(`child Name .............................. : ${name}`);
                                             validateChildInformation(child_information);
                                         }}
-                                        // onPress={addUser}
+                                    // onPress={addUser}
                                     ></CustomButton>
 
                             }

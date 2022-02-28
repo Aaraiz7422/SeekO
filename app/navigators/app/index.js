@@ -19,7 +19,7 @@ const ApplicationStack = createStackNavigator();
 
 function AppNavigationStack() {
     return (
-        <ApplicationStack.Navigator headerMode="none">
+        <ApplicationStack.Navigator initialRouteName='Home' screenOptions={{headerShown:false}}>
             <ApplicationStack.Screen name="Home" component={HomeContainer} />
             <ApplicationStack.Screen name='UserProfile' component={UserProfileComponent}/>
             <ApplicationStack.Screen name='CreateUser' component={UserContainer}/>

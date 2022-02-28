@@ -20,16 +20,29 @@ import {
   } from '../../../redux/actions/userActions';
 
 const UserContainer = (props) => {
+    
+    const {account, child_account_info, edit_user_profile } = props.route.params;
+
+    const showGenderInEdit = (gender) => {
+        let gen;
+            if (gender === "M")
+                 return gen = "Male";
+            if (gender === "F")
+                return gen = "Female";
+            if (gender === "O")
+                return gen = "Others";
+        }
+
 
     // User Creation Fields States
-    const [name, setName] = useState(null);
-    const [dob, setDOB] = useState(null);
-    const [gender, setGender] = useState(null);
+    const [name, setName] = useState(edit_user_profile ? account.name:null);
+    const [dob, setDOB] = useState( edit_user_profile ? account.dob :null);
+    const [gender, setGender] = useState(edit_user_profile ? showGenderInEdit(account.gender):null);
     // DateTimePicker States
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
     // DropDown States
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(edit_user_profile ? showGenderInEdit(account.gender) :null);
     const [isFocus, setIsFocus] = useState(false);
     // Modal States
     const [visible, setVisible] = useState(false);
@@ -37,7 +50,6 @@ const UserContainer = (props) => {
     const [avatarList, setAvatarList] = useState([]);
     const [profileImage, setProfileImage] = useState(null);
 
-    const {account, child_account_info, edit_user_profile } = props.route.params;
     const {navigation} = props;
 
     // Child Name Error Handling and State
@@ -48,7 +60,6 @@ const UserContainer = (props) => {
     );
     const [loading, setLoading] = useState(false);
 
-
     const resetErrors = () => {
         let error = errors;
         error.name = null;
@@ -56,6 +67,7 @@ const UserContainer = (props) => {
     };
 
     useEffect(() => {
+        props.getCurrentUserAction();
         fetchAvatarList();
     }, [])
 
@@ -92,6 +104,8 @@ const UserContainer = (props) => {
         } 
     }
     const addUser = (child_information) => {
+        const {current_user, getCurrentUserAction} = props;
+
         let gen;
         if (gender === "Male")
             gen = "M"
@@ -100,8 +114,10 @@ const UserContainer = (props) => {
         if (gender === "Others")
             gen = "O"
 
+            
         let payload = {
-            "password": 12,
+            "id":child_information.user_id,
+            "password": "121211",
             "username": child_information.name,
             "name": child_information.name,
             "gender": gen,
@@ -112,9 +128,35 @@ const UserContainer = (props) => {
             payload.avatar = profileImage.id;
         }
 
+        if(edit_user_profile){
+            payload.avatar = account.avatar[0].id;
+            console.log(`USER DATA +++++++ : ${child_information.name} : ${gen} : ${dob} : ${account.avatar[0].id}` );
+        }
+
+
+        let data = { user_id: child_information.user_id };
+        // let data = { user_id: current_user.id };
+
+        console.log(` Log of Payload : ${payload.name} : ${payload.gender} : ${payload.dob} : ${payload.avatar}`)
+
+        edit_user_profile ? 
+        services
+        .base_service(urls.edit_user_by_id,data, payload)
+        .then((response) => {
+        getCurrentUserAction();
+            console.log('Edit User response: ', response);
+            props.setCurrentUserFetchLoadingAction(false);
+
+        })
+        .catch((error) => {
+            console.log('fetch categories error: ', error);
+            props.setCurrentUserFetchLoadingAction(false);
+
+        }) :
         services
             .base_service(urls.user_register, payload)
             .then((response) => {
+        getCurrentUserAction();
                 console.log('Create User response: ', response);
                 props.setCurrentUserFetchLoadingAction(false);
 
@@ -147,6 +189,7 @@ const UserContainer = (props) => {
             });
         navigation.pop();
     };
+    
 
     return (
         <UserComponent
