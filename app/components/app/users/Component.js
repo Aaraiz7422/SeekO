@@ -110,8 +110,17 @@ const UserComponent = props => {
         image={edit_user_profile && account.avatar[0].avatar}>
         {' '}
       </AppHeader>
+      <FullScreenModal visible={visible} closeModal={closeModal}>
+        <ScrollView>
+          <AvatarCard></AvatarCard>
+          <AvatarCard></AvatarCard>
+          <AvatarCard></AvatarCard>
+        </ScrollView>
+      </FullScreenModal>
       <View
         style={{
+          position: 'relative',
+          zIndex: -10,
           height: Dimensions.get('window').height * 0.9,
         }}>
         <View
@@ -296,13 +305,21 @@ const UserComponent = props => {
             setOpen(false);
           }}
         />
-        <FullScreenModal visible={visible} closeModal={closeModal}>
-          <ScrollView>
-            <AvatarCard></AvatarCard>
-            <AvatarCard></AvatarCard>
-            <AvatarCard></AvatarCard>
-          </ScrollView>
-        </FullScreenModal>
+        {/* <View
+          style={{
+            height: Dimensions.get('window').height * 1,
+            // top: -(Dimensions.get('window').height * 0.7),
+            zIndex:18,
+            position:'relative'
+          }}> */}
+        {/* <FullScreenModal visible={visible} closeModal={closeModal}>
+            <ScrollView>
+              <AvatarCard></AvatarCard>
+              <AvatarCard></AvatarCard>
+              <AvatarCard></AvatarCard>
+            </ScrollView>
+          </FullScreenModal> */}
+        {/* </View> */}
       </View>
     </KeyboardAwareScrollView>
   );
