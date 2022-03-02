@@ -25,7 +25,7 @@ const PackageCard = ({ title, subTitle, price }) => {
             <View
             // style={{backgroundColor:"green"}}
             >
-                <Text style={{ color:'black', fontSize: 30, fontWeight: "bold",fontFamily:'Poppins-Regular' }}>$2.99</Text>
+                <Text style={{ color:'black', fontSize: 30, fontWeight: "bold",fontFamily:'Poppins-Regular' }}>{`$${price}`}</Text>
             </View>
         </View>
     );
@@ -35,8 +35,8 @@ const SubscriptionComponent = () => {
     return (
         <View style={{ flex: 1, alignItems: "center", marginTop: 20 }}>
             <View style={{ height: Dimensions.get('window').height * 0.44, justifyContent: "space-around" }}>
-                 <PackageCard title={"Monthly"} subTitle={"(Renews automatically every month)"} price={"$2.99"}></PackageCard>
-                <PackageCard title={"Annual Package"} subTitle={"(Renews automatically every 12 month)"} price={"$33"}></PackageCard> 
+                 <PackageCard title={"Monthly"} subTitle={"(Renews automatically every month)"} price={"2.99"}></PackageCard>
+                <PackageCard title={"Annual Package"} subTitle={"(Renews automatically every 12 month)"} price={"34.99"}></PackageCard> 
             </View>
         </View>
     );

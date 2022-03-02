@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, View, StyleSheet, Text } from 'react-native';
 import {
   TabView,
@@ -61,6 +61,7 @@ const TopicTabsContainer = (props) => {
   const [routes, setRoutes] = useState([]);
   const [data_source_coords, set_Data_Source_Cords] = useState([]);
   const [onSwipeStart, set_On_Swipe_Start] = useState(false);
+  const horizontal_scroll_bar = useRef(null);
 
   let progress_calculation = (index + 1) / routes.length;
   useEffect(() => {
@@ -77,8 +78,9 @@ const TopicTabsContainer = (props) => {
 
   useEffect(() => {
     if (data_source_coords.length === routes.length) {
-      if (index === 0) {
-        // horizontal_scroll_bar.scrollTo({ animated: true, offset: 0 });
+      if (index === 0 ) {
+        console.log('Not Null');
+        // horizontal_scroll_bar.current.scrollTo({ animated: true, offset: 0 });
       } else {
         scrollHandler();
       }
@@ -86,7 +88,7 @@ const TopicTabsContainer = (props) => {
     if (data_source_coords.length > 0) {
       scrollHandler();
     }
-  }, [data_source_coords, index]);
+  }, [ data_source_coords,index]);
 
   const setOnSwipeStart = (onSwipeStart) => {
     set_On_Swipe_Start(onSwipeStart);
@@ -96,7 +98,7 @@ const TopicTabsContainer = (props) => {
     // const { data_source_coords } = this.state;
     // const { index } = this.state;
     if (data_source_coords.length > index) {
-      // horizontal_scroll_bar.scrollTo({
+      // horizontal_scroll_bar.current.scrollTo({
       //   x: data_source_coords[index] - 8,
       //   y: 0,
       //   animated: true,
@@ -145,7 +147,8 @@ const TopicTabsContainer = (props) => {
     return (
       <TabBar
         {...props}
-        // ref={(o) => (horizontal_scroll_bar = o)}
+        bounces={false}
+        // ref={(o) => horizontal_scroll_bar.current = o}
         scrollEnabled
         indicatorStyle={styles.indicator}
         style={styles.tab_bar}
@@ -158,7 +161,7 @@ const TopicTabsContainer = (props) => {
 
   const renderScene = ({ route }) => {
     const { parent_data } = props;
-    if (Math.abs(index - routes.indexOf(route)) > 4 && onSwipeStart) {
+    if (Math.abs(index - routes.indexOf(route)) > 5 && onSwipeStart) {
       return <View />;
     }
     return (
@@ -196,6 +199,9 @@ const TopicTabsContainer = (props) => {
  
             />
           <TabView
+          
+          transitionStyle='scroll'
+          lazy
             navigationState={{ index, routes }}
             swipeEnabled={true}
             renderScene={renderScene}
@@ -228,12 +234,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    backgroundColor:'transparent'
   },
   indicatorContainerStyle: {
     display: 'none',
   },
   indicator: {
-    backgroundColor: 'purple',
+    backgroundColor: 'transparent',
     height: 0, width: 0, opacity: 0,
   },
   tab: {
@@ -258,9 +265,9 @@ const styles = StyleSheet.create({
     maxHeight: 32,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: 'red',
+    borderColor: 'white',
   },
   selected_tab: {
-    backgroundColor: 'green',
+    backgroundColor: 'white',
   },
 });

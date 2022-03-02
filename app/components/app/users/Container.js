@@ -33,10 +33,21 @@ const UserContainer = (props) => {
                 return gen = "Others";
         }
 
+    const showDateInEdit = (date) => {
+        let day,month,year;
+        let containDate = date.split('-');
+        year = containDate[0];
+        month = containDate[1];
+        day = containDate[2];
+
+        let returnDate = day + "-" + month + "-" + year;
+        return returnDate;
+    }
+
 
     // User Creation Fields States
     const [name, setName] = useState(edit_user_profile ? account.name:null);
-    const [dob, setDOB] = useState( edit_user_profile ? account.dob :null);
+    const [dob, setDOB] = useState( edit_user_profile ? showDateInEdit(account.dob) :null);
     const [gender, setGender] = useState(edit_user_profile ? showGenderInEdit(account.gender):null);
     // DateTimePicker States
     const [date, setDate] = useState(new Date())
@@ -114,6 +125,13 @@ const UserContainer = (props) => {
         if (gender === "Others")
             gen = "O"
 
+        let changeDateStyle = dob.split('-');
+        let day = changeDateStyle[0];
+        let month = changeDateStyle[1];
+        let year = changeDateStyle[2];
+
+        let dateStyleOnServer = year + "-" + month + "-" + day;
+
             
         let payload = {
             "id":child_information.user_id,
@@ -121,7 +139,7 @@ const UserContainer = (props) => {
             "username": child_information.name,
             "name": child_information.name,
             "gender": gen,
-            "dob": dob,
+            "dob": dateStyleOnServer,
         }
 
         if(profileImage !== null){

@@ -72,36 +72,36 @@ const HomeComponent = (props) => {
             // style={{ flex: 1 ,width: Dimensions.get('window').width}}
             >
                 <View style={{ justifyContent: 'flex-start', padding: 15 }}>
-                    <Image source={profile} style={{
+                    {/* <Image source={profile} style={{
                         width: 60,
                         height: 60,
                         borderRadius: 10,
                         marginTop: 8
-                    }}></Image>
+                    }}></Image> */}
 
-                    <Text style={{
+                    {/* <Text style={{
                         fontSize: 20,
                         fontWeight: 'bold',
                         color: 'white',
                         marginTop: 20
-                    }}>Jenna Ezarik</Text>
+                    }}>Jenna Ezarik</Text> */}
 
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                         <Text style={{
                             marginTop: 6,
                             color: 'white'
                         }}>View Profile</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
-                    <View style={{ flexGrow: 1, marginTop: 50 }}>
+                    <View style={{ flexGrow: 1 }}>
                         {
                             // Tab Bar Buttons....
                         }
 
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Home", home)}
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", search)}
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Track Progress", notifications)}
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "User", settings)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Users", settings)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", search)}
 
                     </View>
 
@@ -200,15 +200,15 @@ const TabButton = (onLogout, openCloseMenu, currentTab, setCurrentTab, title, im
 
                 <Image source={image} style={{
                     width: 25, height: 25,
-                    tintColor: currentTab == title ? "#5359D1" : "white"
+                    tintColor: "white"
                 }}></Image>
 
                 <Text style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
+                    fontSize: currentTab == title ? 22: 18,
+                    fontWeight: currentTab == title ? 'bold':'normal',
                     fontFamily:'Poppins-Regular',
                     paddingLeft: 15,
-                    color: currentTab == title ? "#5359D1" : "white"
+                    color: "white"
                 }}>{title}</Text>
 
             </View>

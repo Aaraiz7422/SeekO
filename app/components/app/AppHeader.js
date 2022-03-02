@@ -6,7 +6,7 @@ import { SCREEN_WIDTH } from '../../../constants';
 
 
 
-const AppHeader = ({ title, image}) => {
+const AppHeader = ({ title, image, onGoBack=null}) => {
     const navigation = useNavigation();
     
     // useNavigation is a hook which gives access to navigation object. 
@@ -21,7 +21,7 @@ const AppHeader = ({ title, image}) => {
         <Appbar.Header style={{ backgroundColor: '#F5F8FF', justifyContent: "flex-start", elevation: 0, height: 30,marginBottom:10,marginTop:10,paddingLeft:10,paddingRight:0 }}>
             <Appbar.BackAction
             style={{margin:0,padding:0,width:30,alignItems:"flex-start"}}
-            onPress={_goBack} 
+            onPress={onGoBack === null ? _goBack:onGoBack} 
             />
             <View style={{ height: Dimensions.get('window').height * 0.12,justifyContent:'flex-start',alignItems:'center',flexDirection: "row",  width: Dimensions.get('window').width * 0.78 }}>
                 <Text style={{ fontSize: 22,color:'black', fontWeight:'bold',fontFamily:'Poppins-Regular' }} numberOfLines={3}>{title}</Text>

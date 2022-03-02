@@ -10,10 +10,13 @@ import { StackActions } from '@react-navigation/native';
 
 const QuizResultComponent = (props) => {
     const { navigation, route } = props;
-    const { account, quiz_progress_data, child_user_account, selected_topic_title, quiz_result_data, selected_quiz, tab_data } = route.params;
+    const { account, selected_topic_redux, quiz_progress_data, child_user_account, selected_topic_title, quiz_result_data, selected_quiz, tab_data } = route.params;
 
     console.log("Result.............................", props.selected_topic_redux);
 
+    const goToHome = () => {
+        navigation.navigate("Home");
+    }
     const filterQuizProgressData = () => {
 
         console.log("quiz progress Data in quiz result screen ", quiz_progress_data);
@@ -36,7 +39,7 @@ const QuizResultComponent = (props) => {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-                <AppHeader title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
+                <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
                 <ProgressBar progress={1}
                     style={{
                         height: 16,
@@ -55,7 +58,7 @@ const QuizResultComponent = (props) => {
                 </View>
                 <View style={{ marginBottom: -40, marginTop: -20 }}>
 
-                    <CustomCard coverImage={'https://picsum.photos/700'}
+                    <CustomCard coverImage={selected_topic_redux.thumbnail}
                         imageMargin={20}
                         width={0.90}
                         height={0.38}

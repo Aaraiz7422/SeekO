@@ -194,7 +194,7 @@ const UserComponent = props => {
                 }}
                 mode="outlined"
                 label="DOB"
-                placeholder="yyyy-mm-dd"
+                placeholder="dd-mm-yyyy"
                 activeOutlineColor="rgba(0, 0, 0, 0.57)"
                 outlineColor="rgba(0, 0, 0, 0.19)"
                 value={dob}
@@ -296,7 +296,7 @@ const UserComponent = props => {
             let month = date.getUTCMonth() + 1; //months from 1-12
             let day = date.getUTCDate();
             let year = date.getUTCFullYear();
-            let newdate = year + '-' + month + '-' + day;
+            let newdate = day + '-' + month + '-' + year;
             setDOB(newdate.toString());
             console.log('New Selected Date', newdate);
             console.log('Selected Date', date);

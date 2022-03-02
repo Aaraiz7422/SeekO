@@ -63,6 +63,7 @@ const QuizzesContainer = (props) => {
         fetching_quiz_data_error,
     ])
 
+
     const fetchQuizData = () => {
         setLoadingAndErrorState(true, false, false);
         let data = { quiz_id: selected_quiz.id };
@@ -117,15 +118,16 @@ const QuizzesContainer = (props) => {
         console.log('attempted_quiz_data: ', temp_attempted_quiz_data);
         // may be this function not needed set_Quiz_Answers_Indexes_List()
         set_Quiz_Answers_Indexes_List(quiz_answers_indexes_list);
+        // doSomething(temp_attempted_quiz_data);
+        set_Attempted_Quiz_Data(temp_attempted_quiz_data);
         setTimeout(() => {
-            set_Attempted_Quiz_Data(temp_attempted_quiz_data);
             set_Current_Question_Index((prevState) => (quiz_data.questions.length === prevState + 1 ? prevState : prevState + 1));
             set_Show_Quiz_Submit_Button(() => (quiz_data.questions.length === current_question_index + 1));
         }, 300);
     }
 
     const fetchChildQuizProgress = (submitResponse) => {
-        const { navigation, child_user_account } = props;
+        const { navigation, child_user_account,selected_topic_redux } = props;
         console.log('CURRENT CHILD ACCOUNT: ', child_user_account.id);
         console.log("SSSSSSSSS ........... ::: ", submitResponse);
         let data1 = { user_id: child_user_account.id };
@@ -136,8 +138,9 @@ const QuizzesContainer = (props) => {
                 // setLoadingAndErrorState(false, false);
                 quiz_result = response;
                 console.log("Quiz Result ............", response);
+                console.log("Select topic redux : ",selected_topic_redux);
 
-                navigation.navigate('QuizResult', {account:account, quiz_progress_data: response, quiz_result_data: submitResponse, selected_quiz, tab_data, child_user_account: child_user_account, selected_topic_title: props.route.params.selected_topic_title });
+                navigation.navigate('QuizResult', {account:account, selected_topic_redux:selected_topic_redux, quiz_progress_data: response, quiz_result_data: submitResponse, selected_quiz, tab_data, child_user_account: child_user_account, selected_topic_title: props.route.params.selected_topic_title });
             })
             .catch((error) => {
                 // setLoadingAndErrorState(false, true);
