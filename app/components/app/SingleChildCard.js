@@ -163,7 +163,7 @@ const SingleChildCard = props => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       width: Dimensions.get('window').width * 0.4,
-                      height: Dimensions.get('window').height * 0.27,
+                      height: Dimensions.get('window').height * 0.2,
                       // backgroundColor:"purple",
                     }}>
                     <Icon.Button
@@ -187,6 +187,7 @@ const SingleChildCard = props => {
             </>
           ) : (
             <>
+            { trackProgress === false &&
               <View
                 style={{
                   justifyContent: 'center',
@@ -208,8 +209,8 @@ const SingleChildCard = props => {
                       edit_user_profile: false,
                     });
                   }}></Icon.Button>
-              </View>
-              <Text style={{fontFamily: 'Poppins-Regular'}}>
+              </View>}
+              <Text style={{fontFamily: 'Poppins-Regular', textAlign:'center'}}>
                 There is no child account yet. Tap plus button to register your
                 child account.
               </Text>
@@ -217,7 +218,10 @@ const SingleChildCard = props => {
           )}
         </>
       ) : current_user_fetching ? (
-        <ActivityIndicator size="large" />
+        <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color="#00CDAC" />
+          </View>
       ) : (
         current_user_error && (
           <>

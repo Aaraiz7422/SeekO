@@ -111,7 +111,7 @@ const TopicDetailsComponent = (props) => {
         {!fetching_topics && !fetching_topics_error && topic_associated_data ? (
           renderTopicContentData()
         ) : fetching_topics ? (
-          <ActivityIndicator size="large" />
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator size="large" color='#00CDAC'/></View>
         ) : (
           fetching_topics_error && (
             <View>

@@ -8,22 +8,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const slides = [
     {
         id: '1',
-        title: "Learn While Playing",
-        subTitle: "The average company forecasts a growth   178% in revenues for their first year, 100% for second, and 71% for third.",
+        title: "Learn while playing",
+        subTitle: "Stimulate tactile learning by working together with your child to complete fun activities.",
     },
     {
         id: '2',
-        title: "Learn While Travel",
-        subTitle: "The average company forecasts a growth   178% in revenues for their first year, 100% for second, and 71% for third.",
+        title: "Broaden your horizons",
+        subTitle: "Plethora of topics for knowledge on tons of information in the world around us.",
     },
     {
         id: '3',
-        title: "Learn While Free",
-        subTitle: "The average company forecasts a growth   178% in revenues for their first year, 100% for second, and 71% for third.",
+        title: "Get your kids’ creative juices flowing",
+        subTitle: "Research indicates that reading bedtime stories to your children increases their visual processing, imagination and linguistic skills.",
     }
 ];
 
-const onBoarding = () => {
+const onBoarding = (props) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -33,16 +33,21 @@ const onBoarding = () => {
         setCurrentIndex(viewableItems[0].index);
     }).current;
 
+    const { navigation } =props;
+
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
     const slidesRef = useRef(null);
 
     const onClickSkip = () => {
-        if(currentIndex < slides.length -1){
-            console.log(`On Boarding Screen # ${currentIndex + 1}`);
-        } else {
-            AsyncStorage.setItem('alreadyLaunched','true');
-            // setIsFirstLaunch(false);
-        }
+        navigation.navigate("Signup");
+
+        // if(currentIndex < slides.length -1){
+        //     console.log(`On Boarding Screen # ${currentIndex + 1}`);
+        // } else {
+        //     navigation.navigate("Signup");
+        //     // AsyncStorage.setItem('alreadyLaunched','true');
+        //     // setIsFirstLaunch(false);
+        // }
     }
 
 

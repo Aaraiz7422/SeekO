@@ -22,7 +22,10 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const UserComponent = props => {
   const loadingIndicator = (
-    <ActivityIndicator animating={true} color={Colors.red800} />
+    <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color="#00CDAC" />
+          </View>
   );
 
   const {

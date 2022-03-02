@@ -107,7 +107,10 @@ const TrackProgressComponent = (props) => {
           keyExtractor={(item) => item.id}
         />
       ) : fetching_quiz_progress_data ? (
-        <ActivityIndicator size={"large"}></ActivityIndicator>
+        <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color="#00CDAC" />
+          </View>
       ) : (
         fetching_quiz_data_progress_error && (
           <>

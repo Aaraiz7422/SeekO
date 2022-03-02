@@ -125,13 +125,15 @@ const UserContainer = (props) => {
         if (gender === "Others")
             gen = "O"
 
-        let changeDateStyle = dob.split('-');
-        let day = changeDateStyle[0];
-        let month = changeDateStyle[1];
-        let year = changeDateStyle[2];
-
-        let dateStyleOnServer = year + "-" + month + "-" + day;
-
+        if(dob !== null){
+            let changeDateStyle = dob.split('-');
+            let day = changeDateStyle[0];
+            let month = changeDateStyle[1];
+            let year = changeDateStyle[2];
+    
+            let dateStyleOnServer = year + "-" + month + "-" + day;    
+        }
+        
             
         let payload = {
             "id":child_information.user_id,
@@ -139,7 +141,7 @@ const UserContainer = (props) => {
             "username": child_information.name,
             "name": child_information.name,
             "gender": gen,
-            "dob": dateStyleOnServer,
+            "dob": dob !== null ? dateStyleOnServer : null,
         }
 
         if(profileImage !== null){

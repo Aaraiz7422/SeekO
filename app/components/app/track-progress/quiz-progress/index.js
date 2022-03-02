@@ -121,7 +121,7 @@ const QuizProgressComponent = (props) => {
                         }}>
                           <Text
                             key={index}
-                            style={[{ color: "white", fontSize: 20,fontFamily:'Poppins-Regular', }]}>
+                            style={[{ color: "white", padding:8, fontSize: 20,fontFamily:'Poppins-Regular', }]}>
                             {answer.option}
                           </Text>
                         </View>
@@ -140,7 +140,7 @@ const QuizProgressComponent = (props) => {
                         }}>
                           <Text
                             key={index}
-                            style={[{ color: "white", fontSize: 20 ,fontFamily:'Poppins-Regular',}]}>
+                            style={[{ color: "white", padding:8, fontSize: 20 ,fontFamily:'Poppins-Regular',}]}>
                             {answer.option}
                           </Text>
                         </View>
@@ -159,7 +159,7 @@ const QuizProgressComponent = (props) => {
                         }}>
                           <Text
                             key={index}
-                            style={[{ color: "black", fontSize: 20,fontFamily:'Poppins-Regular', }]}>
+                            style={[{ color: "black", padding:8, fontSize: 20,fontFamily:'Poppins-Regular', }]}>
                             {answer.option}
                           </Text>
                         </View>

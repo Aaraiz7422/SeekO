@@ -89,7 +89,7 @@ const CategoriesComponent = ({ navigation, account, categories }) => {
     const loadingFullScreenAtOnce = () => {
 
         const item = <View>
-            <ActivityIndicator style={loading ? { display: 'flex' } : { display: 'none' }} size={"small"}></ActivityIndicator>
+            <ActivityIndicator color='#00CDAC' style={loading ? { display: 'flex' } : { display: 'none' }} size={"large"}></ActivityIndicator>
             <View style={loading ? { display: 'none' } : { display: 'flex' }}>
                 <FlatList
                     stickyHeaderIndices={[0]}
@@ -111,7 +111,7 @@ const CategoriesComponent = ({ navigation, account, categories }) => {
 
     return (
 
-        <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
+        <View style={loading?{ flex: 1, backgroundColor: "#F5F8FF",justifyContent:'center',alignItems:'center' }:{flex: 1, backgroundColor: "#F5F8FF"}}>
             {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
         </View>
     );

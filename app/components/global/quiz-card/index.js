@@ -34,10 +34,14 @@ const QuizCard = (props) => {
   console.log('submitting_quiz: ', submitting_quiz, show_quiz_submit_button);
   return (
     <View
-      style={[
-        global.page_container_with_aligned_flex_start,
-        { paddingTop: 0 },
-      ]}>
+      style={
+        {
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          width: SCREEN_WIDTH,
+          paddingLeft: 16,
+          paddingRight: 16,
+          paddingTop: 0 ,}}>
 
       <ScrollView showsVerticalScrollIndicator={true}>
         <View

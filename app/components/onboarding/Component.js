@@ -16,18 +16,16 @@ function OnBoardingItem({item,onClickSkip}) {
                 translucent={true}
             />
             <View style={[global.row_flex_end_container, { width: width * 0.9 }]}>
-                <TouchableOpacity onPress={onClickSkip 
-                        // this.props.navigation.navigate('ForgotPassword')
-                    }>
+                <TouchableOpacity onPress={onClickSkip}>
 
-                <Text style={{ color: 'black', fontSize: 16, fontWeight: '400' }}>
-                    Skip
+                <Text style={{ color: 'black', fontSize: 18, fontFamily:"Poppins-Regular", fontWeight: '700' }}>
+                   { item.id === '3' ? "Done" : "Skip" }
                 </Text>
                     </TouchableOpacity>
             </View>
             <View style={[styles.bottomContainer,{width:width}]}>
-                <Text style={{ fontSize: 40, marginLeft: 30, marginRight: 30,fontFamily:'Poppins-Regular', fontWeight: '700', padding: 20, textAlign: 'center' }}>{item.title}</Text>
-                <Text style={{ fontSize: 16, fontFamily: 'Poppins-Regular', marginTop: 50, marginLeft: 30, marginRight: 30, textAlign: 'justify', color: '#707A8D' }}>{item.subTitle}</Text>
+                <Text style={{ fontSize: 40, fontFamily:'Poppins-Regular', fontWeight: '700', padding: 20, textAlign: 'center' }}>{item.title}</Text>
+                <Text style={{ fontSize: 16, fontFamily: 'Poppins-Regular', marginTop: 10, marginLeft: 30, marginRight: 30, textAlign: 'justify', color: '#707A8D' }}>{item.subTitle}</Text>
                 {/* <View style={{
                     flex: 0.9,
                     justifyContent: 'space-around',

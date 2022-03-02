@@ -13,7 +13,8 @@ import logout from '../../../assets/logout.png';
 // Menu
 import menu from '../../../assets/menu.png';
 import close from '../../../assets/close.png';
-
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
 
 const HomeComponent = (props) => {
 
@@ -98,15 +99,15 @@ const HomeComponent = (props) => {
                             // Tab Bar Buttons....
                         }
 
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Home", home)}
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Track Progress", notifications)}
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Users", settings)}
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", search)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Home", "home")}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Track Progress", "tachometer-alt")}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Users", "user")}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", "payments")}
 
                     </View>
 
                     <View>
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "LogOut", logout)}
+                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "LogOut", "logout")}
                     </View>
 
                 </View>
@@ -198,10 +199,22 @@ const TabButton = (onLogout, openCloseMenu, currentTab, setCurrentTab, title, im
                 marginTop: 15
             }}>
 
-                <Image source={image} style={{
+                {image === "home" || image === "payments" || image === "logout"? <Icon2 name={image} size={24} color={'white'} ></Icon2> : <Icon
+                      name={image}
+                      size={24}
+                      color={"white"}
+                      iconStyle={{marginRight: 0}}
+                      ></Icon>}
+                    {/* <Icon
+                      name={image}
+                      size={24}
+                      color={"white"}
+                      iconStyle={{marginRight: 0}}
+                      ></Icon> */}
+                {/* <Image source={image} style={{
                     width: 25, height: 25,
                     tintColor: "white"
-                }}></Image>
+                }}></Image> */}
 
                 <Text style={{
                     fontSize: currentTab == title ? 22: 18,
