@@ -12,7 +12,7 @@ const SignupContainer = (props) => {
 
     const [errors, setErrors] = useState(
         {
-            email: null,
+            username: null,
             password: null,
         }
     );
@@ -21,7 +21,7 @@ const SignupContainer = (props) => {
 
     const resetErrors = () => {
         let error = errors;
-        error.email = null;
+        error.username = null;
         error.password = null;
         setErrors(error);
     };
@@ -41,7 +41,8 @@ const SignupContainer = (props) => {
           .catch((error) => {
             console.log('Sign-up error: ', error);
             let err = errors;
-            err.email = errors.username;
+            err.username = error.username === undefined ?"This field may not be blank":error.username;
+            err.password = error.password;
             setErrors(err);
             setLoading(false);
           });
@@ -74,9 +75,12 @@ const SignupContainer = (props) => {
             is_error = true;
         }
         if (login_information.username && !reg.test(login_information.username)) {
-            error.email = 'Enter a valid email address.';
+            error.username = 'Enter a valid email address.';
             is_error = true;
         }
+        // if ( login_information.username === null){
+        //     error.username = "This field may not be blank"
+        // }
         if (is_error) {
             setErrors(error);
             setLoading(false);

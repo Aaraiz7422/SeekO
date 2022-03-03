@@ -93,13 +93,13 @@ const SignupComponent = props => {
           theme={input_theme}
           left={<TextInput.Icon name="account" style={{marginTop: 12}} />}
           onChangeText={email => {
-            resetSingleFieldError('email');
+            resetSingleFieldError('username');
             setEmail(email);
           }}
         />
-        <HelperText type="error" visible={true} style={{}}>
-          {errors.email}
-        </HelperText>
+        {errors.username && <HelperText type="error" visible={true}>
+          {errors.username}
+        </HelperText>}
       </View>
       <View>
         <TextInput
@@ -143,9 +143,9 @@ const SignupComponent = props => {
         shadowRadius={20}
         onPress={() => {
           setLoading(true);
-          loading ? loadingIndicator : loading;
+          // loading ? loadingIndicator : loading;
           let sign_up_information = {
-            username: email.toLowerCase(),
+            username: email !== null ? email.toLowerCase():null,
             password: password,
           };
           console.log(

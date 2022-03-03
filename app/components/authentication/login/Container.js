@@ -28,6 +28,14 @@ const LoginContainer = (props) => {
 
     const resetSingleFieldError = (field_name) => {
         let error = errors;
+        // if(field_name === 'email'){
+        //     error[field_name] = errors.email;
+        //     error['password'] = errors.password;
+        // }
+        // if(field_name === 'password'){
+        //     error[field_name] = errors.password;
+        //     error['email'] = errors.email;
+        // }
         error[field_name] = null;
         setErrors(error);
     };
@@ -39,16 +47,17 @@ const LoginContainer = (props) => {
         services
             .base_service(urls.user_login, login_information)
             .then((response) => {
+            console.log('response: ', response);
+            setLoading(false);
                 saveAccessTokenAction(response);
-                setLoading(false);
                 props.navigation.navigate('App');
             })
             .catch((error) => {
-                setLoading(false);
                 let err = errors;
                 err.email = error.error_description || error.detail;
                 err.password = error.error_description || error.detail;
                 setErrors(err);
+                setLoading(false);
                 console.log('login error: ', error);
             });
     }

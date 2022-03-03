@@ -13,9 +13,9 @@ import CustomButton from '../../global/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const LoginComponent = props => {
-  const loadingIndicator = (
-    <ActivityIndicator animating={true} color={Colors.red800} />
-  );
+  // const loadingIndicator = (
+  //   <ActivityIndicator animating={true} color={Colors.red800} />
+  // );
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [show, setShow] = useState(false);
@@ -33,6 +33,10 @@ const LoginComponent = props => {
     setShow(!show);
     setVisible(!visible);
   };
+
+  const showLoaderWhileValidatingUser = () => {
+    return <ActivityIndicator animating={true} color={Colors.red800} />;
+  }
 
   return (
     <KeyboardAwareScrollView
@@ -96,9 +100,9 @@ const LoginComponent = props => {
           theme={input_theme}
           left={<TextInput.Icon name="account" style={{marginTop: 12}} />}
         />
-        <HelperText type="error" visible={true} style={{}}>
+       {errors.email && <HelperText type="error" visible={true} >
           {errors.email}
-        </HelperText>
+        </HelperText>}
       </View>
       <View>
         <TextInput
@@ -124,9 +128,9 @@ const LoginComponent = props => {
             />
           }
         />
-        <HelperText type="error" visible={true}>
+        { errors.password && <HelperText type="error" visible={true}>
           {errors.password}
-        </HelperText>
+        </HelperText>}
       </View>
 
       <View
@@ -145,7 +149,30 @@ const LoginComponent = props => {
           Forgot Password?
         </Text>
       </View>
-      <CustomButton
+      {
+        loading ? showLoaderWhileValidatingUser() : <CustomButton
+        backgroundColor={'#DEE8FB'}
+        title={'Sign In'}
+        height={50}
+        width={0.6}
+        borderRadius={30}
+        textColor={'white'}
+        linearStartColor={'#F8C04E'}
+        linearEndColor={'#FFBF3C'}
+        shadowColor={'#FFBF3C'}
+        shadowRadius={20}
+        onPress={() => {
+          setLoading(true);
+          // loading ? loadingIndicator : loading;
+          let login_information = {
+            username:email !== null ? email.toLowerCase():email,
+            password: password,
+          };
+          // console.log(` Email : ${email} and Password : ${password}`);
+          validateSignUpInformation(login_information);
+        }}></CustomButton>
+      }
+      {/* <CustomButton
         backgroundColor={'#DEE8FB'}
         title={'Sign In'}
         height={50}
@@ -165,7 +192,7 @@ const LoginComponent = props => {
           };
           console.log(` Email : ${email} and Password : ${password}`);
           validateSignUpInformation(login_information);
-        }}></CustomButton>
+        }}></CustomButton> */}
     </KeyboardAwareScrollView>
   );
 };

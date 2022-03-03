@@ -35,12 +35,16 @@ const UserContainer = (props) => {
 
     const showDateInEdit = (date) => {
         let day,month,year;
-        let containDate = date.split('-');
-        year = containDate[0];
-        month = containDate[1];
-        day = containDate[2];
+        let returnDate = null;
+        if(date !== null){
 
-        let returnDate = day + "-" + month + "-" + year;
+            let containDate = date.split('-');
+            year = containDate[0];
+            month = containDate[1];
+            day = containDate[2];
+    
+            returnDate = day + "-" + month + "-" + year;
+        }
         return returnDate;
     }
 

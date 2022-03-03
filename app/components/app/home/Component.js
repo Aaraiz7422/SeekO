@@ -199,11 +199,19 @@ const TabButton = (onLogout, openCloseMenu, currentTab, setCurrentTab, title, im
                 marginTop: 15
             }}>
 
-                {image === "home" || image === "payments" || image === "logout"? <Icon2 name={image} size={24} color={'white'} ></Icon2> : <Icon
+                {image === "home" || image === "payments" || image === "logout"? 
+                <Icon2 
+                name={image} 
+                size={image === "home" ? 32:28} 
+                color={'white'}
+                style={{paddingRight : image === "payments" && 4 }}
+                ></Icon2> : 
+                <Icon
                       name={image}
-                      size={24}
+                      solid
+                      size={image === "user" ? 28 : 22}
                       color={"white"}
-                      iconStyle={{marginRight: 0}}
+                      style={{paddingRight: image === "user" ? 8 : 6}}
                       ></Icon>}
                     {/* <Icon
                       name={image}
