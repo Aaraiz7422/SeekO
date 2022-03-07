@@ -24,7 +24,7 @@ const HomeContainer = props => {
     props.getCurrentUserAction(userId => setUserIdIAP(userId));
     if (current_user !== null) {
       console.log(
-        `Use Effect is Called : ${current_user.child_accounts[0].username}`,
+        `Use Effect is Called :`,
       );
     }
   }, []);

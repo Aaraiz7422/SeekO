@@ -210,10 +210,11 @@ const SingleChildCard = props => {
                     });
                   }}></Icon.Button>
               </View>}
-              <Text style={{fontFamily: 'Poppins-Regular', textAlign:'center'}}>
-                There is no child account yet. Tap plus button to register your
-                child account.
-              </Text>
+              { trackProgress === false ?  <Text style={{fontFamily: 'Poppins-Regular', textAlign:'center'}}>
+              There is no child account yet. Tap + to create a child
+              </Text>: <Text style={{fontFamily: 'Poppins-Regular', textAlign:'center'}}>
+              There is no child account yet. Visit the home screen to create a child
+              </Text>}
             </>
           )}
         </>

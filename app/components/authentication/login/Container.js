@@ -68,11 +68,11 @@ const LoginContainer = (props) => {
         let error = errors;
         let is_error = false;
         if (login_information.password && login_information.password.length < 6) {
-            error.password = 'Min. 6 characters are required.';
+            error.password = 'Invalid username or password';
             is_error = true;
         }
         if (login_information.username && !reg.test(login_information.username)) {
-            error.email = 'Enter a valid email address.';
+            error.email = 'Invalid username or password';
             is_error = true;
         }
         if (is_error) {

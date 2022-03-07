@@ -122,6 +122,7 @@ const UserContainer = (props) => {
         const {current_user, getCurrentUserAction} = props;
 
         let gen;
+        let dateStyleOnServer;
         if (gender === "Male")
             gen = "M"
         if (gender === "Female")
@@ -135,7 +136,7 @@ const UserContainer = (props) => {
             let month = changeDateStyle[1];
             let year = changeDateStyle[2];
     
-            let dateStyleOnServer = year + "-" + month + "-" + day;    
+            dateStyleOnServer = year + "-" + month + "-" + day;    
         }
         
             

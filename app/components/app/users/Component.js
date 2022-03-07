@@ -118,6 +118,7 @@ const UserComponent = props => {
           <AvatarCard></AvatarCard>
           <AvatarCard></AvatarCard>
           <AvatarCard></AvatarCard>
+          {/* <AvatarCard></AvatarCard> */}
         </ScrollView>
       </FullScreenModal>
       <View
@@ -132,18 +133,20 @@ const UserComponent = props => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity
+          <TouchableOpacity 
             onPress={() => {
               showModal();
             }}>
-            <View style={{margin: 5}}>
+            <View style={{margin: 5 }}>
               <Avatar.Image
                 size={130}
+                style={{
+                  backgroundColor:'#F5F8FF'}}
                 source={
                   profileImage === null
                     ? edit_user_profile
                       ? {uri: account.avatar[0].avatar}
-                      : require('../../../assets/profile.png')
+                      : require('../../../assets/user.png')
                     : {uri: profileImage.avatar}
                 }
               />

@@ -41,7 +41,7 @@ const SignupContainer = (props) => {
           .catch((error) => {
             console.log('Sign-up error: ', error);
             let err = errors;
-            err.username = error.username === undefined ?"This field may not be blank":error.username;
+            err.username = error.username === undefined ?"Username can not be blank":error.username;
             err.password = error.password;
             setErrors(err);
             setLoading(false);
@@ -71,11 +71,11 @@ const SignupContainer = (props) => {
         let error = errors;
         let is_error = false;
         if (login_information.password && login_information.password.length < 6) {
-            error.password = 'Min. 6 characters are required.';
+            error.password = 'Password should be at least 6 characters long';
             is_error = true;
         }
         if (login_information.username && !reg.test(login_information.username)) {
-            error.username = 'Enter a valid email address.';
+            error.username = 'Please enter a valid email address';
             is_error = true;
         }
         // if ( login_information.username === null){

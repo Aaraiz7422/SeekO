@@ -202,9 +202,9 @@ const TabButton = (onLogout, openCloseMenu, currentTab, setCurrentTab, title, im
                 {image === "home" || image === "payments" || image === "logout"? 
                 <Icon2 
                 name={image} 
-                size={image === "home" ? 32:28} 
+                size={image === "home" ? 34:28} 
                 color={'white'}
-                style={{paddingRight : image === "payments" && 4 }}
+                style={{paddingRight : image === "payments" ? 4 : 0, marginLeft : image === "home" ? -5 : 0 }}
                 ></Icon2> : 
                 <Icon
                       name={image}
@@ -229,6 +229,7 @@ const TabButton = (onLogout, openCloseMenu, currentTab, setCurrentTab, title, im
                     fontWeight: currentTab == title ? 'bold':'normal',
                     fontFamily:'Poppins-Regular',
                     paddingLeft: 15,
+                    marginTop: title === "Track Progress" ? 4 : 0,
                     color: "white"
                 }}>{title}</Text>
 
