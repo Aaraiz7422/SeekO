@@ -55,7 +55,7 @@ const LoginContainer = (props) => {
             .catch((error) => {
                 let err = errors;
                 err.email = error.error_description || error.detail;
-                err.password = error.error_description || error.detail;
+                err.password =login_information.password.length < 6 ?"Password should be at least 6 characters long": error.error_description || error.detail;
                 setErrors(err);
                 setLoading(false);
                 console.log('login error: ', error);
@@ -67,14 +67,14 @@ const LoginContainer = (props) => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         let error = errors;
         let is_error = false;
-        if (login_information.password && login_information.password.length < 6) {
-            error.password = 'Invalid username or password';
-            is_error = true;
-        }
-        if (login_information.username && !reg.test(login_information.username)) {
-            error.email = 'Invalid username or password';
-            is_error = true;
-        }
+        // if (login_information.password && login_information.password.length < 6) {
+        //     error.password = 'Invalid username or password';
+        //     is_error = true;
+        // }
+        // if (login_information.username && !reg.test(login_information.username)) {
+        //     error.email = 'Invalid username or password';
+        //     is_error = true;
+        // }
         if (is_error) {
             setErrors(error);
             setLoading(false);

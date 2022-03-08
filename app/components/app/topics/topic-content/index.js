@@ -150,7 +150,7 @@ const TopicContentContainer = (props) => {
         {topic_associated_data.content.map((content, index) => {
           return (
             <View
-              key={content.id}
+              key={index}
               style={[
                 {
                   marginBottom:

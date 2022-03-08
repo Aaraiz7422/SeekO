@@ -96,8 +96,8 @@ const TrackProgressComponent = props => {
     <View
       style={{
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        // justifyContent: 'flex-start',
+        // alignItems: 'center',
         width: SCREEN_WIDTH,
         backgroundColor: '#F5F8FF',
       }}>
@@ -113,12 +113,21 @@ const TrackProgressComponent = props => {
       !fetching_quiz_data_progress_error &&
       current_user ? (
         flat_list_data.length > 1 ? (
+          <View
+          style={{
+            flex: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            width: SCREEN_WIDTH,
+            backgroundColor: '#F5F8FF',
+          }}>
           <FlatList
             style={{marginTop: 20}}
             data={flat_list_data}
             renderItem={renderChildAccounts}
             keyExtractor={item => item.id}
           />
+          </View>
         ) : (
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>

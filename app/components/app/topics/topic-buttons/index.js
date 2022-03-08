@@ -16,9 +16,9 @@ const TopicButtonsContainer = (props) => {
                         coverImage={selected_topic.thumbnail}
                     ></CustomCard>
                 </View>
-                {topic_associated_data.map((content) => {
+                {topic_associated_data.map((content,index) => {
                     return (
-                        <View key={content.id} >
+                        <View key={index} >
                             <CustomButton
                                 title={content.name}
                                 height={50}

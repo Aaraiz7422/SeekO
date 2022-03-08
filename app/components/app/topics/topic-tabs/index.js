@@ -1,26 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ScrollView, View, StyleSheet, Text } from 'react-native';
-import {
-  TabView,
-  SceneMap,
-  TabBar,
-  TabBarItem,
-} from 'react-native-tab-view';
-import { SCREEN_WIDTH } from '../../../../../constants';
+import React, {useState, useEffect, useRef} from 'react';
+import {ScrollView, View, StyleSheet, Text} from 'react-native';
+import {TabView, SceneMap, TabBar, TabBarItem} from 'react-native-tab-view';
+import {SCREEN_WIDTH} from '../../../../../constants';
 import global from '../../../../../global-styles';
 import services from '../../../../api/services';
-import { urls } from '../../../../api/urls';
+import {urls} from '../../../../api/urls';
 import TopicContentContainer from '../topic-content';
-import { ProgressBar} from 'react-native-paper';
+import {ProgressBar} from 'react-native-paper';
 const initialLayout = {
   width: SCREEN_WIDTH * 0.9,
 };
 
-
 // *** renderLabel and renderTabBarItem ***//
 // *** renderLabel is for showing TabBar title Text ***//
-// *** renderTabBarItem render no.of the Label using _renderTabBar 
-// *** call inside <TabBar renderTabBarItem={renderTabBarItem} > like this ***// 
+// *** renderTabBarItem render no.of the Label using _renderTabBar
+// *** call inside <TabBar renderTabBarItem={renderTabBarItem} > like this ***//
 
 //*** uncomment renderLabel and renderTabBarItem for showing tabs(with label) ***/
 // const renderLabel = ({ route, focused }) => {
@@ -51,8 +45,7 @@ const initialLayout = {
 //   );
 // };
 
-const TopicTabsContainer = (props) => {
-
+const TopicTabsContainer = props => {
   const [index, setIndex] = useState(0);
   const [selected_tab, setSelectedTab] = useState(null);
   const [tab_associated_data, setTabAssociatedData] = useState(null);
@@ -64,21 +57,23 @@ const TopicTabsContainer = (props) => {
   const horizontal_scroll_bar = useRef(null);
 
   let progress_calculation = (index + 1) / routes.length;
+
   useEffect(() => {
     props.routes &&
       props.routes.length > 0 &&
-      props.routes.forEach((tab) => {
-        routes.push(tab);
+      props.routes.forEach(tab => {
+        setRoutes(prevState => [...prevState, tab]);
+        // routes.push(tab);
       });
 
     if (props.routes.length > 0) {
       setSelectedTab(props.routes[0]);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (data_source_coords.length === routes.length) {
-      if (index === 0 ) {
+      if (index === 0) {
         console.log('Not Null');
         // horizontal_scroll_bar.current.scrollTo({ animated: true, offset: 0 });
       } else {
@@ -88,11 +83,11 @@ const TopicTabsContainer = (props) => {
     if (data_source_coords.length > 0) {
       scrollHandler();
     }
-  }, [ data_source_coords,index]);
+  }, [onSwipeStart, index]);
 
-  const setOnSwipeStart = (onSwipeStart) => {
+  const setOnSwipeStart = onSwipeStart => {
     set_On_Swipe_Start(onSwipeStart);
-  }
+  };
 
   const scrollHandler = () => {
     // const { data_source_coords } = this.state;
@@ -132,7 +127,7 @@ const TopicTabsContainer = (props) => {
   //     });
   // };
 
-  const handleIndexChange = (index) => {
+  const handleIndexChange = index => {
     console.log('handleIndexChange: ', index);
     setIndex(index);
     setSelectedTab(routes[index]);
@@ -143,31 +138,32 @@ const TopicTabsContainer = (props) => {
   //   setFetchingTabData(fetching_tab_data);
   //   setFetchingTabDataErro(fetching_tab_data_error);
   // };
-  const _renderTabBar = (props) => {
+  const _renderTabBar = props => {
     return (
       <TabBar
+        key={index + 10}
         {...props}
-        bounces={false}
+        // bounces={false}
         // ref={(o) => horizontal_scroll_bar.current = o}
-        scrollEnabled
-        indicatorStyle={styles.indicator}
+        // scrollEnabled
+        // indicatorStyle={styles.indicator}
         style={styles.tab_bar}
-        tabStyle={styles.tab}
-      // *** uncomment the renderTabBarItem={renderTabBarItem} (line 151) to render your tabs and set height:34 in tab_bar styles in stylesheet ***// 
-      // renderTabBarItem={renderTabBarItem}
+        // tabStyle={styles.tab}
+        // *** uncomment the renderTabBarItem={renderTabBarItem} (line 151) to render your tabs and set height:34 in tab_bar styles in stylesheet ***//
+        // renderTabBarItem={renderTabBarItem}
       />
     );
   };
 
-  const renderScene = ({ route }) => {
-    const { parent_data } = props;
-    if (Math.abs(index - routes.indexOf(route)) > 5 && onSwipeStart) {
-      return <View />;
+  const renderScene = ({route}) => {
+    const {parent_data} = props;
+    if (Math.abs(index - routes.indexOf(route)) > 4 && onSwipeStart) {
+      return <View></View>;
     }
     return (
       <TopicContentContainer
         {...props}
-        key={index}
+        key={index + 200}
         topic_associated_data={route}
         parent_data={parent_data}
         tab_data={selected_tab}
@@ -177,32 +173,28 @@ const TopicTabsContainer = (props) => {
 
   return (
     <View
-      style={[
-        global.page_container_with_aligned_flex_start,
-        { paddingTop: 0 },
-      ]}>
-      {
-        routes.length > 0 &&
+      style={[global.page_container_with_aligned_flex_start, {paddingTop: 0}]}>
+      {routes.length > 0 && (
         <>
-          <ProgressBar progress={progress_calculation}
+          <ProgressBar
+            progress={progress_calculation}
             style={{
               width: SCREEN_WIDTH * 0.84,
               height: 18,
               borderRadius: 10,
               borderColor: 'rgba(0, 0, 0, 0.19)',
               borderWidth: 2,
-              backgroundColor: "#F5F8FF",
+              backgroundColor: '#F5F8FF',
               marginTop: 10,
-          }}
-          color={"#01CCAD"}
-            
- 
-            />
+            }}
+            color={'#01CCAD'}
+          />
           <TabView
-          
-          transitionStyle='scroll'
-          lazy
-            navigationState={{ index, routes }}
+            // lazyPreloadDistance={4}
+            key={index + 100}
+            transitionStyle="scroll"
+            lazy
+            navigationState={{index, routes}}
             swipeEnabled={true}
             renderScene={renderScene}
             renderTabBar={_renderTabBar}
@@ -218,15 +210,15 @@ const TopicTabsContainer = (props) => {
             }}
           />
         </>
-      }
+      )}
     </View>
   );
-}
+};
 
 export default TopicTabsContainer;
 const styles = StyleSheet.create({
   tab_bar: {
-    // *** for showing tabs you just need to set height:34 
+    // *** for showing tabs you just need to set height:34
     // *** for hiding tabs you just need to set height:0
     // height:34,
     height: 0,
@@ -234,14 +226,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor:'transparent'
+    backgroundColor: 'transparent',
   },
   indicatorContainerStyle: {
     display: 'none',
   },
   indicator: {
     backgroundColor: 'transparent',
-    height: 0, width: 0, opacity: 0,
+    height: 0,
+    width: 0,
+    opacity: 0,
   },
   tab: {
     width: 'auto',
