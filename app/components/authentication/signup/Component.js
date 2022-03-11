@@ -145,7 +145,7 @@ const SignupComponent = props => {
           setLoading(true);
           // loading ? loadingIndicator : loading;
           let sign_up_information = {
-            username: email !== null ? email.toLowerCase():null,
+            username: email !== null ? email.toLowerCase().trim():null,
             password: password,
           };
           console.log(

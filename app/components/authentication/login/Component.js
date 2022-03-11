@@ -35,7 +35,8 @@ const LoginComponent = props => {
   };
 
   const showLoaderWhileValidatingUser = () => {
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
+    setTimeout(() => setLoading(false),1000);
+    return <ActivityIndicator style={loading ? { display: 'flex' } : { display: 'none' }} animating={true} color='#00CDAC' />;
   }
 
   return (
@@ -165,7 +166,7 @@ const LoginComponent = props => {
           setLoading(true);
           // loading ? loadingIndicator : loading;
           let login_information = {
-            username:email !== null ? email.toLowerCase():email,
+            username:email !== null ? email.toLowerCase().trim():email,
             password: password,
           };
           // console.log(` Email : ${email} and Password : ${password}`);
