@@ -22,6 +22,8 @@ import { Thumbnail } from 'react-native-thumbnail-video';
 const TopicContentContainer = (props) => {
 
   const [isReady, setIsReady] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [quality, setQuality] = useState(null);
   const [playerWidth, setPlayerWidth] = useState(Dimensions.get('window').width);
   const _youTubeRef = React.createRef();
   const { account, topic_associated_data, navigation, parent_data, tab_data } = props;

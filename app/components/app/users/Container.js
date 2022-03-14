@@ -154,7 +154,7 @@ const UserContainer = (props) => {
         }
 
         if(edit_user_profile){
-            payload.avatar = account.avatar[0].id;
+            payload.avatar = profileImage.id;
             console.log(`USER DATA +++++++ : ${child_information.name} : ${gen} : ${dob} : ${account.avatar[0].id}` );
         }
 

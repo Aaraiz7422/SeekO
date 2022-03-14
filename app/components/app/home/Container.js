@@ -93,11 +93,13 @@ const HomeContainer = props => {
           registerNewChild={registerNewChild}
           id={2}></SingleChildCard>
       );
-    } else if (currentTab === 'Subscription') {
-      return (
-        <SubscriptionComponent navigation={navigation}></SubscriptionComponent>
-      );
-    } else if (currentTab === 'Users') {
+    }
+    //  else if (currentTab === 'Subscription') {
+    //   return (
+    //     <SubscriptionComponent navigation={navigation}></SubscriptionComponent>
+    //   );
+    // } 
+    else if (currentTab === 'Users') {
       return current_user == null ? (
         <ActivityIndicator></ActivityIndicator>
       ) : (

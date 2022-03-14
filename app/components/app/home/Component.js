@@ -66,7 +66,8 @@ const HomeComponent = (props) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        // <SafeAreaView style={styles.container}>
+        <View style={{flex:1}}>
             <LinearGradient colors={["#85DADA", "#2CB8B8"]}
                 style={[styles.container, { width: Dimensions.get('window').width }]}
 
@@ -102,11 +103,11 @@ const HomeComponent = (props) => {
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Home", "home")}
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Track Progress", "tachometer-alt")}
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Users", "user")}
-                        {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", "payments")}
+                        {/* {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "Subscription", "payments")} */}
 
                     </View>
 
-                    <View>
+                    <View style={{marginBottom:24}}>
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "LogOut", "logout")}
                     </View>
 
@@ -169,8 +170,8 @@ const HomeComponent = (props) => {
                 </Animated.View>
 
             </Animated.View>
-
-        </SafeAreaView>
+            </View>
+        // </SafeAreaView>
     );
 }
 

@@ -116,8 +116,8 @@ const UserComponent = props => {
       <FullScreenModal visible={visible} closeModal={closeModal}>
         <ScrollView>
           <AvatarCard></AvatarCard>
-          <AvatarCard></AvatarCard>
-          <AvatarCard></AvatarCard>
+          {/* <AvatarCard></AvatarCard>
+          <AvatarCard></AvatarCard> */}
           {/* <AvatarCard></AvatarCard> */}
         </ScrollView>
       </FullScreenModal>

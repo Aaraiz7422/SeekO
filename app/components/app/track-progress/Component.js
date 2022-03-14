@@ -112,7 +112,7 @@ const TrackProgressComponent = props => {
       {!fetching_quiz_progress_data &&
       !fetching_quiz_data_progress_error &&
       current_user ? (
-        flat_list_data.length > 1 ? (
+        flat_list_data.length >= 1 ? (
           <View
           style={{
             flex: 1,
@@ -128,7 +128,8 @@ const TrackProgressComponent = props => {
             keyExtractor={item => item.id}
           />
           </View>
-        ) : (
+        )
+         : (
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
             <Text style={{fontFamily: 'Poppins-Regular', fontSize: 20, textAlign: 'center'}}>

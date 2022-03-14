@@ -44,7 +44,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 ,backgroundColor:"#F5F8FF",marginHorizontal:0,marginBottom:-36}}>
           <AppContainer></AppContainer>
         </SafeAreaView>
       </PersistGate>
