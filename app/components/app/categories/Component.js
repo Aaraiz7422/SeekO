@@ -92,6 +92,7 @@ const CategoriesComponent = ({ navigation, account, categories }) => {
             <ActivityIndicator color='#00CDAC' style={loading ? { display: 'flex' } : { display: 'none' }} size={"large"}></ActivityIndicator>
             <View style={loading ? { display: 'none' } : { display: 'flex' }}>
                 <FlatList
+                bounces={false}
                     stickyHeaderIndices={[0]}
                     ListHeaderComponent={<AppHeader image={account.avatar[0].avatar} title={"Hi, " + account.name}></AppHeader>}
                     data={categories}

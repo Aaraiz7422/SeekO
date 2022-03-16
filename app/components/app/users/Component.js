@@ -77,7 +77,7 @@ const UserComponent = props => {
           console.log('image : ', element.avatar);
           return (
             <View
-              style={{height: SCREEN_HEIGHT * 0.2, width: SCREEN_WIDTH * 0.26}}>
+              style={{height: SCREEN_HEIGHT * 0.14,}}>
               <TouchableOpacity
                 key={index}
                 onPress={() => {
@@ -86,9 +86,10 @@ const UserComponent = props => {
                 }}>
                 {/* <Text>{element.id}</Text> */}
                 <Image
+                resizeMode='contain'
                   source={{uri: element.avatar}}
                   style={{
-                    height: SCREEN_HEIGHT * 0.18,
+                    height: SCREEN_HEIGHT * 0.14,
                     width: SCREEN_WIDTH * 0.26,
                   }}
                 />
