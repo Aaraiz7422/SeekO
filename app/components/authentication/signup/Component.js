@@ -8,14 +8,14 @@ import {
   HelperText,
 } from 'react-native-paper';
 import global from '../../../../global-styles';
-import {input_theme} from '../../../../constants';
+import {input_theme, SCREEN_HEIGHT} from '../../../../constants';
 import CustomButton from '../../global/CustomButton';
 import {SCREEN_WIDTH} from '../../../../constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const SignupComponent = props => {
   const loadingIndicator = (
-    <ActivityIndicator animating={true} color={Colors.red800} />
+    <ActivityIndicator animating={true} color='#00CDAC' size={'large'} />
   );
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -70,7 +70,13 @@ const SignupComponent = props => {
           </Text>
         </Button>
       </View>
-      <Image source={require('../../../assets/Logo.png')}></Image>
+      <Image source={require('../../../assets/SEEKO_LOGO.png')} 
+      style={{
+        height:Dimensions.get('window').height * 0.15,
+        width:Dimensions.get('window').width * 0.5,
+        resizeMode:'contain'
+      }}
+      ></Image>
       <Text
         style={{
           margin: 30,

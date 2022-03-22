@@ -69,7 +69,7 @@ const HomeContainer = props => {
   const selectedTab = (currentTab, prop) => {
     if (currentTab === 'Home') {
       return current_user == null ? (
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color='#00CDAC'/>
       ) : (
         <SingleChildCard
           {...prop}
@@ -82,7 +82,7 @@ const HomeContainer = props => {
       );
     } else if (currentTab === 'Track Progress') {
       return current_user == null ? (
-        <ActivityIndicator></ActivityIndicator>
+        <ActivityIndicator size={'large'} color='#00CDAC'></ActivityIndicator>
       ) : (
         <SingleChildCard
           {...prop}
@@ -101,7 +101,7 @@ const HomeContainer = props => {
     // } 
     else if (currentTab === 'Users') {
       return current_user == null ? (
-        <ActivityIndicator></ActivityIndicator>
+        <ActivityIndicator size={'large'} color='#00CDAC'></ActivityIndicator>
       ) : (
         <SingleChildCard
           {...prop}

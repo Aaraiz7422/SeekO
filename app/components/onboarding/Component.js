@@ -1,4 +1,4 @@
-import {StatusBar} from 'expo-status-bar';
+// import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 import {
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   View,
   Dimensions,
   useWindowDimensions,
+  StatusBar,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import global from '../../../global-styles';
@@ -16,8 +17,9 @@ function OnBoardingItem({item, onClickSkip}) {
   const {width} = useWindowDimensions();
 
   return (
-    <SafeAreaView style={[styles.container, {width: width}]}>
-      <StatusBar barStyle="dark-content" hidden={true} translucent={true} />
+    <>
+    {/* <StatusBar hidden={false} backgroundColor={"#85DADA"} barStyle={'dark-content'}/> */}
+    <View style={[styles.container, {width: width}]}>
       <View style={[global.row_flex_end_container, {width: width * 0.9}]}>
         <TouchableOpacity onPress={onClickSkip}>
           <Text
@@ -91,7 +93,9 @@ function OnBoardingItem({item, onClickSkip}) {
 
                 </View> */}
       </View>
-    </SafeAreaView>
+    </View>
+    </>
+
   );
 }
 

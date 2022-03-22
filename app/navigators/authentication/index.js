@@ -6,7 +6,7 @@ import LoginContainer from '../../components/authentication/login/Container';
 import SignupContainer from '../../components/authentication/signup/Container';
 import ForgetPassword from '../../components/authentication/forget-password/ForgetPassword';
 import ResetPassword from '../../components/authentication/reset-password/ResetPassword';
-import onBoarding from '../../components/onboarding/Container';
+import OnBoarding from '../../components/onboarding/Container';
 import { useNavigation } from '@react-navigation/native';
 const AuthStack = createStackNavigator();
 
@@ -29,7 +29,7 @@ const AuthenticationStack = () => {
         return null;
     } else if ( isFirstLaunch === true ) {
         return (<AuthStack.Navigator screenOptions={{headerShown:false}}>
-        <AuthStack.Screen name="Onboarding" component={onBoarding} />
+        <AuthStack.Screen name="Onboarding" component={OnBoarding} />
         <AuthStack.Screen name="Login" component={LoginContainer} />
         <AuthStack.Screen name="Signup" component={SignupContainer} />
         <AuthStack.Screen name="ForgotPassword" component={ForgetPassword}/>

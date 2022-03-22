@@ -1,24 +1,23 @@
 import React, {Component, useEffect} from 'react';
-import {View,Text} from 'react-native';
+import {View, Text, Platform} from 'react-native';
 import global from '../../../global-styles';
 import {saveAccessToken, setAuthLoading} from '../../redux/actions/authActions';
 import {getCurrentUser} from '../../redux/actions/userActions';
 import {connect} from 'react-redux';
 import services from '../../api/services';
-import { urls } from '../../api/urls';
+import {urls} from '../../api/urls';
 import CachedImage from '../global/cached-image';
-import { APP_NAME, SCREEN_WIDTH } from '../../../constants';
+import {APP_NAME, SCREEN_WIDTH} from '../../../constants';
 //TODO: This screen deisgn and logi is temporary.
-const SplashScreen = (props) => {
-
-    useEffect(()=>{
-        const {navigation, auth_token} = props;
-        if (auth_token) {
-          authenticateAuthToken();
-        } else {
-          navigation.navigate('Authentication');
-        }
-    },[]);
+const SplashScreen = props => {
+  useEffect(() => {
+    const {navigation, auth_token} = props;
+    if (auth_token) {
+      authenticateAuthToken();
+    } else {
+      navigation.navigate('Authentication');
+    }
+  }, []);
 
   const authenticateAuthToken = () => {
     const {saveAccessTokenAction, refresh_token, navigation} = props;
@@ -29,36 +28,41 @@ const SplashScreen = (props) => {
     };
     services
       .base_service(urls.user_login, auth_data)
-      .then((response) => {
+      .then(response => {
         saveAccessTokenAction(response);
         navigation.navigate('App');
       })
-      .catch((error) => {
+      .catch(error => {
         navigation.navigate('Signup');
         console.log('login error: ', error);
       });
-  }
+  };
 
-    return (
-      <View style={global.page_container}>
-        <CachedImage
-          style={{
-            width: SCREEN_WIDTH * 0.4,
-            height: SCREEN_WIDTH * 0.4,
-            borderRadius: SCREEN_WIDTH,
-            marginBottom: 24,
-          }}
-          localImage={true}
-          source={require('../../assets/Logo.png')} />
-        <Text style={{color: '#000',fontFamily:'Poppins-Regular',}}>
-          {APP_NAME}
-        </Text>
-      </View>
-    );
-}
+  return (
+    <>
+      {Platform.OS === 'android' && (
+        <View style={[global.page_container,{backgroundColor:"#F5F8FF",}]}>
+          <CachedImage
+            style={{
+              width: SCREEN_WIDTH * 0.9,
+              height: SCREEN_WIDTH * 0.4,
+              borderRadius: SCREEN_WIDTH,
+              marginBottom: 24,
+            }}
+            localImage={true}
+            source={require('../../assets/SEEKO_LOGO.png')}
+          />
+          <Text style={{color: '#000', fontFamily: 'Poppins-Regular'}}>
+            {APP_NAME}
+          </Text>
+        </View>
+      )}
+    </>
+  );
+};
 
 // Exports
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   // Redux Store --> Component
   return {
     is_logged_in: state.authReducer.is_logged_in,
@@ -68,12 +72,12 @@ const mapStateToProps = (state) => {
 };
 
 // Map Dispatch To Props (Dispatch Actions To Reducers. Reducers Then Modify The Data And Assign It To Your Props)
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   // Action
   return {
-    saveAccessTokenAction: (token_response) =>
+    saveAccessTokenAction: token_response =>
       dispatch(saveAccessToken(token_response)),
-    setAuthLoadingAction: (loading) => dispatch(setAuthLoading(loading)),
+    setAuthLoadingAction: loading => dispatch(setAuthLoading(loading)),
     getCurrentUserAction: () => dispatch(getCurrentUser()),
   };
 };

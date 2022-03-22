@@ -14,6 +14,7 @@ const CachedImage = (props) => {
 
     return (
         <FastImage
+        resizeMode={'contain'}
             style={style}
             source={source}
             onLoadStart={() => {
@@ -30,8 +31,9 @@ const CachedImage = (props) => {
                         width: '100%',
                         height: '100%',
                         position: 'absolute',
+                        backgroundColor:"#F5F8FF",
                     }}>
-                    <ActivityIndicator size="small" />
+                    <ActivityIndicator size="large" color='#00CDAC'/>
                 </View>
             )}
             {props.children}

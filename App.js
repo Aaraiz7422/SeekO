@@ -18,12 +18,15 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './app/redux/store/store';
 import axios from 'axios';
 
+import SplashScreen from 'react-native-splash-screen';
+
 const Stack = createStackNavigator();
 
 //Hello
 export default function App() {
 
   useEffect(()=>{
+    SplashScreen.hide();
     axios.interceptors.request.use(function (config) {
       if (
         config.data &&

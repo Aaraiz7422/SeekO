@@ -11,10 +11,11 @@ import {BoxShadow} from 'react-native-shadow';
 import QuizCard from '../../global/quiz-card';
 
 import FullScreenModal from '../FullScreenModal';
+import {useNetInfo} from "@react-native-community/netinfo";
 
 const QuizzesComponent = props => {
   const [visible, setVisible] = useState(false);
-
+  const netInfo = useNetInfo();
   const {
     account,
     current_question_index,
@@ -188,7 +189,7 @@ const QuizzesComponent = props => {
               onPress={showModal}></CustomButton>
           )}
         </View>
-
+        {/* {!netInfo.isConnected && <Text>No Internet Connection</Text>} */}
         <FullScreenModal visible={visible} onDismiss={closeModal}>
           <View style={{alignItems: 'center'}}>
             <Text

@@ -74,7 +74,13 @@ const LoginComponent = props => {
           </Text>
         </Button>
       </View>
-      <Image source={require('../../../assets/Logo.png')}></Image>
+      <Image source={require('../../../assets/SEEKO_LOGO.png')} 
+      style={{
+        height:Dimensions.get('window').height * 0.15,
+        width:Dimensions.get('window').width * 0.5,
+        resizeMode:'contain'
+      }}
+      ></Image>
       <Text
         style={{
           margin: 30,
