@@ -134,8 +134,8 @@ android {
         applicationId "com.seek_o_mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 8 // Change to a higher number
+        versionName "1.1.0"
     }
     splits {
         abi {
@@ -147,17 +147,30 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('your_key_name.keystore')
-            storePassword 'Aaraiz7422'
-            keyAlias 'your_key_alias'
-            keyPassword 'Aaraiz7422'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
         }
-        release {
-            storeFile file('your_key_name.keystore')
-            storePassword 'Aaraiz7422'
-            keyAlias 'your_key_alias'
-            keyPassword 'Aaraiz7422'
-        }
+        //  debug {
+        //     storeFile file('your_key_name.keystore')
+        //     storePassword 'Aaraiz7422'
+        //     keyAlias 'your_key_alias'
+        //     keyPassword 'Aaraiz7422'
+        // }
+       release {
+              storeFile file('elearning_release.keystore')
+              storePassword 'elearning'
+              keyAlias 'elearning_mobile'
+              keyPassword 'elearning'
+            }
+
+        //         release {
+        //     storeFile file('your_key_name.keystore')
+        //     storePassword 'Aaraiz7422'
+        //     keyAlias 'your_key_alias'
+        //     keyPassword 'Aaraiz7422'
+        // }
     }
     buildTypes {
         debug {
