@@ -43,7 +43,7 @@ const QuizCard = (props) => {
           paddingRight: 16,
           paddingTop: 0 ,}}>
 
-      <ScrollView showsVerticalScrollIndicator={true}>
+      {/* <ScrollView showsVerticalScrollIndicator={true}> */}
         <View
           style={[
             {
@@ -88,9 +88,11 @@ const QuizCard = (props) => {
             {current_question.question}
           </Text>
         </View>
+        {/* <ScrollView style={{backgroundColor:'red', width:Dimensions.get('window').width * 1}} showsVerticalScrollIndicator={true}> */}
         <View
           style={{ marginTop: 10, marginBottom: 10, justifyContent: 'flex-start', alignItems: 'center' }}
         >
+
           {current_question.options.map((option) => {
             let is_selected =
               quiz_answers_indexes_list[current_question.id] &&
@@ -103,8 +105,10 @@ const QuizCard = (props) => {
               </View>
             );
           })}
+
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
+      {/* </ScrollView> */}
     </View>
   );
 }

@@ -22,6 +22,11 @@ PODS:
   - libwebp/mux (1.2.1):
     - libwebp/demux
   - libwebp/webp (1.2.1)
+  - Purchases (3.14.1):
+    - PurchasesCoreSwift (= 3.14.1)
+  - PurchasesCoreSwift (3.14.1)
+  - PurchasesHybridCommon (2.0.1):
+    - Purchases (= 3.14.1)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -225,6 +230,8 @@ PODS:
     - glog
   - react-native-date-picker (4.1.5):
     - React-Core
+  - react-native-netinfo (8.1.0):
+    - React-Core
   - react-native-pager-view (5.4.11):
     - React-Core
   - react-native-safe-area-context (3.4.0):
@@ -306,6 +313,9 @@ PODS:
     - SDWebImageWebPCoder (~> 0.8.4)
   - RNGestureHandler (2.2.0):
     - React-Core
+  - RNPurchases (4.5.3):
+    - PurchasesHybridCommon (= 2.0.1)
+    - React-Core
   - RNReanimated (2.4.1):
     - DoubleConversion
     - FBLazyVector
@@ -373,6 +383,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -392,6 +403,7 @@ DEPENDENCIES:
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPurchases (from `../node_modules/react-native-purchases`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -402,6 +414,9 @@ SPEC REPOS:
   trunk:
     - fmt
     - libwebp
+    - Purchases
+    - PurchasesCoreSwift
+    - PurchasesHybridCommon
     - SDWebImage
     - SDWebImageWebPCoder
     - YoutubePlayer-in-WKWebView
@@ -447,6 +462,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
@@ -485,6 +502,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPurchases:
+    :path: "../node_modules/react-native-purchases"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -505,6 +524,9 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
+  Purchases: b714751c386c2204d2d5aafaa903fd424a25cd59
+  PurchasesCoreSwift: 2cf98c52dd4b785177539fbfd1c32f60c89eafe7
+  PurchasesHybridCommon: e9bc1677cb11fe584ad29c0309f78142a8f14b5a
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: cd47794163052d2b8318c891a7a14fcfaccc75ab
   RCTTypeSafety: 393bb40b3e357b224cde53d3fec26813c52428b1
@@ -519,6 +541,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 595f76eba2176ebd8817a1fffd47b84fbdab9383
   React-logger: 23de8ea0f44fa00ee77e96060273225607fd4d78
   react-native-date-picker: 93603f8a1c171fb8988cf472eff6f2d76652500f
+  react-native-netinfo: 379ba2af7d2abcec0c062267abe1c9a977c72bf9
   react-native-pager-view: 7f00d63688f7df9fad86dfb0154814419cc5eb8d
   react-native-safe-area-context: f4f7cc09d81ae2d39dfd13e764d718969af07080
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
@@ -538,6 +561,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: 1dd15d7ed1ab7d999056bc77879a42920d139c12
   RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
+  RNPurchases: fd7e85ca54a006b0894cfe0698f261bcd499abe3
   RNReanimated: 32c91e28f5780937b8efc07ddde1bab8d373fe0b
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
@@ -547,6 +571,6 @@ SPEC CHECKSUMS:
   Yoga: 9b6696970c3289e8dea34b3eda93f23e61fb8121
   YoutubePlayer-in-WKWebView: 4fca3b4f6f09940077bfbae7bddb771f2b43aacd
 
-PODFILE CHECKSUM: a33ba61843ba303fb19de74f98d74e85595eb1eb
+PODFILE CHECKSUM: db003d22041a5f360c1ffe5ae92e78ded8db4a25
 
 COCOAPODS: 1.11.2

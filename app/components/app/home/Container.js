@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import HomeComponent from './Component';
-import SubscriptionComponent from '../payment/SubscriptionComponent';
+import SubscriptionComponent from '../payment/Component';
 import SingleChildCard from '../SingleChildCard';
 import UserComponent from '../users/Component';
 import {connect} from 'react-redux';

@@ -89,8 +89,10 @@ const QuizzesComponent = props => {
 
   return (
     <ScrollView
-      stickyHeaderIndices={[0]}
-      style={{flex: 1, backgroundColor: '#F5F8FF'}}>
+    showsVerticalScrollIndicator={true}
+      style={{flex:1, backgroundColor: '#F5F8FF',
+      marginBottom:40
+      }}>
       <View style={{paddingTop: 10, backgroundColor: '#F5F8FF'}}>
         <AppHeader
           title={headerTitle}
@@ -98,7 +100,7 @@ const QuizzesComponent = props => {
       </View>
       <View
         style={{
-          height: Dimensions.get('window').height * 0.88,
+          // height: Dimensions.get('window').height * 0.88,
           alignContent: 'center',
         }}>
         {!fetching_quiz_data && !fetching_quiz_data_error && quiz_data ? (
@@ -119,7 +121,8 @@ const QuizzesComponent = props => {
         <View
           style={{
             alignItems: 'center',
-            // backgroundColor:"red"
+            // backgroundColor:"grey",
+            // opacity:0.5,
           }}>
           <View
             style={{

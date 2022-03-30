@@ -17,7 +17,7 @@ target 'seek_o_mobile' do
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
-
+  pod 'RNPurchases', :path => '../node_modules/react-native-purchases', :inhibit_warnings => true, :modular_headers => false
   target 'seek_o_mobileTests' do
     inherit! :complete
     # Pods for testing

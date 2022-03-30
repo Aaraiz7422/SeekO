@@ -172,6 +172,7 @@ const TopicContentContainer = (props) => {
         })}
         {
           topic_associated_data.quiz_id && (
+            <View style={{marginBottom:40}}>
             <CustomButton
               backgroundColor={"#DEE8FB"}
               title={"Start Quiz"}
@@ -193,7 +194,7 @@ const TopicContentContainer = (props) => {
                   tab_data,
                 });
               }}
-            ></CustomButton>)
+            ></CustomButton></View>)
         }
       </ScrollView>
     </View>

@@ -37,9 +37,13 @@ const QuizResultComponent = (props) => {
     }
 
     return (
+        <>
+        <View style={{marginTop:10,backgroundColor:"#F5F8FF"}}>
+        <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
+        </View>
         <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
-                <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
+                {/* <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader> */}
                 <ProgressBar progress={1}
                     style={{
                         height: 16,
@@ -111,6 +115,8 @@ const QuizResultComponent = (props) => {
                 </View>
             </View>
         </ScrollView>
+        </>
+
     );
 }
 

@@ -4,3 +4,4 @@ export const APP_VERSION = '1.0.0';
 // export const IAP_APP_ID = '610ff9e7f47b027d66f79999';
 // export const IAP_CLIENT_ID = 'tC0vdpbAUB7cmDNEvttX8p8kFgLktZJx';
 // export const IAP_ENV = 'staging';
+export const RC_GOOGLE_SDK_KEY = 'goog_vbuFwTVOdKyTqxQpeoGUIJzoUOS';

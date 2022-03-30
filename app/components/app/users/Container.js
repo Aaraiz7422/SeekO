@@ -143,7 +143,7 @@ const UserContainer = (props) => {
         let payload = {
             "id":child_information.user_id,
             "password": "121211",
-            "username": child_information.name,
+            "username": child_information.name+ `${Math.random()}`,
             "name": child_information.name,
             "gender": gen,
             "dob": dob !== null ? dateStyleOnServer : null,
@@ -151,6 +151,8 @@ const UserContainer = (props) => {
 
         if(profileImage !== null){
             payload.avatar = profileImage.id;
+        }else{
+            payload.avatar = avatarList[0].id;
         }
 
         if(edit_user_profile){
