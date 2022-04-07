@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Platform } from 'react-native';
 import { BoxShadow } from 'react-native-shadow';
 import { Divider } from 'react-native-paper';
 import LinearGradient from "react-native-linear-gradient";
@@ -37,7 +37,7 @@ const QuizProgressComponent = (props) => {
 
   return (
     <>
-    <View style={{marginTop:10,backgroundColor: "#F5F8FF"}}>
+    <View style={{marginTop:Platform.OS ==='android'?10:0,backgroundColor: "#F5F8FF"}}>
       <AppHeader title={quizName} image={account.avatar[0].avatar}></AppHeader>
       </View>
     <View style={

@@ -38,7 +38,7 @@ const QuizResultComponent = (props) => {
 
     return (
         <>
-        <View style={{marginTop:10,backgroundColor:"#F5F8FF"}}>
+        <View style={{marginTop:Platform.OS === 'android'?10:0,backgroundColor:"#F5F8FF"}}>
         <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
         </View>
         <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>

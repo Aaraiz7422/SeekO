@@ -1,6 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import React,{useEffect} from 'react';
-import { StyleSheet, Text, SafeAreaView, View , StatusBar,Appearance} from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View , StatusBar,Appearance, Platform} from 'react-native';
 import OnBoardingScreen2 from './app/components/app/OnBoardingScreen2';
 import ResetPassword from './app/components/authentication/reset-password/ResetPassword';
 import ForgetPassword from './app/components/authentication/forget-password/ForgetPassword';
@@ -78,7 +78,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaView style={{ flex: 1 ,backgroundColor:"#F5F8FF",marginHorizontal:0,marginBottom:-36,marginTop:-12}}>
+        <SafeAreaView style={{ flex: 1 ,backgroundColor:"#F5F8FF",marginHorizontal:0,marginBottom:-36,marginTop: Platform.OS === 'android'? -12 :0}}>
           <StatusBar hidden={false} backgroundColor={"#F5F8FF"} barStyle={'dark-content'} ></StatusBar>
           <AppContainer></AppContainer>
         </SafeAreaView>
