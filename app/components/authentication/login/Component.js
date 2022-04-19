@@ -48,11 +48,13 @@ const LoginComponent = props => {
       resetScrollToCoords={{x: 0, y: 0}}
       contentContainerStyle={[
         {
+          flex:1,
           justifyContent: 'center',
           alignItems: 'center',
+          marginBottom: 50,
         },
       ]}
-      scrollEnabled={false}>
+      >
       <View
         style={[
           global.row_flex_end_container,

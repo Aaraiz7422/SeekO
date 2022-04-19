@@ -15,6 +15,7 @@ const TopicsListComponent = props => {
     selected_category,
     selected_topic,
     topicListData,
+    fetchTopics,
   } = props;
 
   const Item = ({item, index}) => (
@@ -69,7 +70,7 @@ const TopicsListComponent = props => {
         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator size="large" color='#00CDAC'/></View>
       ) : (
         fetching_topics_error && (
-          <View>
+          <View style={{flex:1,alignItems:'center',backgroundColor:'#F5F8FF',marginTop:10}}>
             <Text style={{color: 'black', fontFamily: 'Poppins-Regular'}}>
               Tap to reload
             </Text>

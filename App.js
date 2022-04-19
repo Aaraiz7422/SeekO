@@ -28,7 +28,7 @@ const Stack = createStackNavigator();
 export default function App() {
 
   useEffect(()=>{
-    initializeRevenueCat();
+    // initializeRevenueCat();
     SplashScreen.hide();
     axios.interceptors.request.use(function (config) {
       if (
@@ -48,19 +48,19 @@ export default function App() {
   })
 
 
-  initializeRevenueCat = async () => {
+  const initializeRevenueCat = async () => {
     Purchases.setDebugLogsEnabled(true);
     try {
       // Init iaphub
       console.log('Initializing RC....');
       await Purchases.setup(RC_GOOGLE_SDK_KEY);
-      this.fetchProducts();
+      // fetchProducts();
       console.log('Initializing RC....');
     } catch (err) {
       console.log('initializeRevenueCat Error: ', err);
     }
   }
-  fetchProducts = async () => {
+  const fetchProducts = async () => {
     try {
       const offerings = await Purchases.getOfferings();
       console.log('fetchProducts: ', offerings);

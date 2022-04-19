@@ -7,6 +7,7 @@ import SignupContainer from '../../components/authentication/signup/Container';
 import ForgetPassword from '../../components/authentication/forget-password/ForgetPassword';
 import ResetPassword from '../../components/authentication/reset-password/ResetPassword';
 import OnBoarding from '../../components/onboarding/Container';
+import HomeContainer from '../../components/app/home/Container';
 import { useNavigation } from '@react-navigation/native';
 const AuthStack = createStackNavigator();
 
@@ -39,8 +40,11 @@ const AuthenticationStack = () => {
      else {
 
         return (
-        <AuthStack.Navigator initialRouteName='Login' screenOptions={{headerShown:false}}>
+        <AuthStack.Navigator 
+        initialRouteName='Login'
+         screenOptions={{headerShown:false}}>
             {/* <AuthStack.Screen name="Onboarding" component={onBoarding} /> */}
+            {/* <AuthStack.Screen name='Home' component={HomeContainer} /> */}
             <AuthStack.Screen name="Login" component={LoginContainer} />
             <AuthStack.Screen name="Signup" component={SignupContainer} />
             <AuthStack.Screen name="ForgotPassword" component={ForgetPassword}/>

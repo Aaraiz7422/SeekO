@@ -13,14 +13,17 @@ import {
 } from '../../../redux/actions/userActions';
 import {ActivityIndicator} from 'react-native-paper';
 import TrackProgressContainer from '../track-progress/Container';
+import Purchases from 'react-native-purchases';
 
 const HomeContainer = props => {
   const {navigation, current_user} = props;
   const [show_add_child_account_modal, setShowAddChildAccountModal] =
     useState(false);
   const [loading, setLoading] = useState(true);
+  const [availablePackages,setAvailablePackages] = useState(null);
   // const { current_user_fetching,current_user_error,getCurrentUserAction } = props;
   useEffect(() => {
+    // fetchProducts();
     props.getCurrentUserAction(userId => setUserIdIAP(userId));
     if (current_user !== null) {
       console.log(
@@ -41,6 +44,24 @@ const HomeContainer = props => {
       console.log('setUserId error: ', error);
     }
   };
+
+  const fetchProducts = async () => {
+    try {
+      const offerings = await Purchases.getOfferings();
+      console.log('fetchProducts: ', offerings);
+      if (
+        offerings.current !== null &&
+        offerings.current.availablePackages.length !== 0
+      ) {
+        // Display packages for sale
+      console.log('initializeRevenueCat Offerings availible packages is :',offerings.current.availablePackages.length);
+      console.log("Current Availible Packages : ",offerings.current.availablePackages)
+      setAvailablePackages(offerings.current.availablePackages);
+      }
+    } catch (e) {
+      console.log('initializeRevenueCat Error: ', e);
+    }
+  }
 
   const registerNewChild = child_information => {
     const {getCurrentUserAction, setCurrentUserFetchLoadingAction} = props;
@@ -96,7 +117,7 @@ const HomeContainer = props => {
     }
     //  else if (currentTab === 'Subscription') {
     //   return (
-    //     <SubscriptionComponent navigation={navigation}></SubscriptionComponent>
+    //     <SubscriptionComponent navigation={navigation} availablePackages={availablePackages}></SubscriptionComponent>
     //   );
     // } 
     else if (currentTab === 'Users') {

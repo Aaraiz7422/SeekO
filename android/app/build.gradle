@@ -134,7 +134,7 @@ android {
         applicationId "com.seek_o_mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9 // Change to a higher number
+        versionCode 11 // Change to a higher number
         versionName "1.1.0"
     }
     splits {
