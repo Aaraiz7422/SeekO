@@ -18,7 +18,7 @@ import {getCurrentUser} from '../../../redux/actions/userActions';
  const SubscriptionContainer = (props) => {
 
   useEffect(() => {
-    //this.fetchActiveProducts();
+    //fetchActiveProducts();
     getProductsForSale();
   });
 

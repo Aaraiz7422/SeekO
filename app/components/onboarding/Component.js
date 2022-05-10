@@ -18,47 +18,59 @@ function OnBoardingItem({item, onClickSkip}) {
 
   return (
     <>
-    {/* <StatusBar hidden={false} backgroundColor={"#85DADA"} barStyle={'dark-content'}/> */}
-    <View style={[styles.container, {width: width}]}>
-      <View style={[global.row_flex_end_container, {width: width * 0.9}]}>
-        <TouchableOpacity onPress={onClickSkip}>
+      {/* <StatusBar hidden={false} backgroundColor={"#85DADA"} barStyle={'dark-content'}/> */}
+      <View style={[styles.container, {width: width}]}>
+        <View style={[global.row_flex_end_container, {width: width * 0.9}]}>
+          <TouchableOpacity onPress={onClickSkip}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 18,
+                fontFamily: 'Poppins-Regular',
+                fontWeight: '700',
+              }}>
+              {item.id === '3' ? 'Done' : 'Skip'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.bottomContainer, {width: width}]}>
           <Text
             style={{
-              color: 'white',
-              fontSize: 18,
+              fontSize: 40,
               fontFamily: 'Poppins-Regular',
               fontWeight: '700',
-            }}>
-            {item.id === '3' ? 'Done' : 'Skip'}
+              marginLeft: 30,
+              marginRight: 30,
+              padding: 20,
+              textAlign: 'center',
+              color: '#707A8D',
+            }}
+            adjustsFontSizeToFit={true}
+            numberOfLines={2}
+            allowFontScaling={true}>
+            {item.title}
           </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={[styles.bottomContainer, {width: width}]}>
-        <Text
-          style={{
-            fontSize: 40,
-            fontFamily: 'Poppins-Regular',
-            fontWeight: '700',
-            marginLeft: 30,
-            marginRight: 30,
-            padding: 20,
-            textAlign: 'center',
-          }}>
-          {item.title}
-        </Text>
-        <Text
-          style={{
-            fontSize: 16,
-            fontFamily: 'Poppins-Regular',
-            marginTop: 10,
-            marginLeft: 30,
-            marginRight: 30,
-            textAlign: 'justify',
-            color: '#707A8D',
-          }}>
-          {item.subTitle}
-        </Text>
-        {/* <View style={{
+          <View
+            style={{
+              height: Dimensions.get('window').height * 0.26,
+              // backgroundColor: 'green',
+            }}>
+            <Text
+              style={{
+                fontSize: 200,
+                fontFamily: 'Poppins-Regular',
+                marginTop: 10,
+                marginLeft: 30,
+                marginRight: 30,
+                textAlign: 'justify',
+                color: '#707A8D',
+              }}
+              adjustsFontSizeToFit={true}
+              numberOfLines={5}>
+              {item.subTitle}
+            </Text>
+          </View>
+          {/* <View style={{
                     flex: 0.9,
                     justifyContent: 'space-around',
                     alignItems: 'center',
@@ -92,26 +104,29 @@ function OnBoardingItem({item, onClickSkip}) {
                     ></CustomButton>
 
                 </View> */}
+        </View>
       </View>
-    </View>
     </>
-
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    // height: Dimensions.get('window').height * 0.5,
     backgroundColor: '#85DADA',
+    // backgroundColor: 'black',
+    // opacity:0.4,
+
     justifyContent: 'space-between',
-    // borderTopRightRadius: 40,
-    // borderTopLeftRadius: 40,
   },
   bottomContainer: {
-    height: '45%',
+    height: Dimensions.get('window').height * 0.5,
+    // flex:1,
     // width: '100%',
+    // opacity:0.8,
     borderTopRightRadius: 40,
-    backgroundColor: '#FFF',
+    backgroundColor: '#fff',
     borderTopLeftRadius: 40,
   },
 });

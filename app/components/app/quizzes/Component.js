@@ -55,8 +55,10 @@ const QuizzesComponent = props => {
   };
 
   const shadowOpt = {
-    width: Dimensions.get('window').width * 0.17,
-    height: Dimensions.get('window').height * 0.1,
+    width:80,
+    height:80,
+    // width: Dimensions.get('window').width * 0.17,
+    // height: Dimensions.get('window').height * 0.1,
     color: '#f9c04d',
     border: 10,
     radius: 30,
@@ -91,7 +93,6 @@ const QuizzesComponent = props => {
     <ScrollView
     showsVerticalScrollIndicator={true}
       style={{flex:1, backgroundColor: '#F5F8FF',
-      marginBottom:40
       }}>
       <View style={{paddingTop: 10, backgroundColor: '#F5F8FF'}}>
         <AppHeader
@@ -135,8 +136,10 @@ const QuizzesComponent = props => {
               <LinearGradient
                 colors={['#F8C04E', '#FFBF3C']}
                 style={{
-                  width: Dimensions.get('window').width * 0.16,
-                  height: Dimensions.get('window').height * 0.1,
+                  width:80,
+                  height:80,
+                  // width: Dimensions.get('window').width * 0.16,
+                  // height: Dimensions.get('window').height * 0.12,
                   alignItems: 'center',
                   borderRadius: 60,
                   justifyContent: 'center',
@@ -154,8 +157,10 @@ const QuizzesComponent = props => {
               <LinearGradient
                 colors={['#F8C04E', '#FFBF3C']}
                 style={{
-                  width: Dimensions.get('window').width * 0.16,
-                  height: Dimensions.get('window').height * 0.1,
+                  width:80,
+                  height:80,
+                  // width: Dimensions.get('window').width * 0.16,
+                  // height: Dimensions.get('window').height * 0.12,
                   alignItems: 'center',
                   borderRadius: 60,
                   justifyContent: 'center',
@@ -185,7 +190,7 @@ const QuizzesComponent = props => {
               shadowRadius={20}
               shadowBorder={10}
               shadowHorizontalMargin={10}
-              shadowVerticalMargin={10}
+              // shadowVerticalMargin={10}
               shadowOpacity={0.15}
               linearStartColor={'#F8C04E'}
               linearEndColor={'#FFBF3C'}
@@ -208,6 +213,7 @@ const QuizzesComponent = props => {
             </Text>
             <CustomButton
               backgroundColor={'#FFFFFF'}
+              textColor={'black'}
               title={'Cancel'}
               height={60}
               width={0.64}
@@ -217,6 +223,7 @@ const QuizzesComponent = props => {
               onPress={closeModal}></CustomButton>
             <CustomButton
               backgroundColor={'#01CCAD'}
+              textColor={'black'}
               title={'OK'}
               height={60}
               width={0.64}

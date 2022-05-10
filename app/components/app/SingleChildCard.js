@@ -75,6 +75,7 @@ const CardComponent = ({
           // opacity:0.9,
           elevation: 0,
           backgroundColor: 'transparent',
+          // backgroundColor:"green",
         }}>
         <Card.Content></Card.Content>
         <Card.Cover
@@ -158,14 +159,16 @@ const SingleChildCard = props => {
               {trackProgress === false ? (
                 child_accounts &&
                 child_accounts.length < MAX_CHILD_ACCOUNTS && (
-                  <View
+                  <View 
                     style={{
                       justifyContent: 'center',
                       alignItems: 'center',
                       width: Dimensions.get('window').width * 0.4,
-                      height: Dimensions.get('window').height * 0.2,
-                      // backgroundColor:"purple",
-                    }}>
+                      height: Dimensions.get('window').height * 0.27,
+                      // backgroundColor:'purple',
+                      marginTop:4,
+                    }}
+                    >
                     <Icon.Button
                       name="pluscircle"
                       size={110}
@@ -189,13 +192,15 @@ const SingleChildCard = props => {
             <>
             { trackProgress === false &&
               <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: Dimensions.get('window').width * 0.4,
-                  height: Dimensions.get('window').height * 0.27,
-                  // backgroundColor:"purple",
-                }}>
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: Dimensions.get('window').width * 0.4,
+                height: Dimensions.get('window').height * 0.27,
+                // backgroundColor:'purple',
+                marginTop:4,
+              }}
+                >
                 <Icon.Button
                   name="pluscircle"
                   size={110}

@@ -107,7 +107,7 @@ const HomeComponent = (props) => {
 
                     </View>
 
-                    <View style={{marginBottom:24}}>
+                    <View style={{marginBottom:10}}>
                         {TabButton(onLogout, openCloseMenu, currentTab, setCurrentTab, "LogOut", "logout")}
                     </View>
 

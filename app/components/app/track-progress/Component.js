@@ -45,8 +45,12 @@ const TrackProgressComponent = props => {
             justifyContent: 'flex-start',
           }}>
           <View style={styles.child_account_count_circle}>
-            <Text style={{textAlign: 'center', fontFamily: 'Poppins-Regular'}}>
-              {index + 1}
+            <Text
+              style={{textAlign: 'center', fontFamily: 'Poppins-Regular'}}
+              adjustsFontSizeToFit={true}
+              numberOfLines={1}
+              allowFontScaling={true}
+              >{index + 1}
             </Text>
           </View>
           <View style={{maxWidth: SCREEN_WIDTH * 0.9 - 24 - 120}}>
@@ -114,25 +118,29 @@ const TrackProgressComponent = props => {
       current_user ? (
         flat_list_data.length >= 1 ? (
           <View
-          style={{
-            flex: 1,
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            width: SCREEN_WIDTH,
-            backgroundColor: '#F5F8FF',
-          }}>
-          <FlatList
-            style={{marginTop: 20}}
-            data={flat_list_data}
-            renderItem={renderChildAccounts}
-            keyExtractor={item => item.id}
-          />
+            style={{
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              width: SCREEN_WIDTH,
+              backgroundColor: '#F5F8FF',
+            }}>
+            <FlatList
+              style={{marginTop: 20}}
+              data={flat_list_data}
+              renderItem={renderChildAccounts}
+              keyExtractor={item => item.id}
+            />
           </View>
-        )
-         : (
+        ) : (
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Text style={{fontFamily: 'Poppins-Regular', fontSize: 20, textAlign: 'center'}}>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Regular',
+                fontSize: 20,
+                textAlign: 'center',
+              }}>
               Please attempt a quiz first
             </Text>
           </View>

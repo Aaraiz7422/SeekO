@@ -123,11 +123,11 @@ const UserContainer = (props) => {
 
         let gen;
         let dateStyleOnServer;
-        if (gender === "Male")
+        if (value === "Male")
             gen = "M"
-        if (gender === "Female")
+        if (value === "Female")
             gen = "F"
-        if (gender === "Others")
+        if (value === "Others")
             gen = "O"
 
         if(dob !== null){

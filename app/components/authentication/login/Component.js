@@ -11,6 +11,7 @@ import global from '../../../../global-styles';
 import {input_theme} from '../../../../constants';
 import CustomButton from '../../global/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {SCREEN_WIDTH} from '../../../../constants';
 
 const LoginComponent = props => {
   // const loadingIndicator = (
@@ -42,23 +43,40 @@ const LoginComponent = props => {
   return (
     <KeyboardAwareScrollView
       style={{
-        width: Dimensions.get('window').width * 1,
+        // flex:1,
+        // width: Dimensions.get('window').width * 1,
         backgroundColor: '#F5F8FF',
       }}
       resetScrollToCoords={{x: 0, y: 0}}
-      contentContainerStyle={[
-        {
-          flex:1,
+      // contentContainerStyle={[
+      //   {
+      //     flex:1,
+      //     justifyContent: 'center',
+      //     alignItems: 'center',
+      //     marginBottom: 50,
+      //   },
+      // ]}
+      >
+        <View
+        style={{
+          flex: 1,
+          backgroundColor: '#F5F8FF',
           justifyContent: 'center',
           alignItems: 'center',
-          marginBottom: 50,
-        },
-      ]}
-      >
+        }}>
       <View
         style={[
           global.row_flex_end_container,
-          {width: Dimensions.get('window').width * 1},
+          {
+            // flex:1
+            width: Dimensions.get('window').width * 1,
+            marginTop:8,
+            marginRight: 16,
+            marginBottom: 20,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+        },
         ]}>
         <Button
           color="black"
@@ -86,6 +104,7 @@ const LoginComponent = props => {
       <Text
         style={{
           margin: 30,
+          marginTop:20,
           color: 'black',
           fontSize: 26,
           fontWeight: '700',
@@ -95,7 +114,13 @@ const LoginComponent = props => {
       </Text>
       <View>
         <TextInput
-          style={global.auth_input}
+          style={[global.auth_input,{
+            fontSize: 20,
+            height: Dimensions.get('window').height * 0.08,
+            width: SCREEN_WIDTH * 0.8,
+            marginTop: 20,
+            paddingVertical:0,
+          }]}
           mode="outlined"
           label="Email"
           placeholder="Email"
@@ -115,7 +140,13 @@ const LoginComponent = props => {
       </View>
       <View>
         <TextInput
-          style={global.auth_input}
+          style={[global.auth_input,{
+            fontSize: 20,
+            height: Dimensions.get('window').height * 0.08,
+            width: SCREEN_WIDTH * 0.8,
+            marginTop: 20,
+            paddingVertical:0,
+          }]}
           mode="outlined"
           label="Password"
           placeholder="Password"
@@ -202,6 +233,7 @@ const LoginComponent = props => {
           console.log(` Email : ${email} and Password : ${password}`);
           validateSignUpInformation(login_information);
         }}></CustomButton> */}
+        </View>
     </KeyboardAwareScrollView>
   );
 };

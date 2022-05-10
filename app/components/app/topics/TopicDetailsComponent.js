@@ -88,7 +88,7 @@ const TopicDetailsComponent = (props) => {
   // console.log("TDDDDDDDDDDDDDDDDDD");
   return (
     <>
-      <View style={{ paddingTop: 10, backgroundColor: "#F5F8FF" }}>
+      <View style={{paddingTop:10, backgroundColor: "#F5F8FF" }}>
         <AppHeader
           {...props}
           image={account.avatar[0].avatar}

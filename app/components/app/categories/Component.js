@@ -164,8 +164,18 @@ const CategoriesComponent = ({navigation, account, categories}) => {
     //   )}
     // </View>
 
-    <View style={loading?{ flex: 1, backgroundColor: "#F5F8FF",justifyContent:'center',alignItems:'center' }:{flex: 1, backgroundColor: "#F5F8FF"}}>
-        {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
+    <View
+      style={
+        loading
+          ? {
+              flex: 1,
+              backgroundColor: '#F5F8FF',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }
+          : {flex: 1, backgroundColor: '#F5F8FF'}
+      }>
+      {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
     </View>
   );
 };

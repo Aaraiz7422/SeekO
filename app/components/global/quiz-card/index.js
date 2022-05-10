@@ -93,12 +93,12 @@ const QuizCard = (props) => {
           style={{ marginTop: 10, marginBottom: 10, justifyContent: 'flex-start', alignItems: 'center' }}
         >
 
-          {current_question.options.map((option) => {
+          {current_question.options.map((option,index) => {
             let is_selected =
               quiz_answers_indexes_list[current_question.id] &&
               quiz_answers_indexes_list[current_question.id] === option.id;
             return (
-              <View style={{ margin: 5 }}>
+              <View key={index} style={{ margin: 5 }}>
                 <Pressable style={[{ width: Dimensions.get('window').width * 0.8, borderRadius: 30, borderWidth: 1, backgroundColor: is_selected ? "#01CCAD" : "#F5F8FF", }]} onPress={() => onChangeOption(current_question, option)}>
                   <Text style={{ color: 'black', textAlign: 'center', fontFamily: 'Poppins-Regular', margin: 10, fontSize: 20 }}>{option.option}</Text>
                 </Pressable>

@@ -37,7 +37,7 @@ const QuizProgressComponent = (props) => {
 
   return (
     <>
-    <View style={{marginTop:Platform.OS ==='android'?10:0,backgroundColor: "#F5F8FF"}}>
+    <View style={{paddingTop:10,backgroundColor: "#F5F8FF"}}>
       <AppHeader title={quizName} image={account.avatar[0].avatar}></AppHeader>
       </View>
     <View style={
@@ -79,7 +79,11 @@ const QuizProgressComponent = (props) => {
                   justifyContent: "center",
                   alignItems: 'center'
                 }}>
-                  <Text style={{ color: "white", fontSize: 34, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{markInPercentage}%</Text>
+                  <Text
+                  numberOfLines={1}
+                  allowFontScaling={true} 
+                  adjustsFontSizeToFit={true}
+                  style={{ color: "white", fontSize: 34, fontWeight: "bold",fontFamily:'Poppins-Regular', }}>{markInPercentage}%</Text>
                 </LinearGradient>
               </View>
             </BoxShadow>

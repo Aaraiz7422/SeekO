@@ -81,7 +81,7 @@ const LoginContainer = props => {
   };
 
   return (
-    <View style={global.page_container}>
+    // <View style={global.page_container}>
       <LoginComponent
         navigation={props.navigation}
         validateSignUpInformation={validateSignUpInformation}
@@ -90,7 +90,7 @@ const LoginContainer = props => {
         resetSingleFieldError={resetSingleFieldError}
         errors={errors}
       />
-    </View>
+    // </View>
   );
 };
 

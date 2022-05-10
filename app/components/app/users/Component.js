@@ -116,179 +116,139 @@ const UserComponent = props => {
     //       // marginBottom: 50,
     //     },
     //   ]}>
-      <ScrollView
-        scrollEnabled
+    <ScrollView
+      scrollEnabled
       stickyHeaderIndices={[0]}
-        style={{
+      style={{
         backgroundColor: '#F5F8FF',
 
-          // backgroundColor: 'red',
-          flex:1,
-          // width:Dimensions.get('window').width * 1,
-          // height: Dimensions.get('window').height * 0.9,
-        }}>
-        <AppHeader
-          title={edit_user_profile ? 'Edit User' : 'Create User'}
-          image={edit_user_profile && account.avatar[0].avatar}>
-          {' '}
-        </AppHeader>
-        <FullScreenModal visible={visible} closeModal={closeModal}>
-          <ScrollView>
-            <AvatarCard></AvatarCard>
-            {/* <AvatarCard></AvatarCard>
+        // backgroundColor: 'red',
+        flex: 1,
+        // width:Dimensions.get('window').width * 1,
+        // height: Dimensions.get('window').height * 0.9,
+      }}>
+      <AppHeader
+        title={edit_user_profile ? 'Edit User' : 'Create User'}
+        image={edit_user_profile && account.avatar[0].avatar}>
+        {' '}
+      </AppHeader>
+      <FullScreenModal visible={visible} closeModal={closeModal}>
+        <ScrollView>
+          <AvatarCard></AvatarCard>
+          {/* <AvatarCard></AvatarCard>
           <AvatarCard></AvatarCard> */}
-            {/* <AvatarCard></AvatarCard> */}
-          </ScrollView>
-        </FullScreenModal>
+          {/* <AvatarCard></AvatarCard> */}
+        </ScrollView>
+      </FullScreenModal>
+      <View
+        style={{
+          position: 'relative',
+          zIndex: -10,
+          // flex:1,
+          height: Dimensions.get('window').height * 1.21,
+        }}>
         <View
           style={{
-            position: 'relative',
-            zIndex: -10,
-            // flex:1,
-            height: Dimensions.get('window').height * 1,
+            marginTop: 20,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
+          <TouchableOpacity
+            onPress={() => {
+              showModal();
+            }}>
+            <View style={{margin: 5}}>
+              <Avatar.Image
+                size={130}
+                style={{
+                  backgroundColor: '#F5F8FF',
+                }}
+                source={
+                  profileImage === null
+                    ? edit_user_profile
+                      ? {uri: account.avatar[0].avatar}
+                      : require('../../../assets/user.png')
+                    : {uri: profileImage.avatar}
+                }
+              />
+              <Avatar.Icon
+                size={24}
+                icon="plus"
+                style={{
+                  top: -30,
+                  left: 100,
+                  backgroundColor: '#C4C4C4',
+                }}
+              />
+            </View>
+          </TouchableOpacity>
           <View
             style={{
-              marginTop: 20,
+              height: Dimensions.get('window').height * 0.4,
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
             }}>
-            <TouchableOpacity
-              onPress={() => {
-                showModal();
-              }}>
-              <View style={{margin: 5}}>
-                <Avatar.Image
-                  size={130}
-                  style={{
-                    backgroundColor: '#F5F8FF',
-                  }}
-                  source={
-                    profileImage === null
-                      ? edit_user_profile
-                        ? {uri: account.avatar[0].avatar}
-                        : require('../../../assets/user.png')
-                      : {uri: profileImage.avatar}
-                  }
-                />
-                <Avatar.Icon
-                  size={24}
-                  icon="plus"
-                  style={{
-                    top: -30,
-                    left: 100,
-                    backgroundColor: '#C4C4C4',
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-            <View
-              style={{
-                height: Dimensions.get('window').height * 0.4,
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <View>
-                <TextInput
-                  style={{
-                    fontSize: 20,
-                    height: 60,
-                    width: SCREEN_WIDTH * 0.8,
-                    marginTop: 20,
-                  }}
-                  mode="outlined"
-                  label="Name"
-                  placeholder="Name"
-                  activeOutlineColor="rgba(0, 0, 0, 0.57)"
-                  outlineColor="rgba(0, 0, 0, 0.19)"
-                  value={name}
-                  theme={input_theme}
-                  onChangeText={email => setName(email)}
-                  left={
-                    <TextInput.Icon name="account" style={{marginTop: 12}} />
-                  }
-                />
-                {errors.name !== null && (
-                  <HelperText type="error" visible={true} style={{}}>
-                    {errors.name}
-                  </HelperText>
-                )}
-                <TextInput
-                  onFocus={props => setOpen(true)}
-                  style={{
-                    fontSize: 20,
-                    height: 60,
-                    width: SCREEN_WIDTH * 0.8,
-                    marginTop: 20,
-                  }}
-                  mode="outlined"
-                  label="DOB"
-                  placeholder="dd-mm-yyyy"
-                  activeOutlineColor="rgba(0, 0, 0, 0.57)"
-                  outlineColor="rgba(0, 0, 0, 0.19)"
-                  value={dob}
-                  onChangeText={dob => {
-                    setDOB(dob);
-                  }}
-                  theme={input_theme}
-                  left={
-                    <TextInput.Icon name="calendar" style={{marginTop: 12}} />
-                  }
-                />
-                <DropDownListComponent
-                  value={value}
-                  isFocus={isFocus}
-                  setValue={setValue}
-                  setIsFocus={setIsFocus}></DropDownListComponent>
-              </View>
-              <View style={{marginTop:20}}>
-                {edit_user_profile ? (
-                  <>
-                    <CustomButton
-                      backgroundColor={'#DEE8FB'}
-                      title={'Make Changes'}
-                      height={60}
-                      width={0.64}
-                      borderRadius={30}
-                      textColor={'white'}
-                      linearStartColor={'#F8C04E'}
-                      linearEndColor={'#FFBF3C'}
-                      shadowColor={'#FFBF3C'}
-                      shadowRadius={20}
-                      onPress={
-                        name === null
-                          ? () => {}
-                          : () => {
-                              setLoading(true);
-                              loading ? loadingIndicator : loading;
-                              let child_information = {
-                                name: name,
-                                user_id: account.id,
-                              };
-                              console.log(
-                                `Edited child Name .............................. : ${name}`,
-                              );
-                              validateChildInformation(child_information);
-                            }
-                      }></CustomButton>
-                    <CustomButton
-                      backgroundColor={'#FFFFFF'}
-                      title={'Delete User'}
-                      height={60}
-                      width={0.64}
-                      borderColor={'red'}
-                      borderWidth={1}
-                      borderRadius={30}
-                      onPress={() =>
-                        deleteChildAccount(child_account_info.id)
-                      }></CustomButton>
-                  </>
-                ) : (
+            <View>
+              <TextInput
+                style={{
+                  fontSize: 20,
+                  height: 60,
+                  width: SCREEN_WIDTH * 0.8,
+                  marginTop: 20,
+                  paddingVertical: 0,
+                }}
+                mode="outlined"
+                label="Name"
+                placeholder="Name"
+                activeOutlineColor="rgba(0, 0, 0, 0.57)"
+                outlineColor="rgba(0, 0, 0, 0.19)"
+                value={name}
+                theme={input_theme}
+                onChangeText={email => setName(email)}
+                left={<TextInput.Icon name="account" style={{marginTop: 12}} />}
+              />
+              {errors.name !== null && (
+                <HelperText type="error" visible={true} style={{}}>
+                  {errors.name}
+                </HelperText>
+              )}
+              <TextInput
+                onFocus={props => setOpen(true)}
+                style={{
+                  fontSize: 20,
+                  height: 60,
+                  width: SCREEN_WIDTH * 0.8,
+                  marginTop: 20,
+                  paddingVertical: 0,
+                }}
+                mode="outlined"
+                label="DOB"
+                placeholder="dd-mm-yyyy"
+                activeOutlineColor="rgba(0, 0, 0, 0.57)"
+                outlineColor="rgba(0, 0, 0, 0.19)"
+                value={dob}
+                onChangeText={dob => {
+                  setDOB(dob);
+                }}
+                theme={input_theme}
+                left={
+                  <TextInput.Icon name="calendar" style={{marginTop: 12}} />
+                }
+              />
+              <DropDownListComponent
+                value={value}
+                isFocus={isFocus}
+                setValue={setValue}
+                setIsFocus={setIsFocus}></DropDownListComponent>
+            </View>
+            <View style={{marginTop: 20}}>
+              {edit_user_profile ? (
+                <>
                   <CustomButton
                     backgroundColor={'#DEE8FB'}
-                    title={'Create User'}
-                    height={50}
-                    width={0.6}
+                    title={'Make Changes'}
+                    height={60}
+                    width={0.64}
                     borderRadius={30}
                     textColor={'white'}
                     linearStartColor={'#F8C04E'}
@@ -303,54 +263,94 @@ const UserComponent = props => {
                             loading ? loadingIndicator : loading;
                             let child_information = {
                               name: name,
+                              user_id: account.id,
                             };
                             console.log(
-                              `child Name .............................. : ${name}`,
+                              `Edited child Name .............................. : ${name}`,
                             );
                             validateChildInformation(child_information);
                           }
                     }></CustomButton>
-                )}
-              </View>
+                  <CustomButton
+                    backgroundColor={'#FFFFFF'}
+                    title={'Delete User'}
+                    height={60}
+                    width={0.64}
+                    borderColor={'red'}
+                    borderWidth={1}
+                    borderRadius={30}
+                    onPress={() =>
+                      deleteChildAccount(child_account_info.id)
+                    }></CustomButton>
+                </>
+              ) : (
+                <CustomButton
+                  backgroundColor={'#DEE8FB'}
+                  title={'Create User'}
+                  height={50}
+                  width={0.6}
+                  borderRadius={30}
+                  textColor={'white'}
+                  linearStartColor={'#F8C04E'}
+                  linearEndColor={'#FFBF3C'}
+                  shadowColor={'#FFBF3C'}
+                  shadowRadius={20}
+                  onPress={
+                    name === null
+                      ? () => {}
+                      : () => {
+                          setLoading(true);
+                          loading ? loadingIndicator : loading;
+                          let child_information = {
+                            name: name,
+                          };
+                          console.log(
+                            `child Name .............................. : ${name}`,
+                          );
+                          validateChildInformation(child_information);
+                        }
+                  }></CustomButton>
+              )}
             </View>
           </View>
-          <DatePicker
-            modal
-            mode="date"
-            open={open}
-            date={date}
-            onConfirm={date => {
-              setOpen(false);
-              setDate(date);
-              let month = date.getUTCMonth() + 1; //months from 1-12
-              let day = date.getUTCDate();
-              let year = date.getUTCFullYear();
-              let newdate = day + '-' + month + '-' + year;
-              setDOB(newdate.toString());
-              console.log('New Selected Date', newdate);
-              console.log('Selected Date', date);
-            }}
-            onCancel={() => {
-              setOpen(false);
-            }}
-          />
-          {/* <View
+        </View>
+        <DatePicker
+          modal
+          mode="date"
+          open={open}
+          date={date}
+          onConfirm={date => {
+            setOpen(false);
+            setDate(date);
+            let month = date.getUTCMonth() + 1; //months from 1-12
+            let day = date.getUTCDate();
+            let year = date.getUTCFullYear();
+            let newdate = day + '-' + month + '-' + year;
+            setDOB(newdate.toString());
+            console.log('New Selected Date', newdate);
+            console.log('Selected Date', date);
+          }}
+          onCancel={() => {
+            setOpen(false);
+          }}
+        />
+        {/* <View
           style={{
             height: Dimensions.get('window').height * 1,
             // top: -(Dimensions.get('window').height * 0.7),
             zIndex:18,
             position:'relative'
           }}> */}
-          {/* <FullScreenModal visible={visible} closeModal={closeModal}>
+        {/* <FullScreenModal visible={visible} closeModal={closeModal}>
             <ScrollView>
               <AvatarCard></AvatarCard>
               <AvatarCard></AvatarCard>
               <AvatarCard></AvatarCard>
             </ScrollView>
           </FullScreenModal> */}
-          {/* </View> */}
-        </View>
-      </ScrollView>
+        {/* </View> */}
+      </View>
+    </ScrollView>
     // </KeyboardAwareScrollView>
   );
 };

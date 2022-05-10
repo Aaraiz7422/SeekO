@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, StyleSheet, Dimensions, PixelRatio, ActivityIndicator, Platform, Text, Button } from 'react-native';
-import YouTube, { YouTubeStandaloneAndroid } from 'react-native-youtube';
+import YouTube, { YouTubeStandaloneAndroid,YouTubeStandaloneIOS } from 'react-native-youtube';
 import global from '../../../../../global-styles';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../../../../constants';
 import CustomButton from '../../../global/CustomButton';
@@ -104,7 +104,23 @@ const TopicContentContainer = (props) => {
                 }}
               />
             )}
-            {Platform.OS === 'ios' && (
+
+
+            {Platform.OS === 'ios' &&  YouTubeStandaloneIOS && (
+                <Thumbnail
+                  url={`https://www.youtube.com/watch?v=${content.content}`}
+                  onPress={() => {
+                    YouTubeStandaloneIOS.playVideo(`${content.content}`)
+                      .then(() => {
+                        console.log('iOS Standalone Player Finished');
+                      })
+                      .catch(errorMessage => {
+                        console.log('iOS Standalone Player errorMessage: ', errorMessage);
+                      });
+                  }}
+                />
+            )}
+            {/* {Platform.OS === 'ios' && (
               <>
                 <YouTube
                   ref={_youTubeRef}
@@ -126,7 +142,7 @@ const TopicContentContainer = (props) => {
                   <Text style={{color:'black',fontFamily:'Poppins-Regular',}}>Loading</Text>
                 }
               </>
-            )}
+            )} */}
           </View>
         );
       }

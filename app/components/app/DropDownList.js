@@ -99,10 +99,11 @@ const styles = StyleSheet.create({
     },
     placeholderStyle: {
         fontSize: 18,
-        // color:"rgba(0, 0, 0, 0.6)"
+        // color:"rgba(120, 230, 10, 0.6)"
     },
     selectedTextStyle: {
         fontSize: 18,
+        color:'black'
     },
     iconStyle: {
         width: 20,

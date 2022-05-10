@@ -11,7 +11,7 @@ target 'seek_o_mobile' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
   )
-
+  pod 'XCDYouTubeKit', '~> 2.8'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
