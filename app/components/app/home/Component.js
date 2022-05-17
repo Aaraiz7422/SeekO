@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useRef, useState } from 'react';
+import React, { useRef,useContext, useState } from 'react';
 import { Animated, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 
@@ -15,6 +15,8 @@ import menu from '../../../assets/menu.png';
 import close from '../../../assets/close.png';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import ConnectionModal from '../../global/ConnectionModal';
+import { NetworkContext } from '../../../../network-context';
 
 const HomeComponent = (props) => {
 
@@ -35,6 +37,7 @@ const HomeComponent = (props) => {
         navigation,
         onLogout
     } = props;
+    const internetAvailability = useContext(NetworkContext);
 
     const openCloseMenu = () => {
         // Do Actions Here....
@@ -67,6 +70,8 @@ const HomeComponent = (props) => {
 
     return (
         // <SafeAreaView style={styles.container}>
+        <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
+      { internetAvailability.isConnected ?
         <View style={{flex:1}}>
             <LinearGradient colors={["#85DADA", "#2CB8B8"]}
                 style={[styles.container, { width: Dimensions.get('window').width }]}
@@ -171,6 +176,8 @@ const HomeComponent = (props) => {
 
             </Animated.View>
             </View>
+            : <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>}
+    </View>
         // </SafeAreaView>
     );
 }

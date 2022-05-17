@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, StyleSheet, FlatList, Button, Text} from 'react-native';
 
 //Import Plugins and Libraries
@@ -8,6 +8,8 @@ import {COLORS, SCREEN_WIDTH} from '../../../../constants';
 import global from '../../../../global-styles';
 import AppHeader from '../AppHeader';
 import {ActivityIndicator} from 'react-native-paper';
+import ConnectionModal from '../../global/ConnectionModal';
+import { NetworkContext } from '../../../../network-context';
 
 const TrackProgressComponent = props => {
   const {
@@ -20,6 +22,8 @@ const TrackProgressComponent = props => {
     quiz_progress_data,
     getCurrentUserAction,
   } = props;
+  const internetAvailability = useContext(NetworkContext);
+
 
   const child_accounts = current_user.child_accounts;
   const flat_list_data =
@@ -97,6 +101,8 @@ const TrackProgressComponent = props => {
   };
 
   return (
+    <>
+      { internetAvailability.isConnected ? (
     <View
       style={{
         flex: 1,
@@ -159,6 +165,10 @@ const TrackProgressComponent = props => {
         )
       )}
     </View>
+    ) : (
+      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+    )}
+  </>
   );
 };
 

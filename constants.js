@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-
+export const APP_NAME = 'SeekO'
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
 export const MAX_CHILD_ACCOUNTS = 4;

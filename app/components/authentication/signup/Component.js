@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import {
   TextInput,
@@ -12,6 +12,8 @@ import {input_theme, SCREEN_HEIGHT} from '../../../../constants';
 import CustomButton from '../../global/CustomButton';
 import {SCREEN_WIDTH} from '../../../../constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import ConnectionModal from '../../global/ConnectionModal';
+import {NetworkContext} from '../../../../network-context';
 
 const SignupComponent = props => {
   const loadingIndicator = (
@@ -29,13 +31,26 @@ const SignupComponent = props => {
     resetSingleFieldError,
     errors,
   } = props;
+  const internetAvailability = useContext(NetworkContext);
 
   const onButtonToggle = value => {
     setShow(!show);
     setVisible(!visible);
   };
 
+  const showLoaderWhileValidatingUser = () => {
+    setTimeout(() => setLoading(false), 1000);
+    return (
+      <ActivityIndicator
+        style={loading ? {display: 'flex'} : {display: 'none'}}
+        animating={true}
+        color="#00CDAC"
+      />
+    );
+  };
   return (
+    <>
+    {internetAvailability.isConnected ? (
     <KeyboardAwareScrollView
      style={{
       backgroundColor: '#F5F8FF',
@@ -154,7 +169,9 @@ const SignupComponent = props => {
             {errors.password}
           </HelperText>
         </View>
-
+        {loading ? (
+              showLoaderWhileValidatingUser()
+            ) : (
         <CustomButton
           backgroundColor={'#DEE8FB'}
           title={'Sign Up'}
@@ -178,6 +195,7 @@ const SignupComponent = props => {
             );
             validateSignUpInformation(sign_up_information);
           }}></CustomButton>
+          )}
         <View
           style={{
             // width: SCREEN_WIDTH,
@@ -198,7 +216,11 @@ const SignupComponent = props => {
           </Text>
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </KeyboardAwareScrollView> ) : (
+        <ConnectionModal
+          visible={!internetAvailability.isConnected}></ConnectionModal>
+      )}
+    </>
   );
 };
 

@@ -5,7 +5,7 @@
 // export const API_URL = 'http://ec2-43-204-116-142.ap-south-1.compute.amazonaws.com/api'
 // export const API_URL = 'http://ec2-13-232-130-7.ap-south-1.compute.amazonaws.com/api'
 // export const API_URL = 'http://ec2-3-110-92-56.ap-south-1.compute.amazonaws.com/api'
-export const API_URL = 'http://elearning.skipems.com/api'
+export const API_URL = 'https://elearning.skipems.com/api'
 
 
 

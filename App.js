@@ -29,6 +29,8 @@ import SplashScreen from 'react-native-splash-screen';
 
 import Purchases from 'react-native-purchases';
 import {RC_GOOGLE_SDK_KEY} from './config';
+// import NetInfo from '@react-native-community/netinfo';
+import { NetworkProvider } from './network-context';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,7 @@ const Stack = createStackNavigator();
 export default function App() {
   useEffect(() => {
     // initializeRevenueCat();
+
     SplashScreen.hide();
     axios.interceptors.request.use(function (config) {
       if (
@@ -84,6 +87,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <NetworkProvider>
         <SafeAreaView
           style={{
             flex: 1,
@@ -110,6 +114,7 @@ export default function App() {
             // marginBottom: -36,
             // marginTop: Platform.OS === 'android' ? -12 : 0,
           }}></SafeAreaView> */}
+          </NetworkProvider>
       </PersistGate>
     </Provider>
   );

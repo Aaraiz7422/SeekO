@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useContext } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import global from '../../../../global-styles';
@@ -6,7 +6,10 @@ import AppHeader from '../AppHeader';
 import TopicButtonsContainer from './topic-buttons';
 import TopicTabsContainer from './topic-tabs';
 import TopicContentContainer from './topic-content';
-import { SCREEN_WIDTH } from '../../../../constants'
+import { SCREEN_WIDTH } from '../../../../constants';
+import ConnectionModal from '../../global/ConnectionModal';
+import { NetworkContext } from '../../../../network-context';
+
 const TopicDetailsComponent = (props) => {
 
   const {
@@ -22,6 +25,7 @@ const TopicDetailsComponent = (props) => {
     selection_type,
     selected_button,
   } = props;
+  const internetAvailability = useContext(NetworkContext);
 
   useEffect(() => {
     // console.log(`selection type : ${selection_type}`);
@@ -87,6 +91,8 @@ const TopicDetailsComponent = (props) => {
   };
   // console.log("TDDDDDDDDDDDDDDDDDD");
   return (
+    <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
+      { internetAvailability.isConnected ? (
     <>
       <View style={{paddingTop:10, backgroundColor: "#F5F8FF" }}>
         <AppHeader
@@ -121,7 +127,10 @@ const TopicDetailsComponent = (props) => {
           )
         )}
       </View>
-    </>
+    </>) : (
+      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+    )}
+  </View>
 
   );
 }

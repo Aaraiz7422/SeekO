@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect,useContext, useState} from 'react';
 import {View, FlatList, Text, Button} from 'react-native';
 import AppHeader from '../AppHeader';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import CustomCard from '../../global/CustomCard';
 import {ActivityIndicator} from 'react-native-paper';
+import ConnectionModal from '../../global/ConnectionModal';
+import { NetworkContext } from '../../../../network-context';
 
 const TopicsListComponent = props => {
   const {
@@ -17,6 +19,7 @@ const TopicsListComponent = props => {
     topicListData,
     fetchTopics,
   } = props;
+  const internetAvailability = useContext(NetworkContext);
 
   const Item = ({item, index}) => (
     <CustomCard
@@ -49,6 +52,8 @@ const TopicsListComponent = props => {
   };
 
   return (
+    <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
+      { internetAvailability.isConnected ? (
     <>
       {!fetching_topics && !fetching_topics_error && topicListData ? (
         <View
@@ -79,6 +84,10 @@ const TopicsListComponent = props => {
         )
       )}
     </>
+    ) : (
+      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+    )}
+  </View>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Image, Text, FlatList} from 'react-native';
 import AppHeader from '../AppHeader';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
@@ -12,8 +12,9 @@ import {
   setChildUserAccount,
   setCurrentUserFetchLoading,
 } from '../../../redux/actions/userActions';
-import {useNetInfo} from '@react-native-community/netinfo';
+// import {useNetInfo} from '@react-native-community/netinfo';
 import ConnectionModal from '../../global/ConnectionModal';
+import { NetworkContext } from '../../../../network-context';
 
 const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
   const [topicListData, setTopicListData] = useState({});
@@ -103,7 +104,9 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
 
 const CategoriesComponent = ({navigation, account, categories}) => {
   const [loading, setLoading] = useState(true);
-  const netInfo = useNetInfo();
+  // const netInfo = useNetInfo();
+  const internetAvailability = useContext(NetworkContext);
+  // console.log(`isConnected : ${internetAvailability.isConnected}`);
 
   const loadingFullScreenAtOnce = () => {
     const item = (
@@ -144,39 +147,39 @@ const CategoriesComponent = ({navigation, account, categories}) => {
   );
 
   return (
-    // <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
-    //   {netInfo.isConnected ? (
-    //     <View
-    //       style={
-    //         loading
-    //           ? {
-    //               flex: 1,
-    //               backgroundColor: '#F5F8FF',
-    //               justifyContent: 'center',
-    //               alignItems: 'center',
-    //             }
-    //           : {flex: 1, backgroundColor: '#F5F8FF'}
-    //       }>
-    //       {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
-    //     </View>
-    //   ) : (
-    //     <ConnectionModal visible={!netInfo.isConnected}></ConnectionModal>
-    //   )}
-    // </View>
-
-    <View
-      style={
-        loading
-          ? {
-              flex: 1,
-              backgroundColor: '#F5F8FF',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }
-          : {flex: 1, backgroundColor: '#F5F8FF'}
-      }>
-      {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
+    <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
+      { internetAvailability.isConnected ? (
+        <View
+          style={
+            loading
+              ? {
+                  flex: 1,
+                  backgroundColor: '#F5F8FF',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }
+              : {flex: 1, backgroundColor: '#F5F8FF'}
+          }>
+          {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
+        </View>
+      ) : (
+        <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+      )}
     </View>
+
+    // <View
+    //   style={
+    //     loading
+    //       ? {
+    //           flex: 1,
+    //           backgroundColor: '#F5F8FF',
+    //           justifyContent: 'center',
+    //           alignItems: 'center',
+    //         }
+    //       : {flex: 1, backgroundColor: '#F5F8FF'}
+    //   }>
+    //   {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
+    // </View>
   );
 };
 

@@ -53,7 +53,7 @@ const CustomCard = ({
         }
     }
 
-    const title = cardTitle != null ? <Title  ellipsizeMode='tail' style={{color:CardTitleColor,fontWeight:'700',fontFamily:'Poppins-Regular',}} numberOfLines={2} adjustsFontSizeToFit={true} allowFontScaling={true} >{cardTitle}</Title> : null;
+    const title = cardTitle != null ? <Title  ellipsizeMode='tail' style={{color:CardTitleColor,fontWeight:'700',fontFamily:'Poppins-Regular',}} numberOfLines={2} allowFontScaling={true} >{cardTitle}</Title> : null;
     const para = cardPara != null ? <Paragraph style={{fontFamily:'Poppins-Regular',}}>{cardPara}</Paragraph> : null;
     const cardContent = <Card.Content>{title}{para}</Card.Content>;
     // <Image source={require('C:\\Users\\chaud\\Desktop\\firstApp\\assets\\hands.png')} />

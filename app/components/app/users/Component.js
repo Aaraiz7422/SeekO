@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useContext} from 'react';
 import {View, ScrollView, Dimensions, Text, Image} from 'react-native';
 import {
   Avatar,
@@ -19,6 +19,8 @@ import services from '../../../api/services';
 import {urls} from '../../../api/urls';
 import FullScreenModal from '../FullScreenModal';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import ConnectionModal from '../../global/ConnectionModal';
+import { NetworkContext } from '../../../../network-context';
 
 const UserComponent = props => {
   const loadingIndicator = (
@@ -62,6 +64,7 @@ const UserComponent = props => {
     setLoading,
     validateChildInformation,
   } = props;
+  const internetAvailability = useContext(NetworkContext);
 
   const AvatarCard = () => {
     console.log('ALlllllllllllllllllllllllllll', avatarList);
@@ -100,6 +103,8 @@ const UserComponent = props => {
   };
 
   return (
+    <>
+      { internetAvailability.isConnected ? (
     // <KeyboardAwareScrollView
     //   style={{
     //     backgroundColor: '#F5F8FF',
@@ -273,6 +278,7 @@ const UserComponent = props => {
                     }></CustomButton>
                   <CustomButton
                     backgroundColor={'#FFFFFF'}
+                    textColor={'black'}
                     title={'Delete User'}
                     height={60}
                     width={0.64}
@@ -351,6 +357,10 @@ const UserComponent = props => {
         {/* </View> */}
       </View>
     </ScrollView>
+     ) : (
+      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+    )}
+  </>
     // </KeyboardAwareScrollView>
   );
 };

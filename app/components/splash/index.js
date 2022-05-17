@@ -1,5 +1,6 @@
-import React, {Component, useEffect} from 'react';
-import {View, Text, Platform} from 'react-native';
+import React, {Component, useEffect, useState, useContext} from 'react';
+import {View, Text, Platform, Dimensions} from 'react-native';
+import {ActivityIndicator} from 'react-native-paper';
 import global from '../../../global-styles';
 import {saveAccessToken, setAuthLoading} from '../../redux/actions/authActions';
 import {getCurrentUser} from '../../redux/actions/userActions';
@@ -8,8 +9,13 @@ import services from '../../api/services';
 import {urls} from '../../api/urls';
 import CachedImage from '../global/cached-image';
 import {APP_NAME, SCREEN_WIDTH} from '../../../constants';
+import ConnectionModal from '../global/ConnectionModal';
+import { NetworkContext } from '../../../network-context';
 //TODO: This screen deisgn and logi is temporary.
 const SplashScreen = props => {
+  const [loading, setLoading] = useState(true);
+  const internetAvailability = useContext(NetworkContext);
+
   useEffect(() => {
     const {navigation, auth_token} = props;
     if (auth_token) {
@@ -38,26 +44,69 @@ const SplashScreen = props => {
       });
   };
 
+  const showLoaderWhileValidatingUser = () => {
+    setTimeout(() => setLoading(false), 1000);
+    return (
+      <ActivityIndicator
+        style={loading ? {display: 'flex'} : {display: 'none'}}
+        animating={true}
+        color="#00CDAC"
+        size={'large'}
+      />
+    );
+  };
+
   return (
     <>
+      { internetAvailability.isConnected ? (
+    <>
       {Platform.OS === 'android' && (
-        <View style={[global.page_container,{backgroundColor:"#F5F8FF",}]}>
-          <CachedImage
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: SCREEN_WIDTH,
+            paddingLeft: 16,
+            paddingRight: 16,
+            backgroundColor: '#F5F8FF',
+          }}>
+          <View
             style={{
-              width: SCREEN_WIDTH * 0.9,
-              height: SCREEN_WIDTH * 0.4,
-              borderRadius: SCREEN_WIDTH,
-              marginBottom: 24,
-            }}
-            localImage={true}
-            source={require('../../assets/SEEKO_LOGO.png')}
-          />
-          <Text style={{color: '#000', fontFamily: 'Poppins-Regular'}}>
-            {APP_NAME}
-          </Text>
+              height: Dimensions.get('window').height * 0.3,
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              // backgroundColor: 'purple',
+            }}>
+            <CachedImage
+              style={{
+                width: SCREEN_WIDTH * 0.9,
+                height: SCREEN_WIDTH * 0.4,
+                borderRadius: SCREEN_WIDTH,
+                marginBottom: 24,
+              }}
+              localImage={true}
+              source={require('../../assets/SEEKO_LOGO.png')}
+            />
+            {loading &&
+              showLoaderWhileValidatingUser()
+              // <Text
+              //   style={{
+              //     color: '#000',
+              //     fontSize: 36,
+              //     fontFamily: 'Poppins-Regular',
+              //   }}>
+              //   {APP_NAME}
+              // </Text>
+            }
+          </View>
         </View>
       )}
     </>
+    ) : (
+      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+    )}
+  </>
   );
 };
 

@@ -67,7 +67,7 @@ const CustomButton = ({
                     colors={[linearStartColor, linearEndColor]}
                     style={[buttonStyle]}
                 >
-                    <Text style={textStyle}>{title}</Text>
+                    <Text style={textStyle} adjustsFontSizeToFit={true} allowFontScaling={true} >{title}</Text>
                 </LinearGradient>
             </BoxShadow>
 

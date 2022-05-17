@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Image, Text } from 'react-native';
 import AppHeader from '../AppHeader';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,10 +7,13 @@ import CustomCard from '../../global/CustomCard';
 import CustomButton from '../../global/CustomButton';
 import { connect } from 'react-redux';
 import { StackActions } from '@react-navigation/native';
+import ConnectionModal from '../../global/ConnectionModal';
+import {NetworkContext} from '../../../../network-context';
 
 const QuizResultComponent = (props) => {
     const { navigation, route } = props;
     const { account, selected_topic_redux, quiz_progress_data, child_user_account, selected_topic_title, quiz_result_data, selected_quiz, tab_data } = route.params;
+    const internetAvailability = useContext(NetworkContext);
 
     console.log("Result.............................", props.selected_topic_redux);
 
@@ -38,13 +41,15 @@ const QuizResultComponent = (props) => {
 
     return (
         <>
+      { internetAvailability.isConnected ? (
+        <>
         <View style={{marginTop:Platform.OS === 'android'?10:0,backgroundColor:"#F5F8FF"}}>
         <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader>
         </View>
         <ScrollView style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
             <View style={{ flex: 1, backgroundColor: "#F5F8FF" }}>
                 {/* <AppHeader onGoBack={goToHome} title={selected_topic_title} image={account.avatar[0].avatar}></AppHeader> */}
-                <ProgressBar progress={1}
+                <ProgressBar progress={quiz_result_data.user_marks/quiz_result_data.total_marks}
                     style={{
                         height: 16,
                         borderRadius: 10,
@@ -115,7 +120,10 @@ const QuizResultComponent = (props) => {
                 </View>
             </View>
         </ScrollView>
-        </>
+        </> ) : (
+      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+    )}
+  </>
 
     );
 }
