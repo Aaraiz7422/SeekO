@@ -1,12 +1,14 @@
+//Import Core Components
 import React, {useState, useEffect, useRef} from 'react';
-import {ScrollView, View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+//Import Plugins and Libraries
 import {TabView, SceneMap, TabBar, TabBarItem} from 'react-native-tab-view';
+import {ProgressBar} from 'react-native-paper';
+//Import Global Components
 import {SCREEN_WIDTH} from '../../../../../constants';
 import global from '../../../../../global-styles';
-import services from '../../../../api/services';
-import {urls} from '../../../../api/urls';
+//Import Local Components
 import TopicContentContainer from '../topic-content';
-import {ProgressBar} from 'react-native-paper';
 const initialLayout = {
   width: SCREEN_WIDTH * 0.9,
 };
@@ -127,6 +129,7 @@ const TopicTabsContainer = props => {
   //     });
   // };
 
+  // triggers when we swipe left or right 
   const handleIndexChange = index => {
     console.log('handleIndexChange: ', index);
     setIndex(index);

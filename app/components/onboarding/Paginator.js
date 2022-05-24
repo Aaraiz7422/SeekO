@@ -1,11 +1,6 @@
+//Import Core Components
 import React, {useState, useRef} from 'react';
-import {
-  View,
-  useWindowDimensions,
-  StyleSheet,
-  FlatList,
-  Animated,
-} from 'react-native';
+import {View, useWindowDimensions, StyleSheet, Animated} from 'react-native';
 
 const Paginator = ({data, scrollX}) => {
   const {width} = useWindowDimensions();

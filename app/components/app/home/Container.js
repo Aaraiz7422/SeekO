@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
 import HomeComponent from './Component';
 import SubscriptionComponent from '../payment/Component';
 import SingleChildCard from '../SingleChildCard';
-import UserComponent from '../users/Component';
 import {connect} from 'react-redux';
 import {logout} from '../../../redux/actions/authActions';
 import {
@@ -12,7 +10,6 @@ import {
   setCurrentUserFetchLoading,
 } from '../../../redux/actions/userActions';
 import {ActivityIndicator} from 'react-native-paper';
-import TrackProgressContainer from '../track-progress/Container';
 import Purchases from 'react-native-purchases';
 
 const HomeContainer = props => {
@@ -20,18 +17,17 @@ const HomeContainer = props => {
   const [show_add_child_account_modal, setShowAddChildAccountModal] =
     useState(false);
   const [loading, setLoading] = useState(true);
-  const [availablePackages,setAvailablePackages] = useState(null);
+  const [availablePackages, setAvailablePackages] = useState(null); // stores all subscriptions plan
   // const { current_user_fetching,current_user_error,getCurrentUserAction } = props;
   useEffect(() => {
-    // fetchProducts();
+    fetchProducts();
     props.getCurrentUserAction(userId => setUserIdIAP(userId));
     if (current_user !== null) {
-      console.log(
-        `Use Effect is Called :`,
-      );
+      console.log(`Use Effect is Called :`);
     }
   }, []);
 
+  // for iOS
   const setUserIdIAP = async userId => {
     console.log('setUserIdIAP: ', userId);
     setUserId(userId);
@@ -45,6 +41,8 @@ const HomeContainer = props => {
     }
   };
 
+  // this function get all the available subscription plans and 
+  // store them in availablePackages variable using setAvailablePackages
   const fetchProducts = async () => {
     try {
       const offerings = await Purchases.getOfferings();
@@ -54,15 +52,23 @@ const HomeContainer = props => {
         offerings.current.availablePackages.length !== 0
       ) {
         // Display packages for sale
-      console.log('initializeRevenueCat Offerings availible packages is :',offerings.current.availablePackages.length);
-      console.log("Current Availible Packages : ",offerings.current.availablePackages)
-      setAvailablePackages(offerings.current.availablePackages);
+        console.log(
+          'initializeRevenueCat Offerings availible packages is :',
+          offerings.current.availablePackages.length,
+        );
+        console.log(
+          'Current Availible Packages : ',
+          offerings.current.availablePackages,
+        );
+        setAvailablePackages(offerings.current.availablePackages);
       }
     } catch (e) {
       console.log('initializeRevenueCat Error: ', e);
     }
-  }
+  };
 
+  // this function is used to register new child on Home screen 
+  // and trigger when user onclick plus button on Home screen
   const registerNewChild = child_information => {
     const {getCurrentUserAction, setCurrentUserFetchLoadingAction} = props;
     services
@@ -87,10 +93,11 @@ const HomeContainer = props => {
     navigation.navigate('Authentication');
   };
 
+  // this function triggers when user switch from on tab to another and shows respective UI
   const selectedTab = (currentTab, prop) => {
     if (currentTab === 'Home') {
       return current_user == null ? (
-        <ActivityIndicator size="large" color='#00CDAC'/>
+        <ActivityIndicator size="large" color="#00CDAC" />
       ) : (
         <SingleChildCard
           {...prop}
@@ -103,7 +110,7 @@ const HomeContainer = props => {
       );
     } else if (currentTab === 'Track Progress') {
       return current_user == null ? (
-        <ActivityIndicator size={'large'} color='#00CDAC'></ActivityIndicator>
+        <ActivityIndicator size={'large'} color="#00CDAC"></ActivityIndicator>
       ) : (
         <SingleChildCard
           {...prop}
@@ -114,15 +121,15 @@ const HomeContainer = props => {
           registerNewChild={registerNewChild}
           id={2}></SingleChildCard>
       );
-    }
-    //  else if (currentTab === 'Subscription') {
-    //   return (
-    //     <SubscriptionComponent navigation={navigation} availablePackages={availablePackages}></SubscriptionComponent>
-    //   );
-    // } 
-    else if (currentTab === 'Users') {
+    } else if (currentTab === 'Subscription') {
+      return (
+        <SubscriptionComponent
+          navigation={navigation}
+          availablePackages={availablePackages}></SubscriptionComponent>
+      );
+    } else if (currentTab === 'Users') {
       return current_user == null ? (
-        <ActivityIndicator size={'large'} color='#00CDAC'></ActivityIndicator>
+        <ActivityIndicator size={'large'} color="#00CDAC"></ActivityIndicator>
       ) : (
         <SingleChildCard
           {...prop}

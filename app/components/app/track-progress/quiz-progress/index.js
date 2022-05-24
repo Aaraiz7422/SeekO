@@ -1,17 +1,18 @@
+//Import Core Components
 import React, {useContext} from 'react';
 import {View, StyleSheet, ScrollView, Text, Platform} from 'react-native';
+//Import Plugins and Libraries
 import {BoxShadow} from 'react-native-shadow';
 import {Divider} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
-//Import Plugins and Libraries
-
 //Import Constants and variables
 import {COLORS, SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../../../constants';
-
-//Import Global Components
+//Import Local Components
 import AppHeader from '../../AppHeader';
+//Import Global Components
 import ConnectionModal from '../../../global/ConnectionModal';
 import {NetworkContext} from '../../../../../network-context';
+import global from '../../../../../global-styles';
 
 const QuizProgressComponent = props => {
   const {account, quiz_progress_data, selected_child_account} =
@@ -51,20 +52,15 @@ const QuizProgressComponent = props => {
       <View
         style={{
           flex: 1,
-          // justifyContent: 'flex-start',
-          // alignItems: 'center',
           width: SCREEN_WIDTH,
           backgroundColor: '#F5F8FF',
         }}>
-        {/* <AppHeader title={quizName} image={account.avatar[0].avatar}></AppHeader> */}
-        {/* <AppHeader title={selected_child_account.name}></AppHeader> */}
         <View
           style={{
             marginHorizontal: 40,
             marginVertical: 24,
             // backgroundColor:"green"
           }}>
-          {/* <Text style={{fontSize:16,fontWeight:'bold'}}>{quiz_progress_data.quiz_name}</Text> */}
           <View
             style={{
               flexDirection: 'row',
@@ -304,35 +300,6 @@ const QuizProgressComponent = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  quiz_card: {
-    flexDirection: 'column',
-    width: SCREEN_WIDTH * 0.9,
-    padding: 16,
-    marginBottom: 10,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    borderRadius: 3,
-    backgroundColor: COLORS.secondary_background_color,
-  },
-  child_account_count_circle: {
-    flexDirection: 'row',
-    width: 21,
-    height: 21,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: COLORS.white,
-    borderRadius: 10.5,
-    marginRight: 15,
-  },
-  button: {
-    maxHeight: 25,
-    borderRadius: 3,
-  },
-});
 
 export default QuizProgressComponent;
 
-import global from '../../../../../global-styles';
-import {color} from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';

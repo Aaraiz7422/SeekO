@@ -2,8 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, View, Dimensions, Alert } from 'react-native';
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-import global from '../../../global-styles';
-import CustomButton from '../global/CustomButton';
+import global from '../../../../global-styles';
+import CustomButton from '../../global/CustomButton';
 
 function OnBoardingScreen2() {
     return (

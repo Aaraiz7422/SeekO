@@ -1,9 +1,13 @@
+//Import Core Components
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, Dimensions } from 'react-native';
+//Import Plugins and Libraries
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from "react-native-linear-gradient";
 import { BoxShadow } from 'react-native-shadow';
+//Import global variables and constants
 import { SCREEN_WIDTH } from '../../../constants';
+
 const CustomButton = ({
     title,
     textColor,
@@ -75,23 +79,5 @@ const CustomButton = ({
 
     );
 }
-
-const styles = StyleSheet.create({
-    text: {
-        fontSize: 20,
-        color: '#000',
-        // margin: 10,
-    },
-    button: {
-        // backgroundColor: '#F8C04E',
-        // width: Dimensions.get('window').width * 0.6,
-        // height: 60,
-        alignItems: 'center',
-        // borderRadius: 40,
-        // margin: 20,
-        justifyContent: 'center'
-    },
-    // width:60,
-});
 
 export default CustomButton;

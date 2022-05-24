@@ -1,14 +1,19 @@
+//Import Core Components
 import React, {useState} from 'react';
 import {View} from 'react-native';
+//Import Redux components and actions
 import {connect} from 'react-redux';
-import global from '../../../../global-styles';
 import {
   saveAccessToken,
   setAuthLoading,
 } from '../../../redux/actions/authActions';
+//Import Local Components
 import SignupComponent from './Component';
+//Import Services and APIs
 import services from '../../../api/services';
 import {urls} from '../../../api/urls';
+//Import global variables and constants
+import global from '../../../../global-styles';
 
 const SignupContainer = props => {
   const [errors, setErrors] = useState({

@@ -1,5 +1,7 @@
 import services from '../../api/services';
 
+
+// used to save access token for api calls etc.
 export function saveAccessToken(token_response) {
   return (dispatch) => {
     dispatch({
@@ -9,6 +11,7 @@ export function saveAccessToken(token_response) {
   };
 }
 
+// used to logout from our app
 export function logout() {
   return (dispatch) => {
     dispatch({
@@ -17,6 +20,7 @@ export function logout() {
   };
 }
 
+// this function currently not used in our app
 export function setAuthLoading(loading) {
   return (dispatch) => {
     dispatch({

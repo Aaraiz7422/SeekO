@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+//Import Core Components
+import React, {useState} from 'react';
 import {
   ScrollView,
   View,
@@ -8,16 +9,17 @@ import {
   ActivityIndicator,
   Platform,
   Text,
-  Button,
 } from 'react-native';
+//Import Plugins and Libraries
 import YouTube, {
   YouTubeStandaloneAndroid,
   YouTubeStandaloneIOS,
 } from 'react-native-youtube';
-import global from '../../../../../global-styles';
-import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../../../constants';
-import CustomButton from '../../../global/CustomButton';
 import AutoHeightImage from 'react-native-auto-height-image';
+//Import global variables and constants
+import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../../../constants';
+//Import Global Components
+import CustomButton from '../../../global/CustomButton';
 
 const HEADING_1 = 'HEADING_1';
 const HEADING_2 = 'HEADING_2';
@@ -30,6 +32,7 @@ const win = Dimensions.get('window');
 const ratio = win.width / 541; //541 is actual image width
 import {Thumbnail} from 'react-native-thumbnail-video';
 
+// Topic Content appears on the base of server response ( content can be h1,h2,h3,subtitle,paragraph,images,videos and tabs)
 const TopicContentContainer = props => {
   const [isReady, setIsReady] = useState(false);
   const [status, setStatus] = useState(null);
@@ -41,6 +44,7 @@ const TopicContentContainer = props => {
   const {account, topic_associated_data, navigation, parent_data, tab_data} =
     props;
 
+  // rendering content on the base of server response 
   const renderContentComponent = content => {
     switch (content.type) {
       case HEADING_1: {
@@ -179,7 +183,6 @@ const TopicContentContainer = props => {
 
             {/* {Platform.OS === 'ios' && YouTubeStandaloneIOS && ( */}
             {Platform.OS === 'ios' && (
-              
               // <Thumbnail
               //   url={`https://www.youtube.com/watch?v=${content.content}&html5=1`}
               //   onPress={() => {
@@ -188,17 +191,17 @@ const TopicContentContainer = props => {
                 {
                   <>
                     {!isReady && (
-                      <View style={
-                        {
+                      <View
+                        style={{
                           height: PixelRatio.roundToNearestPixel(
                             playerWidth / (16 / 9),
                           ),
-                          justifyContent:'center'
-                        }
-                      }>
-                      <ActivityIndicator
-                        size={'large'}
-                        color={'#00CDAC'}></ActivityIndicator></View>
+                          justifyContent: 'center',
+                        }}>
+                        <ActivityIndicator
+                          size={'large'}
+                          color={'#00CDAC'}></ActivityIndicator>
+                      </View>
                     )}
 
                     <View

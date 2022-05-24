@@ -1,6 +1,9 @@
+//Import Core Components
 import React from 'react';
+//Import Plugins and Libraries
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+//Import Local Components
 import AuthenticationStack from './authentication';
 import AppNavigationStack from './app';
 import SplashScreen from '../components/splash';

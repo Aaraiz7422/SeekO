@@ -1,6 +1,7 @@
+//Import Core Components
 import React from 'react';
-import {View, Image,Text, Dimensions, Button, Pressable} from 'react-native';
-
+import {View, Text} from 'react-native';
+//Import Local Components
 import FullScreenModal from '../../components/app/FullScreenModal';
 
 const ConnectionModal = props => {
@@ -28,7 +29,7 @@ const ConnectionModal = props => {
             textAlign: 'center',
             marginBottom: 30,
           }}>
-        Oops! Looks like your device is not connected to the Internet.
+          Oops! Looks like your device is not connected to the Internet.
         </Text>
       </View>
     </FullScreenModal>

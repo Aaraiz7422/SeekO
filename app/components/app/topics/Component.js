@@ -1,11 +1,14 @@
-import React, {useEffect,useContext, useState} from 'react';
+//Import Core Components
+import React, {useContext} from 'react';
 import {View, FlatList, Text, Button} from 'react-native';
-import AppHeader from '../AppHeader';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import CustomCard from '../../global/CustomCard';
+//Import Plugins and Libraries
 import {ActivityIndicator} from 'react-native-paper';
+//Import Global Components
+import CustomCard from '../../global/CustomCard';
 import ConnectionModal from '../../global/ConnectionModal';
-import { NetworkContext } from '../../../../network-context';
+import {NetworkContext} from '../../../../network-context';
+//Import Local Components
+import AppHeader from '../AppHeader';
 
 const TopicsListComponent = props => {
   const {
@@ -53,41 +56,53 @@ const TopicsListComponent = props => {
 
   return (
     <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
-      { internetAvailability.isConnected ? (
-    <>
-      {!fetching_topics && !fetching_topics_error && topicListData ? (
-        <View
-          style={[{flex: 1, backgroundColor: '#F5F8FF', alignItems: 'center'}]}>
-          <FlatList
-            bounces={false}
-            stickyHeaderIndices={[0]}
-            ListHeaderComponent={
-              <AppHeader
-                title={topicListData.name}
-                image={account.avatar[0].avatar}></AppHeader>
-            }
-            data={topicListData.topics}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
-        </View>
-      ) : fetching_topics ? (
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator size="large" color='#00CDAC'/></View>
+      {internetAvailability.isConnected ? (
+        <>
+          {!fetching_topics && !fetching_topics_error && topicListData ? (
+            <View
+              style={[
+                {flex: 1, backgroundColor: '#F5F8FF', alignItems: 'center'},
+              ]}>
+              <FlatList
+                bounces={false}
+                stickyHeaderIndices={[0]}
+                ListHeaderComponent={
+                  <AppHeader
+                    title={topicListData.name}
+                    image={account.avatar[0].avatar}></AppHeader>
+                }
+                data={topicListData.topics}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+              />
+            </View>
+          ) : fetching_topics ? (
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ActivityIndicator size="large" color="#00CDAC" />
+            </View>
+          ) : (
+            fetching_topics_error && (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  backgroundColor: '#F5F8FF',
+                  marginTop: 10,
+                }}>
+                <Text style={{color: 'black', fontFamily: 'Poppins-Regular'}}>
+                  Tap to reload
+                </Text>
+                <Button title="click me" onPress={() => fetchTopics()}></Button>
+              </View>
+            )
+          )}
+        </>
       ) : (
-        fetching_topics_error && (
-          <View style={{flex:1,alignItems:'center',backgroundColor:'#F5F8FF',marginTop:10}}>
-            <Text style={{color: 'black', fontFamily: 'Poppins-Regular'}}>
-              Tap to reload
-            </Text>
-            <Button title="click me" onPress={() => fetchTopics()}></Button>
-          </View>
-        )
+        <ConnectionModal
+          visible={!internetAvailability.isConnected}></ConnectionModal>
       )}
-    </>
-    ) : (
-      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
-    )}
-  </View>
+    </View>
   );
 };
 

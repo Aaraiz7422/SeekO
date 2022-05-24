@@ -1,5 +1,8 @@
+//Import Services and APIs
 import services from '../../api/services';
 import {urls} from '../../api/urls';
+
+// used to get current parent user info ( currently logged in user info )
 export function getCurrentUser() {
   return (dispatch) => {
     dispatch({
@@ -27,6 +30,8 @@ export function getCurrentUser() {
       });
   };
 }
+
+// this function is used create child account in parent account
 export function setChildUserAccount(child_account) {
   return (dispatch) => {
     dispatch({
@@ -35,6 +40,8 @@ export function setChildUserAccount(child_account) {
     });
   };
 }
+
+// gets currently selected topic detail using this function
 export function setSelectedTopic(selected_topic) {
   console.log('UA Redux setSelectedTopic: ', selected_topic);
   return (dispatch) => {
@@ -44,6 +51,7 @@ export function setSelectedTopic(selected_topic) {
     });
   };
 }
+
 export function setCurrentUserFetchLoading(value) {
   return (dispatch) => {
     dispatch({

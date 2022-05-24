@@ -1,8 +1,9 @@
+//Import Redux components and actions
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {createLogger} from 'redux-logger';
 import {persistStore, persistReducer} from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
+//Import Plugins and Libraries
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // Imports: Redux
 import rootReducer from '../reducers/index';

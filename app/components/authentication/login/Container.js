@@ -1,12 +1,14 @@
-import React, {Component, useState, useEffect} from 'react';
-import {View} from 'react-native';
+//Import Core Components
+import React, {useState} from 'react';
+//Import Redux components and actions
 import {connect} from 'react-redux';
-import global from '../../../../global-styles';
 import {
   saveAccessToken,
   setAuthLoading,
 } from '../../../redux/actions/authActions';
+//Import Local Components
 import LoginComponent from './Component';
+//Import Services and APIs
 import services from '../../../api/services';
 import {urls} from '../../../api/urls';
 
@@ -58,17 +60,8 @@ const LoginContainer = props => {
         ) {
           err.password = 'Invalid Email or Password.';
         }
-
-        // if(error.error_description === "Invalid credentials given."){
-        //     if(err.password === 'Password should be at least 6 characters long')
-        //     {
-        //         console.log("Login Error password : " , err.password);
-        //     }
-        // else{
         err.email = 'Invalid Email or Password.';
         err.password = 'Invalid Email or Password.';
-        // }
-        // }
         setErrors(err);
         setLoading(false);
         console.log('login error: ', error);
@@ -81,16 +74,14 @@ const LoginContainer = props => {
   };
 
   return (
-    // <View style={global.page_container}>
-      <LoginComponent
-        navigation={props.navigation}
-        validateSignUpInformation={validateSignUpInformation}
-        loading={loading}
-        setLoading={setLoading}
-        resetSingleFieldError={resetSingleFieldError}
-        errors={errors}
-      />
-    // </View>
+    <LoginComponent
+      navigation={props.navigation}
+      validateSignUpInformation={validateSignUpInformation}
+      loading={loading}
+      setLoading={setLoading}
+      resetSingleFieldError={resetSingleFieldError}
+      errors={errors}
+    />
   );
 };
 

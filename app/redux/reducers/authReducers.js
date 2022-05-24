@@ -9,7 +9,7 @@ const initialState = {
   // Reducers (Modifies The State And Returns A New State)
   const authReducer = (state = initialState, action) => {
     switch (action.type) {
-      // Login
+      // Login access token
       case 'ACCESS_TOKEN': {
         console.log('Auth Token: ', action.data);
         let is_logged_in = false;
@@ -24,6 +24,7 @@ const initialState = {
           is_logged_in: is_logged_in,
         };
       }
+      // Auth loading case currently not called in our app
       case 'AUTH_LOADING': {
         return {
           // State

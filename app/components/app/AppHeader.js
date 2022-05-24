@@ -1,15 +1,15 @@
+//Import Core Components
 import React from 'react';
-import {Text, StyleSheet, Dimensions, View, Image} from 'react-native';
+import {Text, Dimensions, View, Image} from 'react-native';
+//Import Plugins and Libraries
 import {Appbar} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-import {SCREEN_WIDTH} from '../../../constants';
 
 const AppHeader = ({title, image, onGoBack = null}) => {
-  const navigation = useNavigation();
-
   // useNavigation is a hook which gives access to navigation object.
   // It's useful when you cannot pass the navigation prop into the component directly,
   // or don't want to pass it in case of a deeply nested child.
+  const navigation = useNavigation();
 
   const _goBack = () => {
     navigation.goBack();
@@ -23,7 +23,7 @@ const AppHeader = ({title, image, onGoBack = null}) => {
         justifyContent: 'flex-start',
         elevation: 0,
         marginTop: 0,
-        paddingTop:0,
+        paddingTop: 0,
         paddingLeft: 10,
         paddingRight: 0,
       }}>
@@ -37,7 +37,7 @@ const AppHeader = ({title, image, onGoBack = null}) => {
           flexDirection: 'row',
           flex: 1,
           alignItems: 'center',
-        //   backgroundColor:'purple',
+          //   backgroundColor:'purple',
         }}>
         <View
           style={{
@@ -45,7 +45,7 @@ const AppHeader = ({title, image, onGoBack = null}) => {
             alignItems: 'center',
             flexDirection: 'row',
             // backgroundColor: 'green',
-              width: Dimensions.get('window').width * 0.80,
+            width: Dimensions.get('window').width * 0.8,
           }}>
           <Text
             style={{
@@ -53,12 +53,11 @@ const AppHeader = ({title, image, onGoBack = null}) => {
               color: 'black',
               fontWeight: 'bold',
               fontFamily: 'Poppins-Regular',
-            //   paddingBottom:12
+              //   paddingBottom:12
             }}
             adjustsFontSizeToFit={true}
             numberOfLines={3}
-            allowFontScaling={true}
-            >
+            allowFontScaling={true}>
             {title}
           </Text>
         </View>
@@ -70,7 +69,7 @@ const AppHeader = ({title, image, onGoBack = null}) => {
               width: 30,
               borderRadius: 16,
               marginTop: 4,
-              marginRight:16
+              marginRight: 16,
             }}></Image>
         ) : (
           <Appbar.Action icon="account" />

@@ -1,16 +1,22 @@
+//Import Core Components
 import React, {Component, useEffect, useState, useContext} from 'react';
 import {View, Text, Platform, Dimensions} from 'react-native';
+//Import Plugins and Libraries
 import {ActivityIndicator} from 'react-native-paper';
-import global from '../../../global-styles';
+//Import Redux components and actions
 import {saveAccessToken, setAuthLoading} from '../../redux/actions/authActions';
 import {getCurrentUser} from '../../redux/actions/userActions';
 import {connect} from 'react-redux';
+//Import Services and APIs
 import services from '../../api/services';
 import {urls} from '../../api/urls';
+//Import Global Components
 import CachedImage from '../global/cached-image';
-import {APP_NAME, SCREEN_WIDTH} from '../../../constants';
 import ConnectionModal from '../global/ConnectionModal';
-import { NetworkContext } from '../../../network-context';
+import {NetworkContext} from '../../../network-context';
+//Import global variables and constants
+import {APP_NAME, SCREEN_WIDTH} from '../../../constants';
+
 //TODO: This screen deisgn and logi is temporary.
 const SplashScreen = props => {
   const [loading, setLoading] = useState(true);
@@ -58,55 +64,56 @@ const SplashScreen = props => {
 
   return (
     <>
-      { internetAvailability.isConnected ? (
-    <>
-      {Platform.OS === 'android' && (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: SCREEN_WIDTH,
-            paddingLeft: 16,
-            paddingRight: 16,
-            backgroundColor: '#F5F8FF',
-          }}>
-          <View
-            style={{
-              height: Dimensions.get('window').height * 0.3,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              // backgroundColor: 'purple',
-            }}>
-            <CachedImage
+      {internetAvailability.isConnected ? (
+        <>
+          {Platform.OS === 'android' && (
+            <View
               style={{
-                width: SCREEN_WIDTH * 0.9,
-                height: SCREEN_WIDTH * 0.4,
-                borderRadius: SCREEN_WIDTH,
-                marginBottom: 24,
-              }}
-              localImage={true}
-              source={require('../../assets/SEEKO_LOGO.png')}
-            />
-            {loading &&
-              showLoaderWhileValidatingUser()
-              // <Text
-              //   style={{
-              //     color: '#000',
-              //     fontSize: 36,
-              //     fontFamily: 'Poppins-Regular',
-              //   }}>
-              //   {APP_NAME}
-              // </Text>
-            }
-          </View>
-        </View>
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: SCREEN_WIDTH,
+                paddingLeft: 16,
+                paddingRight: 16,
+                backgroundColor: '#F5F8FF',
+              }}>
+              <View
+                style={{
+                  height: Dimensions.get('window').height * 0.3,
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  // backgroundColor: 'purple',
+                }}>
+                <CachedImage
+                  style={{
+                    width: SCREEN_WIDTH * 0.9,
+                    height: SCREEN_WIDTH * 0.4,
+                    borderRadius: SCREEN_WIDTH,
+                    marginBottom: 24,
+                  }}
+                  localImage={true}
+                  source={require('../../assets/SEEKO_LOGO.png')}
+                />
+                {
+                  loading && showLoaderWhileValidatingUser()
+                  // <Text
+                  //   style={{
+                  //     color: '#000',
+                  //     fontSize: 36,
+                  //     fontFamily: 'Poppins-Regular',
+                  //   }}>
+                  //   {APP_NAME}
+                  // </Text>
+                }
+              </View>
+            </View>
+          )}
+        </>
+      ) : (
+        <ConnectionModal
+          visible={!internetAvailability.isConnected}></ConnectionModal>
       )}
     </>
-    ) : (
-      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
-    )}
-  </>
   );
 };
 

@@ -1,19 +1,23 @@
+//Import Core Components
 import React, {useState, useEffect, useContext} from 'react';
 import {View, Image, Dimensions, Button, Pressable} from 'react-native';
-import AppHeader from '../AppHeader';
+//Import Plugins and Libraries
 import {ScrollView} from 'react-native-gesture-handler';
 import {ProgressBar, Colors, Text, ActivityIndicator} from 'react-native-paper';
-import CustomCard from '../../global/CustomCard';
-import CustomButton from '../../global/CustomButton';
 import Icon from 'react-native-vector-icons/AntDesign';
 import LinearGradient from 'react-native-linear-gradient';
 import {BoxShadow} from 'react-native-shadow';
-import QuizCard from '../../global/quiz-card';
-
-import FullScreenModal from '../FullScreenModal';
 import {useNetInfo} from '@react-native-community/netinfo';
+//Import Global Components
+import CustomCard from '../../global/CustomCard';
+import CustomButton from '../../global/CustomButton';
+import QuizCard from '../../global/quiz-card';
 import ConnectionModal from '../../global/ConnectionModal';
 import {NetworkContext} from '../../../../network-context';
+//Import Local Components
+import FullScreenModal from '../FullScreenModal';
+import AppHeader from '../AppHeader';
+
 
 const QuizzesComponent = props => {
   const [visible, setVisible] = useState(false);
@@ -50,18 +54,10 @@ const QuizzesComponent = props => {
     : 'Quiz';
   const showModal = () => setVisible(true);
   const closeModal = () => setVisible(false);
-  const containerStyle = {
-    backgroundColor: 'white',
-    padding: 30,
-    margin: 30,
-    borderRadius: 20,
-  };
 
   const shadowOpt = {
     width: 80,
     height: 80,
-    // width: Dimensions.get('window').width * 0.17,
-    // height: Dimensions.get('window').height * 0.1,
     color: '#f9c04d',
     border: 10,
     radius: 30,
@@ -69,7 +65,6 @@ const QuizzesComponent = props => {
     x: 0,
     y: 1,
     style: {
-      // justifyContent:"center",
       marginVertical: 10,
       marginHorizontal: 10,
     },
@@ -104,13 +99,6 @@ const QuizzesComponent = props => {
           <ScrollView
             showsVerticalScrollIndicator={true}
             style={{alignContent: 'center'}}>
-            {/* <View
-          style={{
-            // flex: 1,
-            backgroundColor: 'green',
-            // height: Dimensions.get('window').height * 0.88,
-            alignContent: 'center',
-          }}> */}
             {!fetching_quiz_data && !fetching_quiz_data_error && quiz_data ? (
               renderQuizQuestions()
             ) : fetching_quiz_data ? (
@@ -132,14 +120,11 @@ const QuizzesComponent = props => {
             <View
               style={{
                 alignItems: 'center',
-                // backgroundColor:"grey",
-                // opacity:0.5,
               }}>
               <View
                 style={{
                   flexDirection: 'row',
                   width: Dimensions.get('window').width * 0.9,
-                  // backgroundColor:"purple",
                   justifyContent: 'space-between',
                 }}>
                 <BoxShadow setting={shadowOpt}>
@@ -207,41 +192,6 @@ const QuizzesComponent = props => {
                   onPress={showModal}></CustomButton>
               )}
             </View>
-            {/* {!netInfo.isConnected && <Text>No Internet Connection</Text>} */}
-            {/* <FullScreenModal visible={visible} onDismiss={closeModal}>
-            <View style={{alignItems: 'center'}}>
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 22,
-                  fontWeight: 'bold',
-                  fontFamily: 'Poppins-Regular',
-                  textAlign: 'center',
-                  marginBottom: 30,
-                }}>
-                Are you sure you want to submit your quiz?
-              </Text>
-              <CustomButton
-                backgroundColor={'#FFFFFF'}
-                textColor={'black'}
-                title={'Cancel'}
-                height={60}
-                width={0.64}
-                borderColor={'red'}
-                borderWidth={1}
-                borderRadius={30}
-                onPress={closeModal}></CustomButton>
-              <CustomButton
-                backgroundColor={'#01CCAD'}
-                textColor={'black'}
-                title={'OK'}
-                height={60}
-                width={0.64}
-                borderRadius={30}
-                onPress={submitQuiz}></CustomButton>
-            </View>
-          </FullScreenModal> */}
-            {/* </View> */}
           </ScrollView>
           <FullScreenModal visible={visible} onDismiss={closeModal}>
             <View style={{alignItems: 'center'}}>

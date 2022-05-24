@@ -1,24 +1,31 @@
+//Import Core Components
 import React, {useContext, useEffect, useState} from 'react';
 import {View, Image, Text, FlatList} from 'react-native';
+//Import Local Components
 import AppHeader from '../AppHeader';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import CustomCard from '../../global/CustomCard';
+//Import Services and APIs
 import services from '../../../api/services';
 import {urls} from '../../../api/urls';
+//Import Plugins and Libraries
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {ActivityIndicator} from 'react-native-paper';
+//Import Global Components
+import CustomCard from '../../global/CustomCard';
 import CustomButton from '../../global/CustomButton';
 import {fetchTopics} from '../../../../global-functions';
-import {ActivityIndicator} from 'react-native-paper';
+import ConnectionModal from '../../global/ConnectionModal';
+import {NetworkContext} from '../../../../network-context';
+//Import Redux components and actions
 import {
   setChildUserAccount,
   setCurrentUserFetchLoading,
 } from '../../../redux/actions/userActions';
-// import {useNetInfo} from '@react-native-community/netinfo';
-import ConnectionModal from '../../global/ConnectionModal';
-import { NetworkContext } from '../../../../network-context';
 
 const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
   const [topicListData, setTopicListData] = useState({});
   useEffect(() => {
+    // fetchTopics function fetch one topic at time on the base of topicId variable which contains courses list from server 
+    // and store topic courses list in topicListData variable using setTopicListData function
     fetchTopics(topicId, setTopicListData);
   }, []);
 
@@ -40,6 +47,7 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
     <TopicItem item={item} index={index} />
   );
 
+  // this fuction trigger when user click on viewAll button
   const onClickViewAll = () => {
     navigation.navigate('Topics', {
       account: account,
@@ -47,6 +55,7 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
     });
   };
 
+  // diredtly goToTopicDetail from categories screen this function trigger when you click course on categories screen
   const goToTopicDetail = (item, index) => {
     navigation.push('Topics', {
       account: account,
@@ -148,7 +157,7 @@ const CategoriesComponent = ({navigation, account, categories}) => {
 
   return (
     <View style={{flex: 1, backgroundColor: '#F5F8FF'}}>
-      { internetAvailability.isConnected ? (
+      {internetAvailability.isConnected ? (
         <View
           style={
             loading
@@ -163,7 +172,8 @@ const CategoriesComponent = ({navigation, account, categories}) => {
           {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
         </View>
       ) : (
-        <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
+        <ConnectionModal
+          visible={!internetAvailability.isConnected}></ConnectionModal>
       )}
     </View>
 

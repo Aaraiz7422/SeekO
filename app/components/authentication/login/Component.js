@@ -1,24 +1,24 @@
-import React, {useState,useContext} from 'react';
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
+//Import Core Components
+import React, {useState, useContext} from 'react';
+import {View, Text, Image, Dimensions} from 'react-native';
+//Import Plugins and Libraries
 import {
   TextInput,
   Button,
   ActivityIndicator,
-  Colors,
   HelperText,
 } from 'react-native-paper';
-import global from '../../../../global-styles';
-import {input_theme} from '../../../../constants';
-import CustomButton from '../../global/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {SCREEN_WIDTH} from '../../../../constants';
+//Import Global Components
+import CustomButton from '../../global/CustomButton';
 import ConnectionModal from '../../global/ConnectionModal';
 import {NetworkContext} from '../../../../network-context';
+//Import global variables and constants
+import global from '../../../../global-styles';
+import {input_theme} from '../../../../constants';
+import {SCREEN_WIDTH} from '../../../../constants';
 
 const LoginComponent = props => {
-  // const loadingIndicator = (
-  //   <ActivityIndicator animating={true} color={Colors.red800} />
-  // );
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [show, setShow] = useState(false);
@@ -54,20 +54,9 @@ const LoginComponent = props => {
       {internetAvailability.isConnected ? (
         <KeyboardAwareScrollView
           style={{
-            // flex:1,
-            // width: Dimensions.get('window').width * 1,
             backgroundColor: '#F5F8FF',
           }}
-          resetScrollToCoords={{x: 0, y: 0}}
-          // contentContainerStyle={[
-          //   {
-          //     flex:1,
-          //     justifyContent: 'center',
-          //     alignItems: 'center',
-          //     marginBottom: 50,
-          //   },
-          // ]}
-        >
+          resetScrollToCoords={{x: 0, y: 0}}>
           <View
             style={{
               flex: 1,
@@ -79,7 +68,6 @@ const LoginComponent = props => {
               style={[
                 global.row_flex_end_container,
                 {
-                  // flex:1
                   width: Dimensions.get('window').width * 1,
                   marginTop: 8,
                   marginRight: 16,
@@ -226,7 +214,6 @@ const LoginComponent = props => {
                 shadowRadius={20}
                 onPress={() => {
                   setLoading(true);
-                  // loading ? loadingIndicator : loading;
                   let login_information = {
                     username:
                       email !== null ? email.toLowerCase().trim() : email,
@@ -236,27 +223,6 @@ const LoginComponent = props => {
                   validateSignUpInformation(login_information);
                 }}></CustomButton>
             )}
-            {/* <CustomButton
-        backgroundColor={'#DEE8FB'}
-        title={'Sign In'}
-        height={50}
-        width={0.6}
-        borderRadius={30}
-        textColor={'white'}
-        linearStartColor={'#F8C04E'}
-        linearEndColor={'#FFBF3C'}
-        shadowColor={'#FFBF3C'}
-        shadowRadius={20}
-        onPress={() => {
-          setLoading(true);
-          loading ? loadingIndicator : loading;
-          let login_information = {
-            username: email.toLowerCase(),
-            password: password,
-          };
-          console.log(` Email : ${email} and Password : ${password}`);
-          validateSignUpInformation(login_information);
-        }}></CustomButton> */}
           </View>
         </KeyboardAwareScrollView>
       ) : (
@@ -266,12 +232,5 @@ const LoginComponent = props => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  skip_text: {
-    fontSize: 10,
-    fontWeight: '400',
-  },
-});
 
 export default LoginComponent;

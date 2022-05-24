@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+//Import Core Components
+import React, {useContext} from 'react';
 import {View, StyleSheet, FlatList, Button, Text} from 'react-native';
-
 //Import Plugins and Libraries
-
+import {ActivityIndicator} from 'react-native-paper';
 //Import Constants and variables
 import {COLORS, SCREEN_WIDTH} from '../../../../constants';
 import global from '../../../../global-styles';
-import AppHeader from '../AppHeader';
-import {ActivityIndicator} from 'react-native-paper';
+//Import Global Components
 import ConnectionModal from '../../global/ConnectionModal';
-import { NetworkContext } from '../../../../network-context';
+import {NetworkContext} from '../../../../network-context';
+//Import Local Components
+import AppHeader from '../AppHeader';
 
 const TrackProgressComponent = props => {
   const {
@@ -23,7 +24,6 @@ const TrackProgressComponent = props => {
     getCurrentUserAction,
   } = props;
   const internetAvailability = useContext(NetworkContext);
-
 
   const child_accounts = current_user.child_accounts;
   const flat_list_data =
@@ -53,8 +53,8 @@ const TrackProgressComponent = props => {
               style={{textAlign: 'center', fontFamily: 'Poppins-Regular'}}
               adjustsFontSizeToFit={true}
               numberOfLines={1}
-              allowFontScaling={true}
-              >{index + 1}
+              allowFontScaling={true}>
+              {index + 1}
             </Text>
           </View>
           <View style={{maxWidth: SCREEN_WIDTH * 0.9 - 24 - 120}}>
@@ -102,73 +102,77 @@ const TrackProgressComponent = props => {
 
   return (
     <>
-      { internetAvailability.isConnected ? (
-    <View
-      style={{
-        flex: 1,
-        // justifyContent: 'flex-start',
-        // alignItems: 'center',
-        width: SCREEN_WIDTH,
-        backgroundColor: '#F5F8FF',
-      }}>
-      <AppHeader
-        title={
-          selected_screen && selected_screen === 'quizzes_list'
-            ? selected_child_account.name
-            : 'Track Progress'
-        }
-        image={account.avatar[0].avatar}></AppHeader>
+      {internetAvailability.isConnected ? (
+        <View
+          style={{
+            flex: 1,
+            width: SCREEN_WIDTH,
+            backgroundColor: '#F5F8FF',
+          }}>
+          <AppHeader
+            title={
+              selected_screen && selected_screen === 'quizzes_list'
+                ? selected_child_account.name
+                : 'Track Progress'
+            }
+            image={account.avatar[0].avatar}></AppHeader>
 
-      {!fetching_quiz_progress_data &&
-      !fetching_quiz_data_progress_error &&
-      current_user ? (
-        flat_list_data.length >= 1 ? (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              width: SCREEN_WIDTH,
-              backgroundColor: '#F5F8FF',
-            }}>
-            <FlatList
-              style={{marginTop: 20}}
-              data={flat_list_data}
-              renderItem={renderChildAccounts}
-              keyExtractor={item => item.id}
-            />
-          </View>
-        ) : (
-          <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Text
-              style={{
-                fontFamily: 'Poppins-Regular',
-                fontSize: 20,
-                textAlign: 'center',
-              }}>
-              Please attempt a quiz first
-            </Text>
-          </View>
-        )
-      ) : fetching_quiz_progress_data ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator size="large" color="#00CDAC" />
+          {!fetching_quiz_progress_data &&
+          !fetching_quiz_data_progress_error &&
+          current_user ? (
+            flat_list_data.length >= 1 ? (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  width: SCREEN_WIDTH,
+                  backgroundColor: '#F5F8FF',
+                }}>
+                <FlatList
+                  style={{marginTop: 20}}
+                  data={flat_list_data}
+                  renderItem={renderChildAccounts}
+                  keyExtractor={item => item.id}
+                />
+              </View>
+            ) : (
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: 'Poppins-Regular',
+                    fontSize: 20,
+                    textAlign: 'center',
+                  }}>
+                  Please attempt a quiz first
+                </Text>
+              </View>
+            )
+          ) : fetching_quiz_progress_data ? (
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ActivityIndicator size="large" color="#00CDAC" />
+            </View>
+          ) : (
+            fetching_quiz_data_progress_error && (
+              <>
+                <Button
+                  title="Tap to reload"
+                  onPress={() => getCurrentUserAction()}></Button>
+              </>
+            )
+          )}
         </View>
       ) : (
-        fetching_quiz_data_progress_error && (
-          <>
-            <Button
-              title="Tap to reload"
-              onPress={() => getCurrentUserAction()}></Button>
-          </>
-        )
+        <ConnectionModal
+          visible={!internetAvailability.isConnected}></ConnectionModal>
       )}
-    </View>
-    ) : (
-      <ConnectionModal visible={!internetAvailability.isConnected}></ConnectionModal>
-    )}
-  </>
+    </>
   );
 };
 

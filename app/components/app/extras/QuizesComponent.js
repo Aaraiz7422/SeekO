@@ -174,7 +174,6 @@ const QuizesComponent = ({ navigation }) => {
                         shadowRadius={20}
                         shadowBorder={10}
                         shadowHorizontalMargin={10}
-                        shadowVerticalMargin={10}
                         shadowOpacity={0.15}
                         linearStartColor={"#F8C04E"}
                         linearEndColor={"#FFBF3C"}

@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
+//Import Core Components
+import React, {useEffect, useState} from 'react';
+//Import Local Components
 import TopicsListComponent from './Component';
-
-//Import Redux components and actions
-import { connect } from 'react-redux';
-import { getCurrentUser, setSelectedTopic, setCurrentUserFetchLoading } from '../../../redux/actions/userActions';
 import TopicDetailsComponent from './TopicDetailsComponent';
+//Import Redux components and actions
+import {connect} from 'react-redux';
+import {
+  getCurrentUser,
+  setSelectedTopic,
+  setCurrentUserFetchLoading,
+} from '../../../redux/actions/userActions';
 //Import Services and APIs
 import services from '../../../api/services';
-import { urls } from '../../../api/urls';
+import {urls} from '../../../api/urls';
 
-const TopicsContainer = (props) => {
-  const { navigation, route } = props;
-  const { topicListData,account } = route.params;
+const TopicsContainer = props => {
+  const {navigation, route} = props;
+  const {topicListData, account} = route.params;
 
-  const [selection_type, setSelectionType] = useState("by_category");
+  const [selection_type, setSelectionType] = useState('by_category');
   const [selected_topic_title, setSelectedTopicTitle] = useState(null);
   const [selected_category, setSelectedCategory] = useState(topicListData);
   const [selected_topic, set_Selected_Topic] = useState(null);
@@ -26,7 +31,7 @@ const TopicsContainer = (props) => {
   const [topic_associated_data, setTopicAssociatedData] = useState(null);
   const [topic_list_data, set_Topic_List_Data] = useState(topicListData);
 
-
+  // UI Screen render on the base of Selection Type variable value
   useEffect(() => {
     if (props.route.params.topicListData !== undefined) {
       setSelectedCategory(topicListData);
@@ -37,7 +42,7 @@ const TopicsContainer = (props) => {
     if (props.route.params.selected_topic !== undefined) {
       let s_topic = props.route.params.selected_topic;
       props.setSelectedTopicAction(s_topic);
-      setSelectionType("by_topic");
+      setSelectionType('by_topic');
       set_Selected_Topic(s_topic);
       setSelectedTopicTitle(s_topic.name);
     }
@@ -45,24 +50,22 @@ const TopicsContainer = (props) => {
     if (props.route.params.selected_button !== undefined) {
       let s_button = props.route.params.selected_button;
       let c_type = props.route.params.content_type;
-      let s_topic_title = props.route.params.selected_topic_title
-      setSelectionType("by_button");
+      let s_topic_title = props.route.params.selected_topic_title;
+      setSelectionType('by_button');
       setContentType(c_type);
       setSelectedButton(s_button);
       setSelectedTopicTitle(s_topic_title);
     }
-
 
     console.log(`selection type : ${selection_type}`);
     console.log(`content type : ${content_type}`);
     console.log(`selected topic : ${selected_topic}`);
     console.log(`selected button : ${selected_button}`);
     console.log(`selected topic Name : ${selected_topic_title}`);
-
   }, []);
 
   useEffect(() => {
-    console.log("Effect Updated");
+    console.log('Effect Updated');
     console.log(`Selection type : ${selection_type}`);
 
     if (selected_topic !== null) {
@@ -89,29 +92,31 @@ const TopicsContainer = (props) => {
     let data = null;
     let url = null;
     if (selection_type === 'by_category') {
-      data = { category_id: selected_category.id };
+      data = {category_id: selected_category.id};
       url = urls.get_topics_by_category;
     } else {
-      data = { topic_id: selected_topic.id };
+      data = {topic_id: selected_topic.id};
       url = urls.get_topics_by_topic;
     }
     services
       .base_service(url, data)
-      .then((response) => {
+      .then(response => {
         console.log('topics response: ', response);
         if (selection_type === 'by_category') {
           setSelectedCategory(response);
         } else {
           set_Selected_Topic(response);
           setSelectedTopicTitle(response.name);
-          console.log("11111111111111LLLLLLLLLLLLLLLLLLLLLLLoooooooooooooggggggggg", response);
-
+          console.log(
+            '11111111111111LLLLLLLLLLLLLLLLLLLLLLLoooooooooooooggggggggg',
+            response,
+          );
         }
-        console.log("LLLLLLLLLLLLLLLLLLLLLLLoooooooooooooggggggggg", response);
-        set_Topic_List_Data(response)
+        console.log('LLLLLLLLLLLLLLLLLLLLLLLoooooooooooooggggggggg', response);
+        set_Topic_List_Data(response);
         setLoadingAndErrorState(false, false);
       })
-      .catch((error) => {
+      .catch(error => {
         setLoadingAndErrorState(false, true);
         console.log('fetch topics error: ', error);
       });
@@ -120,7 +125,7 @@ const TopicsContainer = (props) => {
   const fetchContentByButton = () => {
     setLoadingAndErrorState(true);
     // const {selected_button, content_type} = this.state;
-    let data = { button_id: selected_button.id };
+    let data = {button_id: selected_button.id};
     let url =
       content_type === 'tabs'
         ? urls.get_tabs_by_button
@@ -128,35 +133,39 @@ const TopicsContainer = (props) => {
     fetchTopicData(url, data);
   };
 
+  // fetch the topic course list and 
+  // pass the reponse to the TopicListComponent UI Screen.
   const fetchTopicData = (url, data) => {
     services
       .base_service(url, data)
-      .then((response) => {
+      .then(response => {
         console.log('fetchTopicData response: ', response);
         setTopicAssociatedData(response);
         setLoadingAndErrorState(false, false);
       })
-      .catch((error) => {
+      .catch(error => {
         setLoadingAndErrorState(false, true);
         console.log('fetchTopicData  error: ', error);
       });
   };
 
+  // this function calls the api on the base of selection type and content type 
+  // and response data passes to respective screen UI
   const setTopicDataType = () => {
     setLoadingAndErrorState(true);
     // const {selected_topic, selection_type} = state;
     console.log(`selected topic id: ${selected_topic.id}`);
-    let data = { topic_id: selected_topic.id };
+    let data = {topic_id: selected_topic.id};
     let url = null;
     if (selected_topic && selection_type === 'by_topic') {
       let content_type =
         !selected_topic.has_buttons && !selected_topic.has_tabs
           ? 'content'
           : selected_topic.has_buttons
-            ? 'buttons'
-            : selected_topic.has_tabs
-              ? 'tabs'
-              : null;
+          ? 'buttons'
+          : selected_topic.has_tabs
+          ? 'tabs'
+          : null;
       console.log('Content Type: ', content_type);
       setContentType(content_type);
       switch (content_type) {
@@ -203,9 +212,9 @@ const TopicsContainer = (props) => {
       topic_associated_data={topic_associated_data}
     />
   ) : (
-    <TopicsListComponent 
+    <TopicsListComponent
       {...props}
-      account={account} 
+      account={account}
       navigation={navigation}
       fetchTopics={fetchTopics}
       fetching_topics={fetching_topics}
@@ -213,13 +222,12 @@ const TopicsContainer = (props) => {
       selection_type={selection_type}
       selected_category={selected_category}
       selected_topic={selected_topic}
-      topicListData={topic_list_data}
-    ></TopicsListComponent>
+      topicListData={topic_list_data}></TopicsListComponent>
   );
-}
+};
 
 // Map State To Props (Redux Store Passes State To Component)
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   // Redux Store --> Component
   return {
     logged_in: state.authReducer.logged_in,
@@ -231,13 +239,14 @@ const mapStateToProps = (state) => {
 };
 
 // Map Dispatch To Props (Dispatch Actions To Reducers. Reducers Then Modify The Data And Assign It To Your Props)
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   // Action
   return {
-    setCurrentUserFetchLoadingAction: (loading) =>
+    setCurrentUserFetchLoadingAction: loading =>
       dispatch(setCurrentUserFetchLoading(loading)),
     getCurrentUserAction: () => dispatch(getCurrentUser()),
-    setSelectedTopicAction: (selected_topic) => dispatch(setSelectedTopic(selected_topic)),
+    setSelectedTopicAction: selected_topic =>
+      dispatch(setSelectedTopic(selected_topic)),
   };
 };
 

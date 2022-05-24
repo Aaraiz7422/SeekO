@@ -15,14 +15,13 @@ import {connect} from 'react-redux';
 import {getCurrentUser} from '../../../redux/actions/userActions';
 
 //Import Services and APIs
- const SubscriptionContainer = (props) => {
-
+const SubscriptionContainer = props => {
   useEffect(() => {
     //fetchActiveProducts();
     getProductsForSale();
   });
 
-const fetchActiveProducts = () => {
+  const fetchActiveProducts = () => {
     try {
       console.log('fetchActiveProducts');
       const activeProducts = await Iaphub.getActiveProducts();
@@ -30,8 +29,8 @@ const fetchActiveProducts = () => {
     } catch (error) {
       console.log('Error: ', error);
     }
-  }
-const getProductsForSale = () => {
+  };
+  const getProductsForSale = () => {
     console.log('getProductsForSale 1');
     Iaphub.getProductsForSale()
       .then(response => {
@@ -40,9 +39,9 @@ const getProductsForSale = () => {
       .catch(error => {
         console.log('getProductsForSale Error: ', error);
       });
-  }
-    return <SubscriptionComponent {...props}></SubscriptionComponent>;
-}
+  };
+  return <SubscriptionComponent {...props}></SubscriptionComponent>;
+};
 
 // Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = state => {
@@ -63,4 +62,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 // Exports
-export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SubscriptionContainer);
