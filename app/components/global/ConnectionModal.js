@@ -4,6 +4,7 @@ import {View, Text} from 'react-native';
 //Import Local Components
 import FullScreenModal from '../../components/app/FullScreenModal';
 
+// this modal appears when there isn't internet connectivity
 const ConnectionModal = props => {
   return (
     <FullScreenModal visible={props.visible}>

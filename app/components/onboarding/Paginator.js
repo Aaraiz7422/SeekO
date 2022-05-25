@@ -2,6 +2,7 @@
 import React, {useState, useRef} from 'react';
 import {View, useWindowDimensions, StyleSheet, Animated} from 'react-native';
 
+// three dots UI on OnBoarding Screens
 const Paginator = ({data, scrollX}) => {
   const {width} = useWindowDimensions();
 

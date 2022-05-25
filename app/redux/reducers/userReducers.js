@@ -12,7 +12,7 @@ const initialState = {
     switch (action.type) {
       // getting currently Logged in user info
       case 'GET_CURRENT_USER': {
-        console.log('current user: ', action.data);
+        console.log('current user: dd :', action.data);
         return {
           // State
           ...state,

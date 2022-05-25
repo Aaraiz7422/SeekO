@@ -3,6 +3,7 @@ import * as React from 'react';
 //Import Plugins and Libraries
 import {Modal, Portal, Provider} from 'react-native-paper';
 
+// General FullScreenModal 
 const FullScreenModal = props => {
   const {visible, closeModal, children} = props;
   const containerStyle = {

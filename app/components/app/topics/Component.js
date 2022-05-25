@@ -42,7 +42,7 @@ const TopicsListComponent = props => {
   );
 
   const renderItem = ({item, index}) => <Item item={item} index={index} />;
-
+  // diredtly goToTopicDetail from topic course list screen this function trigger when you click course from topic list screen
   const goToTopicDetail = (item, index) => {
     navigation.push('Topics', {
       account: account,

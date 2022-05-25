@@ -33,11 +33,13 @@ const SignupComponent = props => {
   } = props;
   const internetAvailability = useContext(NetworkContext);
 
+  // password hide/show toggler
   const onButtonToggle = value => {
     setShow(!show);
     setVisible(!visible);
   };
 
+  // triggers when click on sign up button and shows loading indicator
   const showLoaderWhileValidatingUser = () => {
     setTimeout(() => setLoading(false), 1000);
     return (

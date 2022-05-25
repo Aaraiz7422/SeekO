@@ -39,6 +39,7 @@ const CustomCard = ({
   const cardHeight = onLayout ? SCREEN_HEIGHT * height : 295;
   const [globalHeight1, setGlobalHeight] = useState(cardHeight);
 
+  // properties for shadow box around card
   const shadowOpt = {
     width: SCREEN_WIDTH * width,
     height: globalHeight1,
@@ -96,6 +97,8 @@ const CustomCard = ({
   }, [globalHeight1]);
   const _goBack = () => console.log('Went back');
   const _handleMore = () => console.log('Shown more');
+  
+  // this function is used find width and height of any viewable component
   const find_dimesions = layout => {
     const {x, y, width, height} = layout;
     setGlobalHeight(height);

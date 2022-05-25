@@ -11,6 +11,7 @@ const AppHeader = ({title, image, onGoBack = null}) => {
   // or don't want to pass it in case of a deeply nested child.
   const navigation = useNavigation();
 
+  // triggers when user click on back button
   const _goBack = () => {
     navigation.goBack();
   };

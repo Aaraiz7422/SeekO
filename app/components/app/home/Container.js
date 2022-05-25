@@ -1,16 +1,22 @@
+
+//Import Core Components
 import React, {useEffect, useState} from 'react';
+//Import Plugins and Libraries
+import {ActivityIndicator} from 'react-native-paper';
+import Purchases from 'react-native-purchases';
+import {connect} from 'react-redux';
+//Import Local Components
 import HomeComponent from './Component';
 import SubscriptionComponent from '../payment/Component';
+import SubscriptionContainer from '../payment/Container';
 import SingleChildCard from '../SingleChildCard';
-import {connect} from 'react-redux';
+//Import Redux components and actions
 import {logout} from '../../../redux/actions/authActions';
 import {
   getCurrentUser,
   setChildUserAccount,
   setCurrentUserFetchLoading,
 } from '../../../redux/actions/userActions';
-import {ActivityIndicator} from 'react-native-paper';
-import Purchases from 'react-native-purchases';
 
 const HomeContainer = props => {
   const {navigation, current_user} = props;
@@ -123,9 +129,12 @@ const HomeContainer = props => {
       );
     } else if (currentTab === 'Subscription') {
       return (
-        <SubscriptionComponent
-          navigation={navigation}
-          availablePackages={availablePackages}></SubscriptionComponent>
+        <SubscriptionContainer 
+        navigation={navigation}
+          availablePackages={availablePackages} ></SubscriptionContainer>
+        // <SubscriptionComponent
+        //   navigation={navigation}
+        //   availablePackages={availablePackages}></SubscriptionComponent>
       );
     } else if (currentTab === 'Users') {
       return current_user == null ? (

@@ -17,7 +17,7 @@ function SplashScreenStack() {
   );
 }
 const AppStack = createStackNavigator();
-
+// Authentication navigation container for Auth screen like ( login, signup, forget password, reset password screens)
 function AppContainer() {
   return (
     <NavigationContainer>

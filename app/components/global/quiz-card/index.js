@@ -7,6 +7,7 @@ import global from '../../../../global-styles';
 //Import Plugins and Libraries
 import {ProgressBar} from 'react-native-paper';
 
+// Quizcard is used to show question options on Quiz Screen
 const QuizCard = props => {
   const {
     current_question,

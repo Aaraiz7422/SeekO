@@ -5,6 +5,7 @@ import {View, StyleSheet, FlatList, Animated} from 'react-native';
 import OnBoardingItem from './Component';
 import Paginator from './Paginator';
 
+// onboarding screens static data
 const slides = [
   {
     id: '1',

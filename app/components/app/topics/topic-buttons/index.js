@@ -5,6 +5,8 @@ import {View, ScrollView} from 'react-native';
 import CustomCard from '../../../global/CustomCard';
 import CustomButton from '../../../global/CustomButton';
 
+
+// Topic Button UI appears when user click on course from topic
 const TopicButtonsContainer = props => {
   const {account, topic_associated_data, selected_topic, navigation} = props;
 

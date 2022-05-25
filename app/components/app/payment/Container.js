@@ -1,53 +1,83 @@
 import React, {useEffect} from 'react';
 
-//Import Plugins and Libraries
-import Iaphub from 'react-native-iaphub';
-//Import Global Components
-
 //Import Local Components
 import SubscriptionComponent from './Component';
 
-//Import global variables and constants
-
 //Import Redux components and actions
-import {setCurrentUserFetchLoading} from '../../../redux/actions/userActions';
+//Import Redux components and actions
+import {logout} from '../../../redux/actions/authActions';
 import {connect} from 'react-redux';
-import {getCurrentUser} from '../../../redux/actions/userActions';
+import {
+  getCurrentUser,
+  setChildUserAccount,
+  setCurrentUserFetchLoading,
+} from '../../../redux/actions/userActions';
+import Purchases from 'react-native-purchases';
 
-//Import Services and APIs
 const SubscriptionContainer = props => {
+  const {current_user,getCurrentUserAction } = props;
   useEffect(() => {
-    //fetchActiveProducts();
-    getProductsForSale();
-  });
-
-  const fetchActiveProducts = () => {
+    console.log(`Sub Container `);
+    getUserInformation();
+    getCurrentUserAction();
+  },[]);
+  const getUserInformation = async () => {
     try {
-      console.log('fetchActiveProducts');
-      const activeProducts = await Iaphub.getActiveProducts();
-      console.log('activeProducts: ', activeProducts);
-    } catch (error) {
-      console.log('Error: ', error);
+      const purchaserInfo = await Purchases.getPurchaserInfo();
+      console.log(`*** Current User Info *** `);
+      console.log(`id : ${current_user.id}`);
+      console.log(`gender : ${current_user.gender}`);
+      console.log(`is root user : ${current_user.is_root_user}`);
+      console.log(`name : ${current_user.name}`);
+      console.log(`updated at : ${current_user.updated_at}`);
+      console.log(`username : ${current_user.username}`);
+
+      console.log(`*** Customer Info *** `);
+      console.log(`request date : ${purchaserInfo.requestDate} `);
+      console.log(`original App User Id : ${purchaserInfo.originalAppUserId} `);
+      console.log(`first seen : ${purchaserInfo.firstSeen} `);
+      console.log(`orignal purchase date : ${purchaserInfo.originalPurchaseDate} `);
+      console.log(`management url : ${purchaserInfo.managementURL} `);
+      console.log(`all purchase dates : ${purchaserInfo.allPurchaseDates['rc_499_m']} `);
+      console.log(`all purchase dates : ${purchaserInfo.allPurchaseDates['rc_6000_y']} `);
+      console.log(`all purchase product indentifiers : ${purchaserInfo.allPurchasedProductIdentifiers} `);
+      console.log(`non subscription transactions  : ${purchaserInfo.nonSubscriptionTransactions} `);
+      console.log(`active subscriptions : ${purchaserInfo.activeSubscriptions} `);
+
+      console.log(`
+      *** Customer Info with Entitlement Info  *** `);
+      console.log(`identifier : ${purchaserInfo.entitlements.active['pro'].identifier}`);
+      console.log(`product identifier : ${purchaserInfo.entitlements.active['pro'].productIdentifier}`);
+      console.log(`is Active : ${purchaserInfo.entitlements.active['pro'].isActive}`);
+      console.log(`will renew : ${purchaserInfo.entitlements.active['pro'].willRenew}`);
+      console.log(`period type : ${purchaserInfo.entitlements.active['pro'].periodType}`);
+      console.log(`latest purchase date : ${purchaserInfo.entitlements.active['pro'].latestPurchaseDate}`);
+      console.log(`original purchase date : ${purchaserInfo.entitlements.active['pro'].originalPurchaseDate}`);
+      console.log(`expiration date : ${purchaserInfo.entitlements.active['pro'].expirationDate}`);
+      console.log(`store : ${purchaserInfo.entitlements.active['pro'].store}`);
+      console.log(`is sandbox : ${purchaserInfo.entitlements.active['pro'].isSandbox}`);
+      console.log(`unsubscribe detected at : ${purchaserInfo.entitlements.active['pro'].unsubscribeDetectedAt}`);
+      console.log(`billing issue detected at : ${purchaserInfo.entitlements.active['pro'].billingIssueDetectedAt}`);
+
+    } catch (e) {
+      console.log(` error : ${e}`)
+     // Error fetching purchaser info
     }
-  };
-  const getProductsForSale = () => {
-    console.log('getProductsForSale 1');
-    Iaphub.getProductsForSale()
-      .then(response => {
-        console.log('getProductsForSale response: ', response);
-      })
-      .catch(error => {
-        console.log('getProductsForSale Error: ', error);
-      });
-  };
+  }
+
+  console.log(` current user : ${current_user}`)
+  
   return <SubscriptionComponent {...props}></SubscriptionComponent>;
 };
 
-// Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = state => {
   // Redux Store --> Component
   return {
     logged_in: state.authReducer.logged_in,
+    auth_token: state.authReducer.auth_token,
+    current_user_fetching: state.userReducer.current_user_fetching,
+    current_user: state.userReducer.current_user,
+    current_user_error: state.userReducer.current_user_error,
   };
 };
 
@@ -57,7 +87,11 @@ const mapDispatchToProps = dispatch => {
   return {
     setCurrentUserFetchLoadingAction: loading =>
       dispatch(setCurrentUserFetchLoading(loading)),
-    getCurrentUserAction: () => dispatch(getCurrentUser()),
+    getCurrentUserAction: () =>
+      dispatch(getCurrentUser()),
+    logoutAction: () => dispatch(logout()),
+    setChildUserAccountAction: child_account =>
+      dispatch(setChildUserAccount(child_account)),
   };
 };
 

@@ -27,7 +27,7 @@ const CustomButton = ({
     borderWidth,
     borderRadius,
 }) => {
-
+    // properties for shadow box around button
     const shadowOpt = {
         width: SCREEN_WIDTH * width,
         height: height,

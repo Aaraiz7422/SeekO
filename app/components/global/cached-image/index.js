@@ -4,6 +4,7 @@ import {View, ActivityIndicator} from 'react-native';
 //Import Plugins and Libraries
 import FastImage from 'react-native-fast-image';
 
+// cachedImage only used for splash screen
 const CachedImage = props => {
   const [image_loading, set_Image_Loading] = useState(false);
   let {style, source, localImage} = props;

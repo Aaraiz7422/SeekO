@@ -13,7 +13,7 @@ import CategoriesContainer from '../../components/app/categories/Container';
 import TrackProgressContainer from '../../components/app/track-progress/Container';
 import QuizProgressComponent from '../../components/app/track-progress/quiz-progress';
 const ApplicationStack = createStackNavigator();
-
+// app navigation container for all app screens other than Authentication screens
 function AppNavigationStack() {
     return (
         <ApplicationStack.Navigator initialRouteName='Home' screenOptions={{headerShown:false}}>

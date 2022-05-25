@@ -31,6 +31,7 @@ const TrackProgressComponent = props => {
       ? quiz_progress_data
       : child_accounts;
 
+  // currently we're not using this UI for childs account but used for attempted quiz title name UI etc.
   const renderChildAccounts = ({item, index}) => {
     const {navigation, selected_child_account, selected_screen} = props;
     console.log(

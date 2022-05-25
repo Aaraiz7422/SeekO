@@ -7,6 +7,8 @@ export const NetworkProvider = (props) => {
   const [isConnected, setIsConnected] = useState(true);
 
   useEffect(() => {
+    // trigger whenever network state change 
+    // and store network state value in isConnected variable using setIsConnected
     const removeNetInfoSubscription = NetInfo.addEventListener(
         networkState => {
     setIsConnected(networkState.isConnected);
@@ -14,14 +16,10 @@ export const NetworkProvider = (props) => {
         console.log('Is connected? - ', networkState.isConnected);
       },
     );
-    // console.log(`isConnected : ${isConnected}`);
+    
+    // unmounting
     return () => removeNetInfoSubscription();
   }, []);
-
-  const handleConnectivityChange = isConnected => {
-    setIsConnected(isConnected);
-    console.log(`isConnected : ${isConnected}`);
-  };
 
   return (
     <NetworkContext.Provider value={{isConnected: isConnected}}>
