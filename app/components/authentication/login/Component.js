@@ -195,7 +195,7 @@ const LoginComponent = props => {
                   {fontFamily: 'Poppins-Regular', color: 'black'},
                 ]}
                 onPress={() => {
-                  navigation.navigate('ForgotPassword');
+                  navigation.navigate('Pdf');
                 }}>
                 Forgot Password?
               </Text>

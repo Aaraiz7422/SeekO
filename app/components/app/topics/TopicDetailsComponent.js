@@ -27,6 +27,15 @@ const TopicDetailsComponent = props => {
     navigation,
     selection_type,
     selected_button,
+    // source,
+    // setSource,
+    // url,
+    // setUrl,
+    // setFilePath,
+    // sharePdf,
+    // saveFile,
+    // createPdf,
+    // requestRunTimePermission,
   } = props;
   const internetAvailability = useContext(NetworkContext);
 

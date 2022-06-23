@@ -8,7 +8,9 @@ import ForgetPassword from '../../components/authentication/forget-password/Forg
 import ResetPassword from '../../components/authentication/reset-password/ResetPassword';
 import OnBoarding from '../../components/onboarding/Container';
 import HomeContainer from '../../components/app/home/Container';
+import PDFGenerateShareAndSaveDocument from '../../components/app/pdf-generate-and-share/Component';
 import { useNavigation } from '@react-navigation/native';
+
 const AuthStack = createStackNavigator();
 
 const AuthenticationStack = () => {
@@ -35,6 +37,7 @@ const AuthenticationStack = () => {
         <AuthStack.Screen name="Signup" component={SignupContainer} />
         <AuthStack.Screen name="ForgotPassword" component={ForgetPassword}/>
         <AuthStack.Screen name="ResetPassword" component={ResetPassword}/>
+        <AuthStack.Screen name="Pdf" component={PDFGenerateShareAndSaveDocument}/>
     </AuthStack.Navigator>);
     }
      else {
@@ -49,6 +52,8 @@ const AuthenticationStack = () => {
             <AuthStack.Screen name="Signup" component={SignupContainer} />
             <AuthStack.Screen name="ForgotPassword" component={ForgetPassword}/>
             <AuthStack.Screen name="ResetPassword" component={ResetPassword}/>
+        <AuthStack.Screen name="Pdf" component={PDFGenerateShareAndSaveDocument}/>
+
         </AuthStack.Navigator>
     );
         // return <LoginContainer ></LoginContainer>

@@ -21,6 +21,8 @@ import {
   setCurrentUserFetchLoading,
 } from '../../../redux/actions/userActions';
 
+
+
 const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
   const [topicListData, setTopicListData] = useState({});
   useEffect(() => {

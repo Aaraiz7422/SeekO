@@ -1,5 +1,5 @@
 //Import Core Components
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   View,
@@ -9,6 +9,8 @@ import {
   ActivityIndicator,
   Platform,
   Text,
+  Alert,
+  PermissionsAndroid,
 } from 'react-native';
 //Import Plugins and Libraries
 import YouTube, {
@@ -20,6 +22,19 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../../../constants';
 //Import Global Components
 import CustomButton from '../../../global/CustomButton';
+
+import {PDFDocument, StandardFonts, rgb, PageSizes} from 'pdf-lib';
+import Share from 'react-native-share';
+// import RNFetchBlob from 'react-native-fetch-blob';
+import {
+  writeFile,
+  appendFile,
+  copyFile,
+  DownloadDirectoryPath,
+  DocumentDirectoryPath,
+} from 'react-native-fs';
+import Pdf from 'react-native-pdf';
+import {PdfImage} from '../../../../../constants';
 
 const HEADING_1 = 'HEADING_1';
 const HEADING_2 = 'HEADING_2';
@@ -40,11 +55,226 @@ const TopicContentContainer = props => {
   const [playerWidth, setPlayerWidth] = useState(
     Dimensions.get('window').width,
   );
-  const _youTubeRef = React.createRef();
-  const {account, topic_associated_data, navigation, parent_data, tab_data} =
-    props;
 
-  // rendering content on the base of server response 
+  // const [source, setSource] = useState(null);
+  // const [url, setUrl] = useState('');
+  // const [file_Path, setFilePath] = useState('');
+
+  const _youTubeRef = React.createRef();
+  const {
+    account,
+    topic_associated_data,
+    navigation,
+    parent_data,
+    tab_data,
+    selected_topic_title,
+    source,
+    setSource,
+    url,
+    setUrl,
+    setFilePath,
+    sharePdf,
+    saveFile,
+    createPdf,
+    requestRunTimePermission,
+  } = props;
+
+  useEffect(() => {
+    // console.log(`Account Data : ${account.name + selected_topic_title}`)
+    // console.log(`Certificate : ${topic_associated_data.certificate_shown}`);
+    console.log(`UE Updated ***`);
+    
+  }, []);
+
+  // const requestRunTimePermission = () => {
+  //   async function externalStoragePermission() {
+  //     try {
+  //       const granted = await PermissionsAndroid.request(
+  //         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+  //         {
+  //           title: 'External Storage Write Permission',
+  //           message: 'App needs access to Storage data.',
+  //         },
+  //       );
+  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //         saveFile();
+  //       } else {
+  //         alert('WRITE_EXTERNAL_STORAGE permission denied');
+  //       }
+  //     } catch (err) {
+  //       Alert.alert('Write permission err', err);
+  //       console.warn(err);
+  //     }
+  //   }
+
+  //   if (Platform.OS === 'android') {
+  //     externalStoragePermission();
+  //   } else {
+  //     saveFile();
+  //   }
+  // };
+
+  // // save pdf
+  // const saveFile = () => {
+  //   // var RNFS = require('react-native-fs');
+  //   const fs = RNFetchBlob.fs;
+  //   var splitArray = file_Path.split('/');
+
+  //   var fileName = splitArray[splitArray.length - 1];
+  //   console.log(fileName);
+  //   // var path = RNFS.DownloadDirectoryPath + '/' + fileName;
+  //   var path = DownloadDirectoryPath + '/' + fileName;
+  //   // var path = DocumentDirectoryPath + '/' + fileName;
+
+  //   fs.writeFile(path, file_Path, 'uri')
+  //     .then(() => {
+  //       RNFetchBlob.android.addCompleteDownload({
+  //         title: `${account.name} Certificate`,
+  //         description: 'desc',
+  //         mime: 'application/pdf',
+  //         path: path,
+  //         showNotification: true,
+  //         notification: true,
+  //       });
+  //       console.log('FILE WRITTEN!');
+  //     })
+  //     .catch(err => {
+  //       console.log('SaveFile()', err.message);
+  //       alert(err.message);
+  //     });
+  // };
+
+  // const createPdf = async () => {
+  //   const pdfDoc = await PDFDocument.create();
+  //   const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+  //   const pngImage = await pdfDoc.embedPng(PdfImage);
+  //   const pngDims = pngImage.scale(0.5);
+  //   const page = pdfDoc.addPage(PageSizes.A4);
+  //   const {width, height} = page.getSize();
+
+  //   page.drawImage(pngImage, {
+  //     x: width / 2 - pngDims.width / 2,
+  //     y: height / 2 - pngDims.height + 250,
+  //     width: pngDims.width,
+  //     height: pngDims.height,
+  //   });
+
+  //   // Draw a string of text toward the top of the page
+  //   const fontSize = 30;
+  //   page.drawText('Creating PDFs in JavaScript is awesome!', {
+  //     x: 50,
+  //     y: height - 4 * fontSize,
+  //     size: fontSize,
+  //     font: timesRomanFont,
+  //     color: rgb(0, 0.53, 0.71),
+  //   });
+
+  //   const username = account.name;
+  //   page.drawText(username, {
+  //     x: (width - 60 - username.length / 2) / 2,
+  //     y: (height + 90) / 2,
+  //     size: 18,
+  //     font: timesRomanFont,
+  //     color: rgb(0, 0.53, 0.71),
+  //   });
+
+  //   const courseTitle = selected_topic_title;
+  //   page.drawText(courseTitle, {
+  //     x: (width - 80 - courseTitle.length / 2) / 2,
+  //     y: (height - 30) / 2,
+  //     size: 18,
+  //     font: timesRomanFont,
+  //     color: rgb(0, 0.53, 0.71),
+  //   });
+
+  //   // Serialize the PDFDocument to bytes (a Uint8Array)
+  //   // const pdfBytes = await pdfDoc.save()
+  //   const base64DataUri = await pdfDoc.saveAsBase64({dataUri: true});
+  //   // dataUri = base64DataUri;
+  //   setSource({uri: base64DataUri});
+  //   setUrl(base64DataUri);
+  //   console.log(`Pdf Created`);
+  //   // console.log(`pdfBytes : ${pdfBytes}`);
+  //   // console.log(`base64DataUri : ${base64DataUri}`);
+  //   // console.log(`dataUri : ${dataUri}`);
+  // };
+
+  // const sharePdf = async () => {
+  //   try {
+  //     await Share.open({
+  //       url: url,
+  //       title: 'Sharing Certificate Maria.pdf file from SeekO app',
+  //       message: 'Please take a look at this pdf',
+  //       filename: `${account.name} Certificate`,
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // return pdf
+
+  const renderPdf = () => {
+    return (
+      <>
+        {source === null ? (
+          <ActivityIndicator size={'small'} color={'green'}></ActivityIndicator>
+        ) : (
+          <Pdf
+            source={source !== null && source}
+            trustAllCerts={false}
+            onLoadComplete={(numberOfPages, filePath) => {
+              console.log(`Number of pages: ${numberOfPages}`);
+              console.log(`FilePath : ${filePath}`);
+              // console.log(`Source : ${source.uri}`)
+              setFilePath(filePath);
+            }}
+            onPageChanged={(page, numberOfPages) => {
+              console.log(`Current page: ${page}`);
+            }}
+            onError={error => {
+              console.log(error);
+            }}
+            onPressLink={uri => {
+              console.log(`Link pressed: ${uri}`);
+            }}
+            style={styles.pdf}
+          />
+        )}
+<View style={{marginTop:- Dimensions.get('window').height * 0.18}}>
+        <CustomButton
+          backgroundColor={'#DEE8FB'}
+          title={'Download'}
+          height={50}
+          width={0.7}
+          borderRadius={30}
+          textColor={'white'}
+          linearStartColor={'#F8C04E'}
+          linearEndColor={'#FFBF3C'}
+          shadowColor={'#FFBF3C'}
+          shadowRadius={20}
+          onPress={async () => {
+            requestRunTimePermission();
+          }}></CustomButton>
+        <CustomButton
+          backgroundColor={'#DEE8FB'}
+          title={'Share'}
+          height={50}
+          width={0.7}
+          borderRadius={30}
+          textColor={'white'}
+          linearStartColor={'#F8C04E'}
+          linearEndColor={'#FFBF3C'}
+          shadowColor={'#FFBF3C'}
+          shadowRadius={20}
+          onPress={async () => {
+            await sharePdf();
+          }}></CustomButton>
+          </View>
+      </>
+    );
+  };
+  // rendering content on the base of server response
   const renderContentComponent = content => {
     switch (content.type) {
       case HEADING_1: {
@@ -286,34 +516,97 @@ const TopicContentContainer = props => {
         alignItems: 'center',
       }}>
       <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 8}}>
-        {topic_associated_data.content.map((content, index) => {
-          return (
-            <View
-              key={index}
-              style={[
-                {
-                  marginBottom:
-                    topic_associated_data.length - 1 === index ? 32 : 0,
-                  width: SCREEN_WIDTH * 0.9,
-                },
-              ]}>
-              {renderContentComponent(content)}
-              {topic_associated_data.length - 1 === index && (
-                <Text
-                  style={{
-                    color: 'black',
-                    textAlign: 'center',
-                    fontFamily: 'Poppins-Regular',
-                    marginTop: 16,
-                  }}>
-                  End of content
-                </Text>
-              )}
-            </View>
-          );
-        })}
+        <View style={styles.container}>
+          {topic_associated_data.certificate_shown === true ? (
+            <>
+            {renderPdf()}
+            </>
+          ) : (
+            <>
+              {topic_associated_data.content.map((content, index) => {
+                return (
+                  <View
+                    key={index}
+                    style={[
+                      {
+                        marginBottom:
+                          topic_associated_data.length - 1 === index ? 32 : 0,
+                        width: SCREEN_WIDTH * 0.9,
+                      },
+                    ]}>
+                    {renderContentComponent(content)}
+                    {topic_associated_data.length - 1 === index && (
+                      <Text
+                        style={{
+                          color: 'black',
+                          textAlign: 'center',
+                          fontFamily: 'Poppins-Regular',
+                          marginTop: 16,
+                        }}>
+                        End of content
+                      </Text>
+                    )}
+                  </View>
+                );
+              })}
+            </>
+          )}
+        </View>
         {topic_associated_data.quiz_id && (
-          <View style={{marginBottom: 40}}>
+          <View style={[{marginBottom: 40}, styles.container]}>
+            {/* {
+                  source === null ?
+                  <ActivityIndicator size={'small'} color={'green'}></ActivityIndicator>:
+                  <Pdf
+                    source={source !== null && source}
+                    trustAllCerts={false}
+                    onLoadComplete={(numberOfPages,filePath) => {
+                        console.log(`Number of pages: ${numberOfPages}`);
+                        console.log(`FilePath : ${filePath}`);
+                        // console.log(`Source : ${source.uri}`)
+                        setFilePath(filePath);
+                    }}
+                    onPageChanged={(page,numberOfPages) => {
+                        console.log(`Current page: ${page}`);
+                    }}
+                    onError={(error) => {
+                        console.log(error);
+                    }}
+                    onPressLink={(uri) => {
+                        console.log(`Link pressed: ${uri}`);
+                    }}
+                    style={styles.pdf}/>
+                    
+                }
+
+<CustomButton
+                backgroundColor={'#DEE8FB'}
+                title={'Download'}
+                height={50}
+                width={0.6}
+                borderRadius={30}
+                textColor={'white'}
+                linearStartColor={'#F8C04E'}
+                linearEndColor={'#FFBF3C'}
+                shadowColor={'#FFBF3C'}
+                shadowRadius={20}
+                onPress={async () => {
+                  requestRunTimePermission();
+                }}></CustomButton>
+                <CustomButton
+                backgroundColor={'#DEE8FB'}
+                title={'Share'}
+                height={50}
+                width={0.6}
+                borderRadius={30}
+                textColor={'white'}
+                linearStartColor={'#F8C04E'}
+                linearEndColor={'#FFBF3C'}
+                shadowColor={'#FFBF3C'}
+                shadowRadius={20}
+                onPress={async () => {
+                  await sharePdf();
+                }}></CustomButton> */}
             <CustomButton
               backgroundColor={'#DEE8FB'}
               title={'Start Quiz'}
@@ -358,5 +651,19 @@ const styles = StyleSheet.create({
   player: {
     alignSelf: 'stretch',
     marginVertical: 10,
+  },
+  container: {
+    // flex: 1,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5F8FF',
+    // marginTop: 25,
+  },
+  pdf: {
+    flex: 1,
+    width: Dimensions.get('window').width * 0.94,
+    height: Dimensions.get('window').height * 0.7,
+    marginTop:-40,
+    backgroundColor: '#F5F8FF',
   },
 });
