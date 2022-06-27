@@ -34,6 +34,7 @@ const CustomCard = ({
   cardBorderWidth,
   cardBorderRadius,
   cardBackgroundColor,
+  unlock=true,
   onPress,
 }) => {
   const cardHeight = onLayout ? SCREEN_HEIGHT * height : 295;
@@ -85,7 +86,7 @@ const CustomCard = ({
       <Card.Cover
         resizeMode="stretch"
         source={{uri: coverImage}}
-        style={{margin: imageMargin, borderRadius: 10}}
+        style={[{margin: imageMargin, borderRadius: 10},unlock === false && {backgroundColor: 'black',opacity:0.5}]}
       />
     ) : null;
 
@@ -118,7 +119,7 @@ const CustomCard = ({
               colors={[linearStartColor, linearEndColor]}
               style={{borderRadius: 10}}>
               <Card
-                style={
+                style={[
                   onLayout
                     ? {
                         width: SCREEN_WIDTH * width,
@@ -130,8 +131,10 @@ const CustomCard = ({
                         height: globalHeight1,
                         backgroundColor: 'transparent',
                         elevation: 0,
-                      }
-                }>
+                      },
+
+                      unlock === true ?{backgroundColor: 'transparent'}:{borderRadius:10}
+                ]}>
                 {cp}
                 {ip}
               </Card>

@@ -54,6 +54,13 @@ const TopicsContainer = props => {
   const [topic_associated_data, setTopicAssociatedData] = useState(null);
   const [topic_list_data, set_Topic_List_Data] = useState(topicListData);
 
+
+  // States for modal
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+  const closeModal = () => setVisible(false);
+
+
   // UI Screen render on the base of Selection Type variable value
   useEffect(() => {
     if (props.route.params.topicListData !== undefined) {
@@ -522,6 +529,9 @@ const TopicsContainer = props => {
     <TopicsListComponent
       {...props}
       account={account}
+      showModal={showModal}
+      closeModal={closeModal}
+      visible={visible}
       navigation={navigation}
       fetchTopics={fetchTopics}
       fetching_topics={fetching_topics}

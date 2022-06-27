@@ -16,6 +16,10 @@ const CategoriesContainer = props => {
   const [categories, setCategories] = useState([]); // all categories list
   const {account} = route.params;  // account variable contains user profile info
 
+  // States for Modal
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+  const closeModal = () => setVisible(false);
   useEffect(() => {
     // fetchCategories function fetch categories list from server 
     // and store categories list in categories variable using setCategories function
@@ -27,7 +31,11 @@ const CategoriesContainer = props => {
       {...props}
       navigation={navigation}
       account={account}
-      categories={categories}></CategoriesComponent>
+      categories={categories}
+      showModal={showModal}
+      closeModal={closeModal}
+      visible={visible}
+      ></CategoriesComponent>
   );
 };
 

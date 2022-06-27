@@ -1,13 +1,13 @@
 //Import Core Components
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Image, Text, FlatList} from 'react-native';
+import {View, Image, Text, FlatList, Dimensions,TouchableOpacity} from 'react-native';
 //Import Local Components
 import AppHeader from '../AppHeader';
 //Import Services and APIs
 import services from '../../../api/services';
 import {urls} from '../../../api/urls';
 //Import Plugins and Libraries
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import {ActivityIndicator} from 'react-native-paper';
 //Import Global Components
 import CustomCard from '../../global/CustomCard';
@@ -20,10 +20,11 @@ import {
   setChildUserAccount,
   setCurrentUserFetchLoading,
 } from '../../../redux/actions/userActions';
+import FullScreenModal from '../FullScreenModal';
 
 
 
-const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
+const CategoryItem = ({navigation, account, categoryName, topicId, index,showModal}) => {
   const [topicListData, setTopicListData] = useState({});
   useEffect(() => {
     // fetchTopics function fetch one topic at time on the base of topicId variable which contains courses list from server 
@@ -31,8 +32,8 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
     fetchTopics(topicId, setTopicListData);
   }, []);
 
-  const TopicItem = ({item, index}) => (
-    <CustomCard
+  const TopicItem = ({item, index}) => {
+    return item.unlocked === true ? ( <CustomCard
       height={0.38}
       width={0.6}
       cardTitle={item.name}
@@ -42,8 +43,40 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
       linearEndColor={index % 2 != 0 ? '#00CDAC' : '#FF8450'}
       shadowColor={index % 2 != 0 ? '#00cbac' : '#FFA06A'}
       onLayout={false}
-      onPress={() => goToTopicDetail(item, index)}></CustomCard>
-  );
+      onPress={() => goToTopicDetail(item, index)}></CustomCard> ) : (
+        <>
+          <Image
+            source={require('../../../assets/lock.png')}
+            style={{
+              zIndex: 1,
+              position: 'absolute',
+              top:Dimensions.get('window').width * 0.28 ,
+              left: Dimensions.get('window').width * 0.31,
+              bottom: 0,
+              right: 0,
+              height: Dimensions.get('window').height * 0.04,
+              width: Dimensions.get('window').width * 0.1,
+              resizeMode: 'contain',
+              tintColor:'grey'
+              }}></Image>
+          <CustomCard
+            height={0.38}
+            width={0.6}
+            unlock={false}
+            cardTitle={item.name}
+            coverImage={item.thumbnail}
+            imageMargin={10}
+            linearStartColor={index % 2 != 0 ? '#02AAB0' : '#FFAC71'}
+            linearEndColor={index % 2 != 0 ? '#00CDAC' : '#FF8450'}
+            shadowColor={index % 2 != 0 ? '#00cbac' : '#FFA06A'}
+            shadowBorder={16}
+            shawdowOpacity={0.25}
+            shadowHorizontalMargin={22}
+            shadowVerticalMargin={20}
+            onPress={showModal}></CustomCard>
+        </>
+      );
+  }
 
   const renderTopicItem = ({item, index}) => (
     <TopicItem item={item} index={index} />
@@ -113,7 +146,7 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index}) => {
   );
 };
 
-const CategoriesComponent = ({navigation, account, categories}) => {
+const CategoriesComponent = ({navigation, account, categories,showModal,closeModal,visible}) => {
   const [loading, setLoading] = useState(true);
   // const netInfo = useNetInfo();
   const internetAvailability = useContext(NetworkContext);
@@ -154,6 +187,7 @@ const CategoriesComponent = ({navigation, account, categories}) => {
       categoryName={item.name}
       index={index}
       topicId={item.id}
+      showModal={showModal}
     />
   );
 
@@ -172,6 +206,79 @@ const CategoriesComponent = ({navigation, account, categories}) => {
               : {flex: 1, backgroundColor: '#F5F8FF'}
           }>
           {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
+          <FullScreenModal visible={visible} onDismiss={closeModal}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      color: 'black',
+                      fontSize: 16,
+                      fontFamily: 'Poppins-Regular',
+                      textAlign: 'center',
+                      paddingTop: 10,
+                    }}>
+                    One course in each
+                  </Text>
+                  <Text
+                    style={{
+                      color: 'black',
+                      fontSize: 16,
+                      fontFamily: 'Poppins-Regular',
+                      textAlign: 'center',
+                    }}>
+                    category is unlocked every
+                  </Text>
+
+                  <Text
+                    style={{
+                      color: '#02AAB0',
+                      fontWeight: 'bold',
+                      fontSize: 36,
+                      fontFamily: 'Poppins-Regular',
+                      textAlign: 'center',
+                    }}>
+                    12 Hours
+                  </Text>
+
+                  <Text
+                    style={{
+                      color: 'black',
+                      fontSize: 12,
+                      fontFamily: 'Poppins-Regular',
+                      textAlign: 'center',
+                    }}>
+                    Next course will be unlocked in
+                  </Text>
+
+                  <Text
+                    style={{
+                      color: '#02AAB0',
+                      fontWeight: 'bold',
+                      fontSize: 24,
+                      fontFamily: 'Poppins-Regular',
+                      textAlign: 'center',
+                    }}>
+                    43:37:15
+                  </Text>
+
+                  <TouchableOpacity
+                    style={{
+                      position: 'absolute',
+                      top: -8,
+                      left: Dimensions.get('window').width * 0.69,
+                      bottom: 0,
+                      right: 0,
+                    }}
+                    onPress={closeModal}>
+                    <Image
+                      source={require('../../../assets/close-modal.png')}
+                      style={{
+                        height: Dimensions.get('window').height * 0.03,
+                        width: Dimensions.get('window').width * 0.2,
+                        resizeMode: 'contain',
+                      }}></Image>
+                  </TouchableOpacity>
+                </View>
+              </FullScreenModal>
         </View>
       ) : (
         <ConnectionModal
