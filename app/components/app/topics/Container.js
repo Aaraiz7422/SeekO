@@ -55,6 +55,13 @@ const TopicsContainer = props => {
   const [topic_list_data, set_Topic_List_Data] = useState(topicListData);
 
 
+  // States for Review Quiz Screen in Course Progress Screen ( embedding )
+  const [quiz_progress_data,setQuizProgressData] = useState(null);
+  const [child_user_account,setChildUserAccount] = useState(null);
+  const [selected_topic_redux,setSelectedTopicRedux] = useState({});
+  const [quiz_result_data,setQuizResultData] = useState({});
+
+
   // States for modal
   const [visible, setVisible] = useState(false);
   const showModal = () => setVisible(true);
@@ -224,6 +231,71 @@ const TopicsContainer = props => {
     }
 
     // console.log("Topic Associated Data : ",topic_associated_data);
+  };
+
+
+
+  const fetchChildQuizProgress = (submitResponse,child_user_account,selected_topic_redux) => {
+    // const {navigation, child_user_account, selected_topic_redux} = props;
+    console.log('CURRENT CHILD ACCOUNT in Course Progress: ', child_user_account.id);
+    console.log('SSSSSSSSS in Course Progress ........... ::: ', submitResponse);
+    let data1 = {user_id: child_user_account.id};
+    services
+      .base_service(urls.track_progress, data1)
+      .then(response => {
+        console.log('quiz progress response in Course Progress : ', JSON.stringify(response));
+        // setLoadingAndErrorState(false, false);
+        // quiz_result = response;
+        console.log('Quiz Result in Course Progress............', response);
+        console.log('Select topic redux in Course Progress : ', selected_topic_redux);
+        setQuizProgressData(response);
+        setSelectedTopicRedux(selected_topic_redux)
+        setChildUserAccount(child_user_account);
+        setQuizResultData(submitResponse);
+        navigation.goBack();
+        // navigation.navigate('QuizResult', {
+        //   account: account,
+        //   selected_topic_redux: selected_topic_redux,
+        //   quiz_progress_data: response,
+        //   quiz_result_data: submitResponse,
+        //   selected_quiz,
+        //   tab_data,
+        //   child_user_account: child_user_account,
+        //   selected_topic_title: props.route.params.selected_topic_title,
+        // });
+      })
+      .catch(error => {
+        // setLoadingAndErrorState(false, true);
+        console.log('fetch quiz progress error: ', error);
+      });
+  };
+
+
+  const filterQuizProgressData = () => {
+    console.log(
+      'quiz progress Data in quiz result screen ',
+      quiz_progress_data,
+    );
+    quiz_progress_data.map((item, index) => {
+      console.log('Without Filter Quiz Name : ............ : ', item.quiz_name);
+      const quiz_name = item.quiz_name.split('-')[0];
+      console.log(
+        'Filtered Quiz Name : ............ : ',
+        item.quiz_name.split('-')[0],
+      );
+      console.log(
+        'Filtered Quiz Name comparison with Selected Topic Title : ............ : ',
+        selected_topic_title,
+      );
+
+      if (selected_topic_title.trim() === quiz_name.trim()) {
+        navigation.navigate('QuizProgress', {
+          account: account,
+          quiz_progress_data: item,
+          selected_child_account: child_user_account.id,
+        });
+      }
+    });
   };
 
   const requestRunTimePermission = () => {
@@ -524,6 +596,11 @@ const TopicsContainer = props => {
       content_type={content_type}
       navigation={navigation}
       topic_associated_data={topic_associated_data}
+      fetchChildQuizProgress={fetchChildQuizProgress}
+      filterQuizProgressData={filterQuizProgressData}
+      quiz_progress_data={quiz_progress_data}
+      selected_topic_redux={selected_topic_redux}
+      quiz_result_data={quiz_result_data}
     />
   ) : (
     <TopicsListComponent

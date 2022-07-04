@@ -22,6 +22,7 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../../../constants';
 //Import Global Components
 import CustomButton from '../../../global/CustomButton';
+import CustomCard from '../../../global/CustomCard';
 
 import {PDFDocument, StandardFonts, rgb, PageSizes} from 'pdf-lib';
 import Share from 'react-native-share';
@@ -35,6 +36,9 @@ import {
 } from 'react-native-fs';
 import Pdf from 'react-native-pdf';
 import {PdfImage} from '../../../../../constants';
+
+// import services from '../../../../api/services';
+// import {urls} from '../../../../api/urls';
 
 const HEADING_1 = 'HEADING_1';
 const HEADING_2 = 'HEADING_2';
@@ -55,7 +59,9 @@ const TopicContentContainer = props => {
   const [playerWidth, setPlayerWidth] = useState(
     Dimensions.get('window').width,
   );
-
+  // const [quiz_progress_data,setQuizProgressData] = useState(null);
+  // const [child_user_account,setChildUserAccount] = useState(null);
+  const reponse = true;
   // const [source, setSource] = useState(null);
   // const [url, setUrl] = useState('');
   // const [file_Path, setFilePath] = useState('');
@@ -77,13 +83,78 @@ const TopicContentContainer = props => {
     saveFile,
     createPdf,
     requestRunTimePermission,
+    fetchChildQuizProgress,
+    filterQuizProgressData,
+    quiz_progress_data,
+    selected_topic_redux,
+    quiz_result_data,
   } = props;
 
+  // const fetchChildQuizProgress = (submitResponse,child_user_account,selected_topic_redux) => {
+  //   // const {navigation, child_user_account, selected_topic_redux} = props;
+  //   console.log('CURRENT CHILD ACCOUNT in Course Progress: ', child_user_account.id);
+  //   console.log('SSSSSSSSS in Course Progress ........... ::: ', submitResponse);
+  //   let data1 = {user_id: child_user_account.id};
+  //   services
+  //     .base_service(urls.track_progress, data1)
+  //     .then(response => {
+  //       console.log('quiz progress response in Course Progress : ', JSON.stringify(response));
+  //       // setLoadingAndErrorState(false, false);
+  //       // quiz_result = response;
+  //       console.log('Quiz Result in Course Progress............', response);
+  //       console.log('Select topic redux in Course Progress : ', selected_topic_redux);
+  //       setQuizProgressData(response);
+  //       setChildUserAccount(child_user_account);
+  //       navigation.goBack();
+  //       // navigation.navigate('QuizResult', {
+  //       //   account: account,
+  //       //   selected_topic_redux: selected_topic_redux,
+  //       //   quiz_progress_data: response,
+  //       //   quiz_result_data: submitResponse,
+  //       //   selected_quiz,
+  //       //   tab_data,
+  //       //   child_user_account: child_user_account,
+  //       //   selected_topic_title: props.route.params.selected_topic_title,
+  //       // });
+  //     })
+  //     .catch(error => {
+  //       // setLoadingAndErrorState(false, true);
+  //       console.log('fetch quiz progress error: ', error);
+  //     });
+  // };
+
+  // const filterQuizProgressData = () => {
+  //   console.log(
+  //     'quiz progress Data in quiz result screen ',
+  //     quiz_progress_data,
+  //   );
+  //   quiz_progress_data.map((item, index) => {
+  //     console.log('Without Filter Quiz Name : ............ : ', item.quiz_name);
+  //     const quiz_name = item.quiz_name.split('-')[0];
+  //     console.log(
+  //       'Filtered Quiz Name : ............ : ',
+  //       item.quiz_name.split('-')[0],
+  //     );
+  //     console.log(
+  //       'Filtered Quiz Name comparison with Selected Topic Title : ............ : ',
+  //       selected_topic_title,
+  //     );
+
+  //     if (selected_topic_title.trim() === quiz_name.trim()) {
+  //       navigation.navigate('QuizProgress', {
+  //         account: account,
+  //         quiz_progress_data: item,
+  //         selected_child_account: child_user_account.id,
+  //       });
+  //     }
+  //   });
+  // };
+
   useEffect(() => {
+    // console.log("BBBBBB : ",quiz_result_data)
     // console.log(`Account Data : ${account.name + selected_topic_title}`)
     // console.log(`Certificate : ${topic_associated_data.certificate_shown}`);
     console.log(`UE Updated ***`);
-    
   }, []);
 
   // const requestRunTimePermission = () => {
@@ -241,36 +312,36 @@ const TopicContentContainer = props => {
             style={styles.pdf}
           />
         )}
-<View style={{marginTop:- Dimensions.get('window').height * 0.18}}>
-        <CustomButton
-          backgroundColor={'#DEE8FB'}
-          title={'Download'}
-          height={50}
-          width={0.7}
-          borderRadius={30}
-          textColor={'white'}
-          linearStartColor={'#F8C04E'}
-          linearEndColor={'#FFBF3C'}
-          shadowColor={'#FFBF3C'}
-          shadowRadius={20}
-          onPress={async () => {
-            requestRunTimePermission();
-          }}></CustomButton>
-        <CustomButton
-          backgroundColor={'#DEE8FB'}
-          title={'Share'}
-          height={50}
-          width={0.7}
-          borderRadius={30}
-          textColor={'white'}
-          linearStartColor={'#F8C04E'}
-          linearEndColor={'#FFBF3C'}
-          shadowColor={'#FFBF3C'}
-          shadowRadius={20}
-          onPress={async () => {
-            await sharePdf();
-          }}></CustomButton>
-          </View>
+        <View style={{marginTop: -Dimensions.get('window').height * 0.18}}>
+          <CustomButton
+            backgroundColor={'#DEE8FB'}
+            title={'Download'}
+            height={50}
+            width={0.7}
+            borderRadius={30}
+            textColor={'white'}
+            linearStartColor={'#F8C04E'}
+            linearEndColor={'#FFBF3C'}
+            shadowColor={'#FFBF3C'}
+            shadowRadius={20}
+            onPress={async () => {
+              requestRunTimePermission();
+            }}></CustomButton>
+          <CustomButton
+            backgroundColor={'#DEE8FB'}
+            title={'Share'}
+            height={50}
+            width={0.7}
+            borderRadius={30}
+            textColor={'white'}
+            linearStartColor={'#F8C04E'}
+            linearEndColor={'#FFBF3C'}
+            shadowColor={'#FFBF3C'}
+            shadowRadius={20}
+            onPress={async () => {
+              await sharePdf();
+            }}></CustomButton>
+        </View>
       </>
     );
   };
@@ -518,41 +589,118 @@ const TopicContentContainer = props => {
       <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 8}}>
         <View style={styles.container}>
           {topic_associated_data.certificate_shown === true ? (
-            <>
-            {renderPdf()}
-            </>
+            <>{renderPdf()}</>
           ) : (
             <>
-              {topic_associated_data.content.map((content, index) => {
-                return (
-                  <View
-                    key={index}
-                    style={[
-                      {
-                        marginBottom:
-                          topic_associated_data.length - 1 === index ? 32 : 0,
-                        width: SCREEN_WIDTH * 0.9,
-                      },
-                    ]}>
-                    {renderContentComponent(content)}
-                    {topic_associated_data.length - 1 === index && (
-                      <Text
-                        style={{
-                          color: 'black',
-                          textAlign: 'center',
-                          fontFamily: 'Poppins-Regular',
-                          marginTop: 16,
-                        }}>
-                        End of content
-                      </Text>
-                    )}
+              {quiz_progress_data !== null && topic_associated_data.quiz_id ? (
+                <View
+                  style={[
+                    {
+                      width: SCREEN_WIDTH * 1,
+                    },
+                  ]}>
+                  <View style={{marginTop: 20, alignItems: 'center'}}>
+                    <Text
+                      style={{
+                        color: 'black',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        fontFamily: 'Poppins-Regular',
+                      }}>
+                      You have scored:
+                    </Text>
+                    <Text
+                      style={{
+                        color: 'black',
+                        textAlign: 'center',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        fontFamily: 'Poppins-Regular',
+                      }}>
+                      {quiz_result_data.user_marks}/
+                      {quiz_result_data.total_marks}
+                    </Text>
                   </View>
-                );
-              })}
+                  <View style={{marginBottom: -40, marginTop: -20}}>
+                    <CustomCard
+                      coverImage={selected_topic_redux.thumbnail}
+                      imageMargin={20}
+                      width={0.9}
+                      height={0.38}></CustomCard>
+                  </View>
+                  <View style={{alignItems: 'center'}}>
+                    <CustomButton
+                      backgroundColor={'#DEE8FB'}
+                      title={'Review Quiz'}
+                      height={50}
+                      width={0.8}
+                      borderRadius={30}
+                      textColor={'white'}
+                      linearStartColor={'#F8C04E'}
+                      linearEndColor={'#FFBF3C'}
+                      shadowColor={'#FFBF3C'}
+                      shadowRadius={20}
+                      onPress={filterQuizProgressData}></CustomButton>
+                    <CustomButton
+                      backgroundColor={'#DEE8FB'}
+                      title={'Reattempt Quiz'}
+                      height={50}
+                      width={0.8}
+                      borderRadius={30}
+                      textColor={'white'}
+                      linearStartColor={'#F8C04E'}
+                      linearEndColor={'#FFBF3C'}
+                      shadowColor={'#FFBF3C'}
+                      shadowRadius={20}
+                      onPress={() => {
+                        console.log('Tab Data: ', tab_data);
+                        // navigation.pop();
+                        navigation.navigate('Quizzes', {
+                          account: account,
+                          selected_topic_title: selected_topic_title,
+                          selected_quiz: {id: topic_associated_data.quiz_id},
+                          fetchChildQuizProgress: fetchChildQuizProgress,
+                          tab_data,
+                        });
+                      }}></CustomButton>
+                  </View>
+                </View>
+              ) : (
+                <>
+                  {topic_associated_data.content.map((content, index) => {
+                    return (
+                      <View
+                        key={index}
+                        style={[
+                          {
+                            marginBottom:
+                              topic_associated_data.length - 1 === index
+                                ? 32
+                                : 0,
+                            width: SCREEN_WIDTH * 0.9,
+                          },
+                        ]}>
+                        {renderContentComponent(content)}
+                        {topic_associated_data.length - 1 === index && (
+                          <Text
+                            style={{
+                              color: 'black',
+                              textAlign: 'center',
+                              fontFamily: 'Poppins-Regular',
+                              marginTop: 16,
+                            }}>
+                            End of content
+                          </Text>
+                        )}
+                      </View>
+                    );
+                  })}
+                </>
+              )}
             </>
           )}
         </View>
-        {topic_associated_data.quiz_id && (
+        {quiz_progress_data === null && topic_associated_data.quiz_id ? (
           <View style={[{marginBottom: 40}, styles.container]}>
             {/* {
                   source === null ?
@@ -625,10 +773,13 @@ const TopicContentContainer = props => {
                   account: account,
                   selected_topic_title: props.selected_topic_title,
                   selected_quiz: {id: topic_associated_data.quiz_id},
+                  fetchChildQuizProgress: fetchChildQuizProgress,
                   tab_data,
                 });
               }}></CustomButton>
           </View>
+        ) : (
+          <></>
         )}
       </ScrollView>
     </View>
@@ -663,7 +814,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Dimensions.get('window').width * 0.94,
     height: Dimensions.get('window').height * 0.7,
-    marginTop:-40,
+    marginTop: -40,
     backgroundColor: '#F5F8FF',
   },
 });

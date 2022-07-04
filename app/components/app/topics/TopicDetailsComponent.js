@@ -63,6 +63,7 @@ const TopicDetailsComponent = props => {
           <TopicContentContainer
             {...props}
             navigation={navigation}
+            selected_topic={selected_topic}
             topic_associated_data={topic_associated_data}
             selected_topic_title={selected_topic_title}
             parent_data={

@@ -26,7 +26,7 @@ const QuizzesContainer = props => {
     useState(false);
   const [tab_data, set_Tab_Data] = useState(null);
 
-  const {account} = props.route.params;
+  const {account,fetchChildQuizProgress} = props.route.params;
 
   useEffect(() => {
     console.log('Tab Data in Quizz: ', props.route.params.tab_data);
@@ -134,42 +134,42 @@ const QuizzesContainer = props => {
   };
 
   // fetch current user quiz marks who attempted the quiz 
-  const fetchChildQuizProgress = submitResponse => {
-    const {navigation, child_user_account, selected_topic_redux} = props;
-    console.log('CURRENT CHILD ACCOUNT: ', child_user_account.id);
-    console.log('SSSSSSSSS ........... ::: ', submitResponse);
-    let data1 = {user_id: child_user_account.id};
-    services
-      .base_service(urls.track_progress, data1)
-      .then(response => {
-        console.log('quiz progress response: ', JSON.stringify(response));
-        // setLoadingAndErrorState(false, false);
-        quiz_result = response;
-        console.log('Quiz Result ............', response);
-        console.log('Select topic redux : ', selected_topic_redux);
+  // const fetchChildQuizProgress = submitResponse => {
+  //   const {navigation, child_user_account, selected_topic_redux} = props;
+  //   console.log('CURRENT CHILD ACCOUNT: ', child_user_account.id);
+  //   console.log('SSSSSSSSS ........... ::: ', submitResponse);
+  //   let data1 = {user_id: child_user_account.id};
+  //   services
+  //     .base_service(urls.track_progress, data1)
+  //     .then(response => {
+  //       console.log('quiz progress response: ', JSON.stringify(response));
+  //       // setLoadingAndErrorState(false, false);
+  //       quiz_result = response;
+  //       console.log('Quiz Result ............', response);
+  //       console.log('Select topic redux : ', selected_topic_redux);
 
-        navigation.navigate('QuizResult', {
-          account: account,
-          selected_topic_redux: selected_topic_redux,
-          quiz_progress_data: response,
-          quiz_result_data: submitResponse,
-          selected_quiz,
-          tab_data,
-          child_user_account: child_user_account,
-          selected_topic_title: props.route.params.selected_topic_title,
-        });
-      })
-      .catch(error => {
-        // setLoadingAndErrorState(false, true);
-        console.log('fetch quiz progress error: ', error);
-      });
-  };
+  //       navigation.navigate('QuizResult', {
+  //         account: account,
+  //         selected_topic_redux: selected_topic_redux,
+  //         quiz_progress_data: response,
+  //         quiz_result_data: submitResponse,
+  //         selected_quiz,
+  //         tab_data,
+  //         child_user_account: child_user_account,
+  //         selected_topic_title: props.route.params.selected_topic_title,
+  //       });
+  //     })
+  //     .catch(error => {
+  //       // setLoadingAndErrorState(false, true);
+  //       console.log('fetch quiz progress error: ', error);
+  //     });
+  // };
 
   // triggers when user click submit button and 
   // submission confirmation modal appear if user click on OK button then 
   // this function will trigger and submit user attempted quiz ans n questions and store them on server.
   const submitQuiz = () => {
-    const {navigation, child_user_account} = props;
+    const {navigation, child_user_account,selected_topic_redux} = props;
     setLoadingAndErrorState(false, false, true);
     console.log('CHILD USER ACCOUNT: ', child_user_account);
     console.log('SUBMIT ANSWERS: ', attempted_quiz_data);
@@ -184,7 +184,7 @@ const QuizzesContainer = props => {
       .then(response => {
         console.log('attempt quiz data response: ', response);
         console.log('Selected Topic', props.selected_topic_redux);
-        fetchChildQuizProgress(response);
+        fetchChildQuizProgress(response,child_user_account,selected_topic_redux);
         setLoadingAndErrorState(false, false, false);
       })
       .catch(error => {
