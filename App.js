@@ -3,7 +3,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
-} from 'react-native';;
+} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AppContainer from './app/navigators';
 import {PersistGate} from 'redux-persist/integration/react';

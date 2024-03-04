@@ -115,6 +115,8 @@ const LoginComponent = props => {
             </Text>
             <View>
               <TextInput
+
+                dense={true}
                 style={[
                   global.auth_input,
                   {
@@ -123,6 +125,7 @@ const LoginComponent = props => {
                     width: SCREEN_WIDTH * 0.8,
                     marginTop: 20,
                     paddingVertical: 0,
+                    lineHeight:Dimensions.get('window').height * 0.08,
                   },
                 ]}
                 mode="outlined"
@@ -146,6 +149,7 @@ const LoginComponent = props => {
             </View>
             <View>
               <TextInput
+                dense={true}
                 style={[
                   global.auth_input,
                   {
@@ -154,6 +158,7 @@ const LoginComponent = props => {
                     width: SCREEN_WIDTH * 0.8,
                     marginTop: 20,
                     paddingVertical: 0,
+                    lineHeight:Dimensions.get('window').height * 0.08
                   },
                 ]}
                 mode="outlined"

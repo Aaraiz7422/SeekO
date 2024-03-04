@@ -33,7 +33,7 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index,showMod
   }, []);
 
   const TopicItem = ({item, index}) => {
-    return item.unlocked === true ? ( <CustomCard
+    return  ( <CustomCard
       height={0.38}
       width={0.6}
       cardTitle={item.name}
@@ -43,39 +43,53 @@ const CategoryItem = ({navigation, account, categoryName, topicId, index,showMod
       linearEndColor={index % 2 != 0 ? '#00CDAC' : '#FF8450'}
       shadowColor={index % 2 != 0 ? '#00cbac' : '#FFA06A'}
       onLayout={false}
-      onPress={() => goToTopicDetail(item, index)}></CustomCard> ) : (
-        <>
-          <Image
-            source={require('../../../assets/lock.png')}
-            style={{
-              zIndex: 1,
-              position: 'absolute',
-              top:Dimensions.get('window').width * 0.28 ,
-              left: Dimensions.get('window').width * 0.31,
-              bottom: 0,
-              right: 0,
-              height: Dimensions.get('window').height * 0.04,
-              width: Dimensions.get('window').width * 0.1,
-              resizeMode: 'contain',
-              tintColor:'grey'
-              }}></Image>
-          <CustomCard
-            height={0.38}
-            width={0.6}
-            unlock={false}
-            cardTitle={item.name}
-            coverImage={item.thumbnail}
-            imageMargin={10}
-            linearStartColor={index % 2 != 0 ? '#02AAB0' : '#FFAC71'}
-            linearEndColor={index % 2 != 0 ? '#00CDAC' : '#FF8450'}
-            shadowColor={index % 2 != 0 ? '#00cbac' : '#FFA06A'}
-            shadowBorder={16}
-            shawdowOpacity={0.25}
-            shadowHorizontalMargin={22}
-            shadowVerticalMargin={20}
-            onPress={showModal}></CustomCard>
-        </>
+      onPress={() => goToTopicDetail(item, index)}></CustomCard> 
       );
+    
+    
+    // item.unlocked === true ? ( <CustomCard
+    //   height={0.38}
+    //   width={0.6}
+    //   cardTitle={item.name}
+    //   coverImage={item.thumbnail}
+    //   imageMargin={10}
+    //   linearStartColor={index % 2 != 0 ? '#02AAB0' : '#FFAC71'}
+    //   linearEndColor={index % 2 != 0 ? '#00CDAC' : '#FF8450'}
+    //   shadowColor={index % 2 != 0 ? '#00cbac' : '#FFA06A'}
+    //   onLayout={false}
+    //   onPress={() => goToTopicDetail(item, index)}></CustomCard> ) : (
+    //     <>
+    //       <Image
+    //         source={require('../../../assets/lock.png')}
+    //         style={{
+    //           zIndex: 1,
+    //           position: 'absolute',
+    //           top:Dimensions.get('window').width * 0.1 ,
+    //           left: Dimensions.get('window').width * 0.52,
+    //           bottom: 0,
+    //           right: 0,
+    //           height: Dimensions.get('window').height * 0.04,
+    //           width: Dimensions.get('window').width * 0.1,
+    //           resizeMode: 'contain',
+    //           tintColor:'white'
+    //           }}></Image>
+    //       <CustomCard
+    //         height={0.38}
+    //         width={0.6}
+    //         unlock={false}
+    //         cardTitle={item.name}
+    //         coverImage={item.thumbnail}
+    //         imageMargin={10}
+    //         linearStartColor={index % 2 != 0 ? '#02AAB0' : '#FFAC71'}
+    //         linearEndColor={index % 2 != 0 ? '#00CDAC' : '#FF8450'}
+    //         shadowColor={index % 2 != 0 ? '#00cbac' : '#FFA06A'}
+    //         shadowBorder={16}
+    //         shawdowOpacity={0.25}
+    //         shadowHorizontalMargin={22}
+    //         shadowVerticalMargin={20}
+    //         onPress={showModal}></CustomCard>
+    //     </>
+    //   );
   }
 
   const renderTopicItem = ({item, index}) => (
@@ -206,7 +220,7 @@ const CategoriesComponent = ({navigation, account, categories,showModal,closeMod
               : {flex: 1, backgroundColor: '#F5F8FF'}
           }>
           {loading ? loadingFullScreenAtOnce() : loadingFullScreenAtOnce()}
-          <FullScreenModal visible={visible} onDismiss={closeModal}>
+          {loading ? <></>:<FullScreenModal visible={visible} onDismiss={closeModal}>
                 <View style={{alignItems: 'center'}}>
                   <Text
                     style={{
@@ -278,7 +292,7 @@ const CategoriesComponent = ({navigation, account, categories,showModal,closeMod
                       }}></Image>
                   </TouchableOpacity>
                 </View>
-              </FullScreenModal>
+              </FullScreenModal>}
         </View>
       ) : (
         <ConnectionModal

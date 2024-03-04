@@ -81,7 +81,11 @@ const QuizProgressComponent = props => {
                     fontSize: 20,
                     fontWeight: 'bold',
                     fontFamily: 'Poppins-Regular',
-                  }}>
+                  }}  
+                  adjustsFontSizeToFit={true}
+              numberOfLines={1}
+              allowFontScaling={true}
+                  >
                   Total Marks:
                 </Text>
                 <Text
@@ -90,7 +94,11 @@ const QuizProgressComponent = props => {
                     fontSize: 20,
                     fontWeight: 'bold',
                     fontFamily: 'Poppins-Regular',
-                  }}>
+                  }}
+                  adjustsFontSizeToFit={true}
+              numberOfLines={1}
+              allowFontScaling={true}
+                  >
                   {quiz_progress_data.total_marks}
                 </Text>
               </View>
@@ -102,7 +110,11 @@ const QuizProgressComponent = props => {
                     fontSize: 20,
                     fontWeight: 'bold',
                     fontFamily: 'Poppins-Regular',
-                  }}>
+                  }}
+                  adjustsFontSizeToFit={true}
+              numberOfLines={1}
+              allowFontScaling={true}
+                  >
                   Obtained Marks:
                 </Text>
                 <Text
@@ -111,7 +123,11 @@ const QuizProgressComponent = props => {
                     fontSize: 20,
                     fontWeight: 'bold',
                     fontFamily: 'Poppins-Regular',
-                  }}>
+                  }}
+                  adjustsFontSizeToFit={true}
+              numberOfLines={1}
+              allowFontScaling={true}
+                  >
                   {quiz_progress_data.user_marks}
                 </Text>
               </View>

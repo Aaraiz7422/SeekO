@@ -1,6 +1,6 @@
 //Import Core Components
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,Dimensions} from 'react-native';
 //Import Plugins and Libraries
 import {Dropdown} from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -81,10 +81,10 @@ const styles = StyleSheet.create({
   dropdown: {
     // width:SCREEN_WIDTH * 0.8,
     backgroundColor: 'white',
-    height: 60,
+    height: Dimensions.get('window').height * 0.08,
     borderColor: 'rgba(0, 0, 0, 0.19)',
     borderWidth: 1.2,
-    borderRadius: 30,
+    borderRadius: 40,
     paddingHorizontal: 8,
   },
   icon: {

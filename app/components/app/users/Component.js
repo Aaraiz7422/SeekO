@@ -171,11 +171,12 @@ const UserComponent = props => {
                 <View>
                   <TextInput
                     style={{
-                      fontSize: 20,
-                      height: 60,
+                      fontSize: 18,
+                      height: Dimensions.get('window').height * 0.08,
                       width: SCREEN_WIDTH * 0.8,
                       marginTop: 20,
                       paddingVertical: 0,
+                      lineHeight:Dimensions.get('window').height * 0.08,
                     }}
                     mode="outlined"
                     label="Name"
@@ -183,7 +184,14 @@ const UserComponent = props => {
                     activeOutlineColor="rgba(0, 0, 0, 0.57)"
                     outlineColor="rgba(0, 0, 0, 0.19)"
                     value={name}
-                    theme={input_theme}
+                    theme={{
+                      roundness: 40,
+    roundnessColor:"purple",
+    colors:
+    {
+        background: "white",
+    }
+                    }}
                     onChangeText={email => setName(email)}
                     left={
                       <TextInput.Icon name="account" style={{marginTop: 12}} />
@@ -197,11 +205,13 @@ const UserComponent = props => {
                   <TextInput
                     onFocus={props => setOpen(true)}
                     style={{
-                      fontSize: 20,
-                      height: 60,
+                      fontSize: 18,
+                      height: Dimensions.get('window').height * 0.08,
                       width: SCREEN_WIDTH * 0.8,
                       marginTop: 20,
                       paddingVertical: 0,
+                      lineHeight:Dimensions.get('window').height * 0.08,
+
                     }}
                     mode="outlined"
                     label="DOB"
@@ -212,8 +222,14 @@ const UserComponent = props => {
                     onChangeText={dob => {
                       setDOB(dob);
                     }}
-                    theme={input_theme}
-                    left={
+                    theme={{
+                      roundness: 40,
+    roundnessColor:"purple",
+    colors:
+    {
+        background: "white",
+    }
+                    }}                    left={
                       <TextInput.Icon name="calendar" style={{marginTop: 12}} />
                     }
                   />

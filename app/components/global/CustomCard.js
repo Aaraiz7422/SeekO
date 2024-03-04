@@ -64,15 +64,17 @@ const CustomCard = ({
           color: CardTitleColor,
           fontWeight: '700',
           fontFamily: 'Poppins-Regular',
+          paddingBottom:10
         }}
         numberOfLines={2}
-        allowFontScaling={true}>
+        // allowFontScaling={true}
+        >
         {cardTitle}
       </Title>
     ) : null;
   const para =
     cardPara != null ? (
-      <Paragraph style={{fontFamily: 'Poppins-Regular'}}>{cardPara}</Paragraph>
+      <Paragraph style={{fontFamily: 'Poppins-Regular',paddingBottom:10}} >{cardPara}</Paragraph>
     ) : null;
   const cardContent = (
     <Card.Content>
@@ -86,7 +88,7 @@ const CustomCard = ({
       <Card.Cover
         resizeMode="stretch"
         source={{uri: coverImage}}
-        style={[{margin: imageMargin, borderRadius: 10},unlock === false && {backgroundColor: 'black',opacity:0.5}]}
+        style={[{margin: imageMargin, borderRadius: 10},unlock === false && {backgroundColor: 'black',opacity:1}]}
       />
     ) : null;
 
